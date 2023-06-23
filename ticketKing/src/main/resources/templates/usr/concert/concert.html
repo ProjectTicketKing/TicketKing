@@ -1,12 +1,164 @@
-
-
 <html layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
+
 <head>
     <meta charset="UTF-8">
     <title>공연 정보</title>
-    <!-- 스타일시트, 스크립트 등 추가적인 내용 -->
+
 </head>
+
 <body>
-<h1>공연 정보 UI</h1>
+<main class="flex items-center justify-center w-full min-h-screen">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <div class="image-caption text-2xl" style="font-weight: bold">공연정보</div>
+
+                <img src="https://newsimg.hankookilbo.com/2017/11/08/201711081172845620_1.jpg"
+                     class="h-auto max-w-sm max-h-96 rounded-lg mr-30 shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30" alt="" />
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                    <table class="min-w-full ml-10 text-sm font-light">
+
+                        <tbody>
+                        <tr>
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">장소</td>
+                            <td class="whitespace-nowrap px-6 py-4">KSPO-DOME</td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">공연시간</td>
+                            <td class="whitespace-nowrap px-6 py-4">120분</td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">관람연령</td>
+                            <td class="whitespace-nowrap px-6 py-4">8세이상 관람가능</td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">
+                                <div>가격</div>
+                                <div style="color: rgba(0, 0, 0, 0);">2</div>
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <div>스탠딩 11,000원</div>
+                                <div>스탠딩 88,000원</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">
+                                <div>혜택</div>
+                                <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                <div style="color: rgba(0, 0, 0, 0);">2</div>
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <div>[AD] SKT 고객전용 특별할인 쿠폰받기 ></div>
+                                <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                                <div>[AD] 티켓 3천원 할인쿠폰 + 편의점 6천원 증정 ></div>
+                                <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                                <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                                <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                                <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">배송</td>
+                            <td class="whitespace-nowrap px-6 py-4">일반 배송은 배송비가 부과됩니다.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col rounded-lg bg-white dark:bg-neutral-700 md:max-w-3xl md:flex-row ml-20">
+        <div class="w-64">
+            <table class="w-full">
+                <thead>
+                <tr>
+                    <th class="bg-gray-200">일</th>
+                    <th class="bg-gray-200">월</th>
+                    <th class="bg-gray-200">화</th>
+                    <th class="bg-gray-200">수</th>
+                    <th class="bg-gray-200">목</th>
+                    <th class="bg-gray-200">금</th>
+                    <th class="bg-gray-200">토</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center">1</td>
+                    <td class="text-center">2</td>
+                </tr>
+                <tr>
+                    <td class="text-center">3</td>
+                    <td class="text-center">4</td>
+                    <td class="text-center">5</td>
+                    <td class="text-center">6</td>
+                    <td class="text-center">7</td>
+                    <td class="text-center">8</td>
+                    <td class="text-center">9</td>
+                </tr>
+                <tr>
+                    <td class="text-center">10</td>
+                    <td class="text-center">11</td>
+                    <td class="text-center">12</td>
+                    <td class="text-center">13</td>
+                    <td class="text-center">14</td>
+                    <td class="text-center">15</td>
+                    <td class="text-center">16</td>
+                </tr>
+                <tr>
+                    <td class="text-center">17</td>
+                    <td class="text-center">18</td>
+                    <td class="text-center">19</td>
+                    <td class="text-center">20</td>
+                    <td class="text-center">21</td>
+                    <td class="text-center">22</td>
+                    <td class="text-center">23</td>
+                </tr>
+                <tr>
+                    <td class="text-center">24</td>
+                    <td class="text-center">25</td>
+                    <td class="text-center">26</td>
+                    <td class="text-center">27</td>
+                    <td class="text-center">28</td>
+                    <td class="text-center">29</td>
+                    <td class="text-center">30</td>
+                </tr>
+                <tr>
+                    <td class="text-center">31</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                    <td class="text-center" style="color: rgba(0, 0, 0, 0);">-</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</main>
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+
 </body>
+
 </html>
