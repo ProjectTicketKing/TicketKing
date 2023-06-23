@@ -1,7 +1,39 @@
+
+<html layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketKing</title>
+</head>
+
+
+<body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
+
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+
 <main layout:fragment="main" class="flex flex-col w-full min-h-screen bg-[#121212] text-white">
     <!--  네브바 시작  -->
 
-    <!--  네브바 끝  -->
+    <nav>
+        <div class="navbar text bg-black">
+            <div class="navbar-start">
+                <a class="btn btn-ghost normal-case" href="/" style="color: #9B6DFF;"></a>
+            </div>
+
+            <div class="navbar-end">
+            </div>
+
+            <a th:if="${@rq.logout}" href="/usr/member/login" class="btn btn-sm bg mx-2 border-none" style="background-color: #9B6DFF; color: #ffffff">로그인</a>
+
+<!--            <a href="/usr/member/me" th:if="${@rq.login}" class="btn btn-sm rounded-lg font-bold mx-2 border-none bg-opacity-0" style="background-color: #121212; color: #9B6DFF">MY PAGE</a>-->
+
+            <form th:if="${@rq.login}" th:action="|/usr/member/logout|" method="post" class="m-0">
+                <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #121212; color: #9B6DFF;">로그아웃</button>
+            </form>
+        </div>
+    </nav>
+    <!--네브바 끝-->
+
 
     <script>
         function openModalPopup() {
@@ -10,10 +42,10 @@
     </script>
 
 
-    <section class="bg-[#F2F4F4] h-full flex flex-col items-center">
+    <section class="bg-[#121212] h-full flex flex-col items-center">
 
-        <img src="/image/Banner.png" alt="Banner Image" class="banner-img" width="300" height="200" >
-        <h1 class="text-black text-2xl font-bold mt-10">Let's Get Ticket</h1>
+        <img src="/image/Banner.png" alt="Banner Image" class="banner-img">
+        <h1 class="text-white text-2xl font-bold mt-10">Let's Get Ticket</h1>
 
         <div style="display: flex; justify-content: center;">
 
@@ -26,9 +58,9 @@
                         <p class="py-2" style="color: #121212;">1. </p>
                         <p class="py-2">2. </p>
                         <p class="py-2">3. </p>
-<!--                        <div class="modal-action">-->
-<!--&lt;!&ndash;                            <label for="my_modal_1" class="btn btn-sm btn-primary border-none align-items-center w-full" style="background-color: #9B6DFF; color: #ffffff">닫기</label>&ndash;&gt;-->
-<!--                        </div>-->
+                        <div class="modal-action">
+                            <label for="my_modal_1" class="btn btn-sm btn-primary border-none align-items-center w-full" style="background-color: #9B6DFF; color: #ffffff">닫기</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,3 +76,13 @@
     </section>
 
 </main>
+
+</body>
+
+<footer class="bg-black text-center dark:bg-neutral-700 lg:text-left">
+    <div class="p-4 text-center text-neutral-500 dark:text-neutral-200">
+        © 2023 TicketKing
+    </div>
+</footer>
+
+</html>
