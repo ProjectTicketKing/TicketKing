@@ -27,6 +27,9 @@ public class MemberController {
         return "usr/member/login";
     }
 
+
+
+
     @GetMapping("/home")
     public String showHome() {
         return "usr/main/home"; // Return the home page template

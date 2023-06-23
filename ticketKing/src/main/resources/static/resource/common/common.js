@@ -1,19 +1,45 @@
-<script th:inline="javascript">
-    // 일반 메세지
-    const localStorageKeyAboutHistoryBackMsg = /*[[${localStorageKeyAboutHistoryBackMsg}]]*/ null;
-    const historyBackMsg = /*[[${historyBackMsg}]]*/ null;
+toastr.options = {
+    closeButton: true,
+    debug: false,
+    newestOnTop: true,
+    progressBar: true,
+    positionClass: "toast-top-right",
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: "300",
+    hideDuration: "1000",
+    timeOut: "5000",
+    extendedTimeOut: "1000",
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut"
+};
 
-    if (localStorageKeyAboutHistoryBackMsg && localStorageKeyAboutHistoryBackMsg.trim().length > 0) {
-        localStorage.setItem(localStorageKeyAboutHistoryBackMsg, historyBackMsg);
+function parseMsg(msg) {
+    const [pureMsg, ttl] = msg.split(";ttl=");
+
+    const currentJsUnixTimestamp = new Date().getTime();
+
+    if (ttl && parseInt(ttl) + 5000 < currentJsUnixTimestamp) {
+        return [pureMsg, false];
     }
 
-    // 에러 메세지
-    const localStorageKeyAboutHistoryBackErrorMsg = /*[[${localStorageKeyAboutHistoryBackErrorMsg}]]*/ null;
-    const historyBackErrorMsg = /*[[${historyBackErrorMsg}]]*/ null;
+    return [pureMsg, true];
+}
 
-    if (localStorageKeyAboutHistoryBackErrorMsg && localStorageKeyAboutHistoryBackErrorMsg.trim().length > 0) {
-        localStorage.setItem(localStorageKeyAboutHistoryBackErrorMsg, historyBackErrorMsg);
+function toastNotice(msg) {
+    const [pureMsg, needToShow] = parseMsg(msg);
+
+    if (needToShow) {
+        toastr["success"](pureMsg, "알림");
     }
+}
 
-    history.back();
-</script>
+function toastWarning(msg) {
+    const [pureMsg, needToShow] = parseMsg(msg);
+
+    if (needToShow) {
+        toastr["warning"](pureMsg, "경고");
+    }
+}
