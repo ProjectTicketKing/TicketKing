@@ -17,7 +17,7 @@ public class Seat extends BaseEntity {
 
 
     private String seatType;
-    private Integer row;
+    private Integer seatRow;
     private Integer seatNumber;
     private Boolean status;
 
