@@ -19,6 +19,9 @@ public class Practice extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Seat seat;
 
+    @ManyToOne(fetch = LAZY)
+    private Member member;
+
 
 
 
