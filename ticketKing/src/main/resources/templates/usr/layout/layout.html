@@ -1,3 +1,4 @@
+
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="ko" data-theme="light">
 
 <head>
@@ -12,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
 
-    <!-- 썸어트폰-->
+    <!-- 썸어트폰 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- 공통 JS 불러오기 -->
@@ -28,9 +29,29 @@
     <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">TicketKing</title>
 </head>
 
-<body>
+<body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
 
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.tailwindcss.com"></script>
 
+<!--    <nav>-->
+<!--        <div class="navbar text bg-black">-->
+<!--            <div class="navbar-start">-->
+<!--                <a class="btn btn-ghost normal-case" href="/static" style="color: #9B6DFF;">Home</a>-->
+<!--            </div>-->
+
+<!--            <div class="navbar-end">-->
+<!--            </div>-->
+
+<!--            <a th:if="${@rq.logout}" href="/usr/member/login" class="btn btn-sm bg mx-2 border-none" style="background-color: #9B6DFF; color: #ffffff">로그인</a>-->
+
+<!--            &lt;!&ndash; <a href="/usr/member/me" th:if="${@rq.login}" class="btn btn-sm rounded-lg font-bold mx-2 border-none bg-opacity-0" style="background-color: #121212; color: #9B6DFF">MY PAGE</a> &ndash;&gt;-->
+
+<!--            <form th:if="${@rq.login}" th:action="|/usr/member/logout|" method="post" class="m-0">-->
+<!--                <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #121212; color: #9B6DFF;">로그아웃</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </nav>-->
 
 <main layout:fragment="main" class="flex-1"></main>
 
@@ -59,7 +80,6 @@
         }
     });
 </script>
-
 </body>
 
 </html>
