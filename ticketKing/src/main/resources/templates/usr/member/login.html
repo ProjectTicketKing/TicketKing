@@ -11,7 +11,18 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 
-<main layout:fragment="main" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+
+<header style="display: flex; justify-content: center; align-items: center;">
+    <div style="display: flex; align-items: center;">
+        <a href="/" style="margin-left: 450px; margin-right: 80px;">
+            <img src="https://i.ibb.co/C1GQGMB/logo.png" alt="logo" border="0" stylse="height: 300px; width: 700px;">
+        </a>
+    </div>
+
+</header>
+
+
+<main layout:fragment="main" style="display: flex; justify-content: center; align-items: center;">
     <!-- 기존 내용 -->
     <script>
         function LoginForm__submit(form) {
@@ -77,7 +88,11 @@
                 <!--                <span>로그인</span>-->
                 <span class="text-black" style="font-size: 17px;">로그인</span>
             </button>
-
+            <div class="login-signup">
+                        <span class="text">계정이 없으신가요?
+                            <a th:href="@{/usr/member/join}" class="text signup-link">회원가입</a>
+                        </span>
+            </div>
 
             </th:block>
 
