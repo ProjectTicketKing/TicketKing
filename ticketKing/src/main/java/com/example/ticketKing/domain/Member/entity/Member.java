@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
-
+import static jakarta.persistence.FetchType.LAZY;
 
 
 
@@ -25,7 +25,7 @@ public class Member extends BaseEntity {
     private String password;
     private String email;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY )
+    @OneToMany(mappedBy = "member", fetch = LAZY)
     private List<Practice> practices;
 
 
