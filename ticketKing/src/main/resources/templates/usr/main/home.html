@@ -3,6 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>TicketKing</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(function (){
+            $('.centerSlide').slick({
+                centerMode: true,
+                centerPadding: '60px',
+                slidesToShow: 3,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: '40px',
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: '40px',
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 </head>
 
 
@@ -72,8 +106,17 @@
     </section>
 
     <section class="bg-[#121212] h-full flex flex-col items-center">
-        <h1 class="text-white text-2xl font-bold mt-10 mb-10">Upcoming Ticketing or Open Ticket or About</h1>
+        <h1 class="text-white text-2xl font-bold mt-10 mb-10">Upcoming Ticketing</h1>
+
+        <div class="centerSlide">
+            <div><img src="image/Concert.png" alt=""></div>
+            <div><img src="image/Concert.png" alt=""></div>
+            <div><img src="image/Concert.png" alt=""></div>
+        </div>
+
     </section>
+
+
 
 </main>
 
