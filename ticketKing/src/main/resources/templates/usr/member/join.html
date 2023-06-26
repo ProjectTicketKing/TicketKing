@@ -9,14 +9,15 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<header style="display: flex; justify-content: center; align-items: center;">
-    <div style="display: flex; align-items: center;">
-        <a href="/" style="margin-left: 450px; margin-right: 80px;">
-            <img src="https://i.ibb.co/C1GQGMB/logo.png" alt="logo" border="0" stylse="height: 300px; width: 700px;">
+<header style="display: flex; justify-content: center; align-items: center; margin-top: 60px; margin-bottom: 60px;">
+    <div style="margin: 0 auto;">
+        <a href="/">
+            <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="logo" border="0" style="max-width: 200px;">
         </a>
     </div>
-
 </header>
+
+
 
 <main layout:fragment="main" style="display: flex; justify-content: center; align-items: center;">
     <script>
@@ -69,7 +70,18 @@
                     <span class="label-text">ID</span>
                 </label>
                 <input type="text" name="username" placeholder="아이디를 입력해주세요." class="input input-bordered" autofocus/>
+
             </div>
+
+<!--            <div>-->
+<!--                <div class="w-full">-->
+<!--                    <label class="label">-->
+<!--                        <span class="text-gray-400 mt-2">아이디를 입력해주세요</span>-->
+<!--                    </label>-->
+<!--                    <input type="text" th:field="*{username}" maxlength="16" placeholder="아이디" class="input input-bordered w-full text-black" id="username" autofocus />-->
+<!--                    <span th:style="${'color: red; font-size:12px;'}" th:text="${valid_username}"></span>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="form-control">
                 <label class="label">

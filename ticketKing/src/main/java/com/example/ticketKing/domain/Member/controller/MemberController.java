@@ -28,8 +28,6 @@ public class MemberController {
     }
 
 
-
-
     @GetMapping("/home")
     public String showHome() {
         return "usr/main/home"; // Return the home page template
@@ -60,4 +58,5 @@ public class MemberController {
         // 아래 링크로 리다이렉트(302, 이동) 하고 그 페이지에서 메세지 보여줘
         return rq.redirectWithMsg("/usr/member/login", joinRs);
     }
+
 }
