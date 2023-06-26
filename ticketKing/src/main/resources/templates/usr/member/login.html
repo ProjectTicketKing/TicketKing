@@ -1,28 +1,26 @@
-<html layout:decorate="~{usr/layout/layout.html}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
     <title>로그인</title>
 </head>
 
-<body>
+<body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
 
 
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 
 
-
-<header style="display: flex; justify-content: center; align-items: center;">
+<header style="display: flex; justify-content: center; align-items: center; margin-top: 60px; margin-bottom: 150px;">
     <div style="display: flex; align-items: center;">
-        <a href="/" style="margin-left: 450px; margin-right: 80px;">
-            <img src="https://i.ibb.co/C1GQGMB/logo.png" alt="logo" border="0" stylse="height: 300px; width: 700px;">
+        <a href="/" style="margin: 0 auto;">
+            <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="logo" border="0" style="max-width: 200px;">
         </a>
     </div>
-
 </header>
 
 
-<main layout:fragment="main" style="display: flex; justify-content: center; align-items: center;">
+<main style="display: flex; justify-content: center; align-items: center;">
     <!-- 기존 내용 -->
     <script>
         function LoginForm__submit(form) {
@@ -83,14 +81,14 @@
                 <input type="password" name="password" placeholder="Password" class="input input-bordered"/>
             </div>
 
-            <button id="btn-login-1" class="btn btn-md btn-accent gap-3 border-none" style="background-color: 9B6DFF;">
+            <button id="btn-login-1" class="btn btn-md btn-accent gap-3 border-none" style="background-color: #9B6DFF;">
                 <!--                <i class="fa-solid fa-arrow-right-to-bracket"></i>-->
                 <!--                <span>로그인</span>-->
-                <span class="text-black" style="font-size: 17px;">로그인</span>
+                <span class="text-white" style="font-size: 17px;">로그인</span>
             </button>
             <div class="login-signup">
                         <span class="text">계정이 없으신가요?
-                            <a th:href="@{/usr/member/join}" class="text signup-link">회원가입</a>
+                            <a th:href="@{/usr/member/join}" class="text signup-link" style="color: #4070f4">회원가입</a>
                         </span>
             </div>
 
@@ -104,5 +102,12 @@
     </div>
 </main>
 </body>
+
+<footer class="fixed left-0 bottom-0 w-full bg-gray-200 text-center">
+    <div class="py-4 text-neutral-500">
+        © 2023 TicketKing
+    </div>
+</footer>
+
 
 </html>

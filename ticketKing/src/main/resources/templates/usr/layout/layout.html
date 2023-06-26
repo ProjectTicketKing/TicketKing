@@ -12,13 +12,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
 
-    <!-- 썸어트폰-->
+    <!-- 폰트어썸 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- 공통 JS 불러오기 -->
-    <script src="/resource/common/common.js"></script>
+    <script th:src="@{/resource/common/common.js}"></script>
     <!-- 공통 CSS 불러오기 -->
-    <link rel="stylesheet" href="/resource/common/common.css">
+    <link th:href="@{/resource/common/common.css}" rel="stylesheet">
 
     <script>
         // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
@@ -26,11 +26,34 @@
     </script>
 
     <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">TicketKing</title>
+
 </head>
 
-<body>
+<body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
 
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.tailwindcss.com"></script>
 
+<nav layout:fragment="nav" class="flex-0">
+    <div class="navbar text bg-[#F2F4F4]">
+        <div class="navbar-start">
+            <a class="navbar-brand" href="/">
+                <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="Bootstrap" style="max-height: 30px;">
+            </a>
+        </div>
+
+        <div class="navbar-end">
+        </div>
+
+        <a th:if="${@rq.logout}" href="/usr/member/login" class="btn btn-sm bg mx-2 border-none" style="background-color: #F2F4F4; color: #9B6DFF">로그인</a>
+
+        <!--            <a href="/usr/member/me" th:if="${@rq.login}" class="btn btn-sm rounded-lg font-bold mx-2 border-none bg-opacity-0" style="background-color: #121212; color: #9B6DFF">MY PAGE</a>-->
+
+        <form th:if="${@rq.login}" th:action="|/usr/member/logout|" method="post" class="m-0">
+            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #F2F4F4; color: #9B6DFF;">로그아웃</button>
+        </form>
+    </div>
+</nav>
 
 <main layout:fragment="main" class="flex-1"></main>
 
@@ -61,5 +84,12 @@
 </script>
 
 </body>
+
+
+<footer layout:fragment="footer" class="bg-[#F2F4F4] text-center dark:bg-neutral-700 lg:text-left">
+    <div class="p-4 text-center text-neutral-500 dark:text-neutral-200">
+        © 2023 TicketKing
+    </div>
+</footer>
 
 </html>
