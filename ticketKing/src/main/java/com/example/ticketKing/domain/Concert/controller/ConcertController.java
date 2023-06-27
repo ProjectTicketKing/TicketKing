@@ -14,10 +14,17 @@ public class ConcertController {
         return "usr/concert/concert";
     }
 
+
+
+
+    @GetMapping("/usr/concert/cost")
+    public String showConcertCost() {return "usr/concert/concert_cost"; }
+
     @GetMapping("/usr/concert/concertDate")
     public String showConcertDate() {
         return "usr/concert/concertDate";
     }
+
 
 
 
