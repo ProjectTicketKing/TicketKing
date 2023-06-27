@@ -130,9 +130,9 @@
                             </style>
 
                         <div class="flex-col">
-                            <input type="text" name="startDate" class="text-black select select w-full mb-2 custom-input" id="startDateInput" value="관람일" />
+                            <label for="startDateInput" class="sr-only">관람일 선택</label>
+                            <input type="text" name="startDate" class="text-black select select mb-2 custom-input" id="startDateInput" value="관람일" style="width: 200px;" />
                         </div>
-
                         <script>
                             var startDateInput = document.getElementById('startDateInput');
                             startDateInput.addEventListener('focus', function() {
@@ -182,10 +182,22 @@
                 </select>
 
             </div>
+<!--            <div class="mt-7 flex justify-center">-->
+<!--                <button type="submit" class="custom-button rounded-lg border-none w-full py-4"-->
+<!--                        style="background-color: #664AFF; color: #ffffff">연습 게임 시작하기</button>-->
+<!--            </div>-->
+
+
+            <!--연습 게임 시작하기 버튼 클릭시, concertDate로 이동하도록-->
             <div class="mt-7 flex justify-center">
-                <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
-                        style="background-color: #664AFF; color: #ffffff">연습 게임 시작하기</button>
+                <a href="/usr/concert/concertDate" class="custom-button rounded-lg border-none w-full py-4"
+                   style="background-color: #664AFF; color: #ffffff; display: flex; justify-content: center; align-items: center;">연습 게임 시작하기</a>
             </div>
+
+
+
+
+
         </div>
     </div>
 
