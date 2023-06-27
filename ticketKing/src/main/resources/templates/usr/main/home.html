@@ -109,7 +109,7 @@
             <!-- 로그인 상태: 버튼 활성화 / 로그아웃 상태 : 로그인페이지로 이동-->
             <a th:if="${@rq.logout}" href="/usr/member/login" class="btn btn-m rounded-lg font-bold mx-1 border-none mt-5 mb-10" style="background-color: #9B6DFF; color: #ffffff">연습하러가기</a>
 
-            <form th:if="${@rq.login}" th:action="|/usr/concert/concert|" method="post" class="m-0">
+            <form th:if="${@rq.login}" th:action="|/usr/concert/concert|" method="get" class="m-0">
                 <button th:if="${@rq.login}" type="submit" class="btn btn-m rounded-lg font-bold mx-1 border-none mt-5 mb-10" style="background-color: #9B6DFF; color: #ffffff;">연습하러가기</button>
             </form>
 
