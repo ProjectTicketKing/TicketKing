@@ -16,7 +16,7 @@
 
     <div class="flex">
 
-        <!--관람일 선택-->
+        <!-- 관람일 선택 -->
         <div class="flex justify-center">
             <div class="p-4">
                 <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">관람일 선택</p>
@@ -29,35 +29,31 @@
                         background-color: #ffffff;
                         color: #9B6DFF;
                         border-color: #9B6DFF;
+                        background-image: none;
                     }
                 </style>
                 <div class="flex-col">
                     <label for="startDateInput" class="sr-only">관람일 선택</label>
-                    <input type="text" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" value="관람일" style="width: 200px;" />
+                    <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />
                 </div>
 
                 <script>
                     var startDateInput = document.getElementById('startDateInput');
-                    startDateInput.addEventListener('focus', function() {
-                        if (startDateInput.value === '관람일') {
-                            startDateInput.value = '';
-                        }
-                        startDateInput.type = 'date';
-                    });
-                    startDateInput.addEventListener('blur', function() {
+                    startDateInput.addEventListener('change', function() {
                         if (startDateInput.value === '') {
                             startDateInput.type = 'text';
                             startDateInput.value = '관람일';
                         }
                     });
                 </script>
-
             </div>
         </div>
 
 
-        <div
-                class="inline-block h-[250px] min-h-[1em] w-0.5 self-stretch bg-neutral-200 opacity-100 dark:opacity-50"></div>
+
+
+
+        <div class="inline-block h-[250px] min-h-[1em] w-0.5 self-stretch bg-neutral-200 opacity-100 dark:opacity-50"></div>
 
         <div class="p-4">
             <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">회차 정보</p>
@@ -122,7 +118,10 @@
             </div>
         </div>
 
+
         <div class="mx-8"></div>
+
+
 
         <!-- 정보 페이지 -->
 
@@ -142,15 +141,29 @@
                                 <table class="min-w-full text-sm font-light">
                                     <tbody>
                                     <tr>
-                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">관람일 선택</td>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">관람일시</td>
                                         <td class="whitespace-nowrap px-4 py-2" style="font-size: 12px;">23-07-15</td>
                                     </tr>
                                     <tr>
-                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">회차 선택</td>
-                                        <td class="whitespace-nowrap px-4 py-2" style="font-size: 12px;">1회차 공연</td>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">선택 좌석</td>
+                                        <td class="whitespace-nowrap px-4 py-2" style="font-size: 12px;">2층-9열-45</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">티켓 금액</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">할인 금액</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">수수료</td>
                                     </tr>
                                     </tbody>
                                 </table>
+                                <hr class="h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
+
+                                <div class="mt-3 flex justify-center">
+                                    <p class="text-lg font-bold" style="color:#DC143C; font-size: 16px;">총 결제금액: </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -165,6 +178,7 @@
             </div>
         </div>
     </div>
+
 
 
 </main>

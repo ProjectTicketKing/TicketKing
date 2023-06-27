@@ -115,33 +115,27 @@
                         관람일 & 회차 정보
                     </div>
                     <div class="p-4">
-                        <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">
-
-                            <style>
-                                .custom-input {
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    appearance: none;
-                                    padding: 0.32rem 1rem;
-                                    background-color: #ffffff;
-                                    color: #9B6DFF;
-                                    border-color: #9B6DFF;
-                                }
-                            </style>
-
+                        <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200"></p>
+                        <style>
+                            .custom-input {
+                                -webkit-appearance: none;
+                                -moz-appearance: none;
+                                appearance: none;
+                                padding: 0.32rem 1rem;
+                                background-color: #ffffff;
+                                color: #9B6DFF;
+                                border-color: #9B6DFF;
+                                background-image: none;
+                            }
+                        </style>
                         <div class="flex-col">
                             <label for="startDateInput" class="sr-only">관람일 선택</label>
-                            <input type="text" name="startDate" class="text-black select select mb-2 custom-input" id="startDateInput" value="관람일" style="width: 200px;" />
+                            <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />
                         </div>
+
                         <script>
                             var startDateInput = document.getElementById('startDateInput');
-                            startDateInput.addEventListener('focus', function() {
-                                if (startDateInput.value === '관람일') {
-                                    startDateInput.value = '';
-                                }
-                                startDateInput.type = 'date';
-                            });
-                            startDateInput.addEventListener('blur', function() {
+                            startDateInput.addEventListener('change', function() {
                                 if (startDateInput.value === '') {
                                     startDateInput.type = 'text';
                                     startDateInput.value = '관람일';
