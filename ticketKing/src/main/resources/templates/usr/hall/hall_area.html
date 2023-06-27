@@ -1,0 +1,122 @@
+<html th:lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>공연예매 페이지 1. 관람일/회차 선택</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+<main layout:fragment="main" class="flex items-center justify-center w-full min-h-screen">
+
+
+  <div class="grid grid-cols-3 md:grid-cols-3 gap-4">
+
+
+    <!--1F 좌측 12 - 15 구역-->
+    <div class="flex flex-col ml-4">
+      <style>
+        .tilted13-image {
+          transform: rotate(-16deg);
+          margin-right: 7px;
+          margin-left: 25px;
+        }
+        .tilted12-image {
+          transform: rotate(-30deg);
+          margin-right: -10px;
+          margin-left: 42px;
+        }
+      </style>
+      <img src="/image/area15.png" alt="area Image" class="mr-1 ml-5 area-img transform -rotate-5">
+      <img src="/image/area14.png" alt="area Image" class="mr-3 ml-5 area-img transform -rotate-5">
+      <img src="/image/area14.png" alt="area Image" class="area-img tilted13-image">
+      <img src="/image/area14.png" alt="area Image" class="area-img tilted12-image">
+    </div>
+
+    <!--Floor-->
+    <div class="col-span-1">
+      <img src="/image/areaF1.png" alt="area Image" class="area-img">
+      <img src="/image/areaF3.png" alt="area Image" class="area-img mt-5">
+    </div>
+    <div class="col-span-1">
+      <img src="/image/areaF2.png" alt="area Image" class="area-img mt-5">
+      <img src="/image/areaF4.png" alt="area Image" class="area-img mt-5">
+    </div>
+  </div>
+
+  <!--1F 우측 1 - 4 구역-->
+  <div class="flex flex-col ml-4">
+    <style>
+      .tilted3-image {
+        transform: rotate(16deg);
+        margin-right: 25px;
+        margin-left: 7px;
+      }
+      .tilted4-image {
+        transform: rotate(30deg);
+        margin-right: 42px;
+        margin-left: -10px;
+      }
+    </style>
+    <img src="/image/area1.png" alt="area Image" class="ml-1 mr-5 area-img transform -rotate-5">
+    <img src="/image/area2.png" alt="area Image" class="ml-3 mr-5 area-img transform -rotate-5">
+    <img src="/image/area3.png" alt="area Image" class="area-img tilted3-image">
+    <img src="/image/area4.png" alt="area Image" class="area-img tilted4-image">
+  </div>
+
+    <div class="flex flex-row">
+
+      <style>
+        .tilted11-image {
+          transform: rotate(45deg);
+          margin-top: -48px;
+          margin-bottom: 48px;
+        }
+        .tilted10-image {
+          transform: rotate(30deg);
+          margin-top: -20px;
+          margin-bottom: 20px;
+        }
+        .tilted9-image {
+          transform: rotate(15deg);
+          margin-top: -4px;
+          margin-bottom: 5px;
+        }
+
+        .tilted7-image {
+          transform: rotate(-15deg);
+          margin-top: -4px;
+          margin-bottom: 5px;
+        }
+        .tilted6-image {
+          transform: rotate(-30deg);
+          margin-top: -20px;
+          margin-bottom: 20px;
+        }
+        .tilted5-image {
+          transform: rotate(-45deg);
+          margin-top: -48px;
+          margin-bottom: 48px;
+        }
+      </style>
+      <img src="/image/area11.png" alt="area Image" class="area-img tilted11-image">
+      <img src="/image/area10.png" alt="area Image" class="area-img tilted10-image">
+      <img src="/image/area9.png" alt="area Image" class="area-img tilted9-image">
+
+      <img src="/image/area8.png" alt="area Image" class="area-img">
+
+      <img src="/image/area7.png" alt="area Image" class="area-img tilted7-image">
+      <img src="/image/area6.png" alt="area Image" class="area-img tilted6-image">
+      <img src="/image/area5.png" alt="area Image" class="area-img tilted5-image">
+
+    </div>
+    </div>
+
+</main>
+</body>
+</html>
