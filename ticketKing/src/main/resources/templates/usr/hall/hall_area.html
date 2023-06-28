@@ -4,9 +4,9 @@
 
 
 <head>
-  <meta charset="UTF-8">
-  <title>공연예매 페이지 1. 관람일/회차 선택</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>공연예매 페이지 1. 관람일/회차 선택</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
@@ -14,109 +14,582 @@
 
 <main layout:fragment="main" class="flex items-center justify-center w-full min-h-screen">
 
+    <div>
+        <div class="flex items-center">
+            <!--Floor-->
+            <div class="relative flex gap-4">
+                <div>
+                    <img src="/image/areaF1.png" alt="area Image" class="area-img">
+                    <img src="/image/areaF3.png" alt="area Image" class="area-img mt-5">
+                </div>
+                <div class="col-span-1">
+                    <img src="/image/areaF2.png" alt="area Image" class="area-img mt-5">
+                    <img src="/image/areaF4.png" alt="area Image" class="area-img mt-5">
+                </div>
 
-  <div class="grid grid-cols-3 md:grid-cols-3 gap-4">
+                <div class="absolute flex flex-col -left-[120px]">
+                    <style>
+                        .tilted13-image {
+                            transform: rotate(-16deg);
+                            margin-right: 7px;
+                            margin-left: 25px;
+                        }
+
+                        .tilted12-image {
+                            transform: rotate(-30deg);
+                            margin-right: -10px;
+                            margin-left: 42px;
+                        }
+                    </style>
+                    <img src="/image/area15.png" alt="area Image" class="mr-1 ml-5 area-img transform -rotate-5">
+                    <img src="/image/area14.png" alt="area Image" class="mr-3 ml-5 area-img transform -rotate-5">
+                    <img src="/image/area14.png" alt="area Image" class="area-img tilted13-image">
+                    <img src="/image/area14.png" alt="area Image" class="area-img tilted12-image">
+                </div>
+                <div class="absolute flex flex-col ml-4 -right-[120px]">
+                    <style>
+                        .tilted3-image {
+                            transform: rotate(16deg);
+                            margin-right: 25px;
+                            margin-left: 7px;
+                        }
+
+                        .tilted4-image {
+                            transform: rotate(30deg);
+                            margin-right: 42px;
+                            margin-left: -10px;
+                        }
+                    </style>
+                    <img src="/image/area1.png" alt="area Image" class="ml-1 mr-5 area-img transform -rotate-5">
+                    <img src="/image/area2.png" alt="area Image" class="ml-3 mr-5 area-img transform -rotate-5">
+                    <img src="/image/area3.png" alt="area Image" class="area-img tilted3-image">
+                    <img src="/image/area4.png" alt="area Image" class="area-img tilted4-image">
+                </div>
+
+                <div class="absolute flex mt-8 justify-center -bottom-[120px]">
+
+                    <style>
+                        .tilted11-image {
+                            transform: rotate(45deg);
+                            margin-top: -48px;
+                            margin-bottom: 48px;
+                        }
+
+                        .tilted10-image {
+                            transform: rotate(30deg);
+                            margin-top: -20px;
+                            margin-bottom: 20px;
+                        }
+
+                        .tilted9-image {
+                            transform: rotate(15deg);
+                            margin-top: -4px;
+                            margin-bottom: 5px;
+                        }
+
+                        .tilted7-image {
+                            transform: rotate(-15deg);
+                            margin-top: -4px;
+                            margin-bottom: 5px;
+                        }
+
+                        .tilted6-image {
+                            transform: rotate(-30deg);
+                            margin-top: -20px;
+                            margin-bottom: 20px;
+                        }
+
+                        .tilted5-image {
+                            transform: rotate(-45deg);
+                            margin-top: -48px;
+                            margin-bottom: 48px;
+                        }
+                    </style>
+                    <img src="/image/area11.png" alt="area Image" class="area-img tilted11-image">
+                    <img src="/image/area10.png" alt="area Image" class="area-img tilted10-image">
+                    <img src="/image/area9.png" alt="area Image" class="area-img tilted9-image">
+
+                    <img src="/image/area8.png" alt="area Image" class="area-img">
+
+                    <img src="/image/area7.png" alt="area Image" class="area-img tilted7-image">
+                    <img src="/image/area6.png" alt="area Image" class="area-img tilted6-image">
+                    <img src="/image/area5.png" alt="area Image" class="area-img tilted5-image">
+
+                </div>
+
+                <div class="absolute -left-[210px]">
+                    <style>
+                        .tilted39-image {
+                            transform: rotate(107deg);
+                            margin-right:25px;
+                            margin-left: 16px;
+                        }
+                        .tilted43-image {
+                            transform: rotate(93deg);
+                            margin-right: 35px;
+                            margin-left: 6px;
+                            margin-top: -20px;
+                        }
+                        .tilted42-image {
+                            transform: rotate(84deg);
+                            margin-right: 36px;
+                            margin-left: 8px;
+                            margin-top: -13px;
+                        }
+                        .tilted41-image {
+                            transform: rotate(75deg);
+                            margin-right:24px;
+                            margin-left: 19px;
+                            margin-top: -15px;
+
+                        }
+
+                        .tilted40-image {
+                            transform: rotate(59deg);
+                            margin-right: 1px;
+                            margin-left: 41px;
+                            margin-top: -23px;
+                        }
+
+                    </style>
+                    <!--2F 좌측 39 - 43 구역-->
+                    <img src="/image/area43.png" alt="area Image" class="tilted39-image">
+                    <img src="/image/area43.png" alt="area Image" class="tilted43-image">
+                    <img src="/image/area42.png" alt="area Image" class="tilted42-image">
+                    <img src="/image/area41.png" alt="area Image" class="tilted41-image">
+                    <img src="/image/area40.png" alt="area Image" class="tilted40-image">
+                </div>
+                <!--1F 좌측 12 - 15 구역-->
+
+                <div class="absolute flex mt-8 justify-center -bottom-[300px]">
+
+                    <style>
+                        .tilted38-image {
+                            transform: rotate(54deg);
+                            margin-top: -129px;
+                            margin-bottom: 137px;
+                            margin-right: -15px;
+                        }
+
+                        .tilted37-image {
+                            transform: rotate(43deg);
+                            margin-top: -88px;
+                            margin-bottom: 93px;
+                            margin-right: -10px;
+                        }
+
+                        .tilted36-image {
+                            transform: rotate(31deg);
+                            margin-top: -52px;
+                            margin-bottom: 59px;
+                            margin-right: -5px;
+                        }
+
+                        .tilted35-image {
+                            transform: rotate(15deg);
+                            margin-top: -28px;
+                            margin-bottom: 35px;
+                            margin-right: 3px;
+                        }
+
+                        .tilted34-image {
+                            transform: rotate(1deg);
+                            margin-top: -21px;
+                            margin-bottom: 27px;
+                        }
+
+                        .tilted33-image {
+                            transform: rotate(351deg);
+                            margin-top: -25px;
+                            margin-bottom: 31px;
+                        }
+                        .tilted32-image {
+                            transform: rotate(340deg);
+                            margin-top: -39px;
+                            margin-bottom: 46px;
+                            margin-left: 0px;
+                        }
+                        .tilted31-image {
+                            transform: rotate(328deg);
+                            margin-top: -61px;
+                            margin-bottom: 70px;
+                            margin-left: -5px;
+                        }
+                        .tilted30-image {
+                            transform: rotate(315deg);
+                            margin-top: -99px;
+                            margin-bottom: 104px;
+                            margin-left: -13px;
+                        }
+                        .tilted29-image {
+                            transform: rotate(300deg);
+                            margin-top: -138px;
+                            margin-bottom: 146px;
+                            margin-left: -22px;
+                        }
+                        /*.tilted29-image {*/
+                        /*    transform: rotate(-45deg);*/
+                        /*    margin-top: -48px;*/
+                        /*    margin-bottom: 48px;*/
+                        /*    margin-left: -19px;*/
+                        /*}*/
+                    </style>
+                    <img src="/image/area38.png" alt="area Image" class="tilted38-image">
+                    <img src="/image/area37.png" alt="area Image" class="tilted37-image">
+                    <img src="/image/area36.png" alt="area Image" class="tilted36-image">
+                    <img src="/image/area35.png" alt="area Image" class="tilted35-image">
+                    <img src="/image/area34.png" alt="area Image" class="tilted34-image">
+                    <img src="/image/area33.png" alt="area Image" class="tilted33-image">
+                    <img src="/image/area32.png" alt="area Image" class="tilted32-image">
+                    <img src="/image/area31.png" alt="area Image" class="tilted31-image">
+                    <img src="/image/area30.png" alt="area Image" class="tilted30-image">
+                    <img src="/image/area30.png" alt="area Image" class="tilted29-image">
+                    <!--            <img src="/image/area29.png" alt="area Image" class="tilted29-image">-->
+
+                </div>
+
+                <div class="absolute flex flex-col ml-4 -right-[220px] -top-[20px]">
+                    <style>
+                        .tilted20-image {
+                            transform: rotate(252deg);
+                            margin-right: 53px;
+                            margin-left: -11px;
+                        }
+                        .tilted24-image {
+                            transform: rotate(266deg);
+                            margin-right: 42px;
+                            margin-left: 3px;
+                            margin-top: -16px;
+                        }
+                        .tilted25-image {
+                            transform: rotate(274deg);
+                            margin-right: 41px;
+                            margin-left: 3px;
+                            margin-top: -10px;
+
+                        }
+
+                        .tilted26-image {
+                            transform: rotate(280deg);
+                            margin-right: 47px;
+                            margin-left: -2px;
+                            margin-top: -10px;
+                        }
+
+                        .tilted27-image {
+                            transform: rotate(288deg);
+                            margin-right: 62px;
+                            margin-left: -19px;
+                            margin-top: -14px;
+                        }
+                    </style>
+                    <img src="/image/area24.png" alt="area Image" class="tilted20-image">
+                    <img src="/image/area24.png" alt="area Image" class="tilted24-image">
+                    <img src="/image/area25.png" alt="area Image" class="tilted25-image">
+                    <img src="/image/area26.png" alt="area Image" class="tilted26-image">
+                    <img src="/image/area27.png" alt="area Image" class="tilted27-image">
+                </div>
+            </div>
+            </div>
 
 
-    <!--1F 좌측 12 - 15 구역-->
-    <div class="flex flex-col ml-4">
-      <style>
-        .tilted13-image {
-          transform: rotate(-16deg);
-          margin-right: 7px;
-          margin-left: 25px;
-        }
-        .tilted12-image {
-          transform: rotate(-30deg);
-          margin-right: -10px;
-          margin-left: 42px;
-        }
-      </style>
-      <img src="/image/area15.png" alt="area Image" class="mr-1 ml-5 area-img transform -rotate-5">
-      <img src="/image/area14.png" alt="area Image" class="mr-3 ml-5 area-img transform -rotate-5">
-      <img src="/image/area14.png" alt="area Image" class="area-img tilted13-image">
-      <img src="/image/area14.png" alt="area Image" class="area-img tilted12-image">
+
+<!--            &lt;!&ndash;1F 우측 1 - 4 구역&ndash;&gt;-->
+
+<!--            &lt;!&ndash;2F 우측 24 - 28 구역&ndash;&gt;-->
+
+<!--        </div>-->
+
+
+<!--        &lt;!&ndash;1F 중앙 5 - 11 구역&ndash;&gt;-->
+
+<!--        &lt;!&ndash;2F 중앙 29 - 38 구역&ndash;&gt;-->
+
+
     </div>
+<!--    <div>-->
+<!--        <div class="flex items-center">-->
+<!--            <div class="grid grid-cols-4 gap-4">-->
 
-    <!--Floor-->
-    <div class="col-span-1">
-      <img src="/image/areaF1.png" alt="area Image" class="area-img">
-      <img src="/image/areaF3.png" alt="area Image" class="area-img mt-5">
-    </div>
-    <div class="col-span-1">
-      <img src="/image/areaF2.png" alt="area Image" class="area-img mt-5">
-      <img src="/image/areaF4.png" alt="area Image" class="area-img mt-5">
-    </div>
-  </div>
+<!--                &lt;!&ndash;2F 좌측 39 - 43 구역&ndash;&gt;-->
+<!--                <div class="flex flex-col ml-4">-->
+<!--                    <style>-->
+<!--                        .tilted39-image {-->
+<!--                            transform: rotate(107deg);-->
+<!--                            margin-right:25px;-->
+<!--                            margin-left: 16px;-->
+<!--                        }-->
+<!--                        .tilted43-image {-->
+<!--                            transform: rotate(93deg);-->
+<!--                            margin-right: 35px;-->
+<!--                            margin-left: 6px;-->
+<!--                            margin-top: -20px;-->
+<!--                        }-->
+<!--                        .tilted42-image {-->
+<!--                            transform: rotate(84deg);-->
+<!--                            margin-right: 36px;-->
+<!--                            margin-left: 8px;-->
+<!--                            margin-top: -13px;-->
+<!--                        }-->
+<!--                        .tilted41-image {-->
+<!--                            transform: rotate(75deg);-->
+<!--                            margin-right:24px;-->
+<!--                            margin-left: 19px;-->
+<!--                            margin-top: -15px;-->
 
-  <!--1F 우측 1 - 4 구역-->
-  <div class="flex flex-col ml-4">
-    <style>
-      .tilted3-image {
-        transform: rotate(16deg);
-        margin-right: 25px;
-        margin-left: 7px;
-      }
-      .tilted4-image {
-        transform: rotate(30deg);
-        margin-right: 42px;
-        margin-left: -10px;
-      }
-    </style>
-    <img src="/image/area1.png" alt="area Image" class="ml-1 mr-5 area-img transform -rotate-5">
-    <img src="/image/area2.png" alt="area Image" class="ml-3 mr-5 area-img transform -rotate-5">
-    <img src="/image/area3.png" alt="area Image" class="area-img tilted3-image">
-    <img src="/image/area4.png" alt="area Image" class="area-img tilted4-image">
-  </div>
+<!--                        }-->
 
-    <div class="flex flex-row">
+<!--                        .tilted40-image {-->
+<!--                            transform: rotate(59deg);-->
+<!--                            margin-right: 1px;-->
+<!--                            margin-left: 41px;-->
+<!--                            margin-top: -23px;-->
+<!--                        }-->
 
-      <style>
-        .tilted11-image {
-          transform: rotate(45deg);
-          margin-top: -48px;
-          margin-bottom: 48px;
-        }
-        .tilted10-image {
-          transform: rotate(30deg);
-          margin-top: -20px;
-          margin-bottom: 20px;
-        }
-        .tilted9-image {
-          transform: rotate(15deg);
-          margin-top: -4px;
-          margin-bottom: 5px;
-        }
+<!--                    </style>-->
+<!--                    <img src="/image/area43.png" alt="area Image" class="tilted39-image">-->
+<!--                    <img src="/image/area43.png" alt="area Image" class="tilted43-image">-->
+<!--                    <img src="/image/area42.png" alt="area Image" class="tilted42-image">-->
+<!--                    <img src="/image/area41.png" alt="area Image" class="tilted41-image">-->
+<!--                    <img src="/image/area40.png" alt="area Image" class="tilted40-image">-->
+<!--                </div>-->
+<!--                &lt;!&ndash;1F 좌측 12 - 15 구역&ndash;&gt;-->
+<!--                <div class="flex flex-col ml-4">-->
+<!--                    <style>-->
+<!--                        .tilted13-image {-->
+<!--                            transform: rotate(-16deg);-->
+<!--                            margin-right: 7px;-->
+<!--                            margin-left: 25px;-->
+<!--                        }-->
 
-        .tilted7-image {
-          transform: rotate(-15deg);
-          margin-top: -4px;
-          margin-bottom: 5px;
-        }
-        .tilted6-image {
-          transform: rotate(-30deg);
-          margin-top: -20px;
-          margin-bottom: 20px;
-        }
-        .tilted5-image {
-          transform: rotate(-45deg);
-          margin-top: -48px;
-          margin-bottom: 48px;
-        }
-      </style>
-      <img src="/image/area11.png" alt="area Image" class="area-img tilted11-image">
-      <img src="/image/area10.png" alt="area Image" class="area-img tilted10-image">
-      <img src="/image/area9.png" alt="area Image" class="area-img tilted9-image">
+<!--                        .tilted12-image {-->
+<!--                            transform: rotate(-30deg);-->
+<!--                            margin-right: -10px;-->
+<!--                            margin-left: 42px;-->
+<!--                        }-->
+<!--                    </style>-->
+<!--                    <img src="/image/area15.png" alt="area Image" class="mr-1 ml-5 area-img transform -rotate-5">-->
+<!--                    <img src="/image/area14.png" alt="area Image" class="mr-3 ml-5 area-img transform -rotate-5">-->
+<!--                    <img src="/image/area14.png" alt="area Image" class="area-img tilted13-image">-->
+<!--                    <img src="/image/area14.png" alt="area Image" class="area-img tilted12-image">-->
+<!--                </div>-->
 
-      <img src="/image/area8.png" alt="area Image" class="area-img">
+<!--                &lt;!&ndash;Floor&ndash;&gt;-->
+<!--                <div class="col-span-1">-->
+<!--                    <img src="/image/areaF1.png" alt="area Image" class="area-img">-->
+<!--                    <img src="/image/areaF3.png" alt="area Image" class="area-img mt-5">-->
+<!--                </div>-->
+<!--                <div class="col-span-1">-->
+<!--                    <img src="/image/areaF2.png" alt="area Image" class="area-img mt-5">-->
+<!--                    <img src="/image/areaF4.png" alt="area Image" class="area-img mt-5">-->
+<!--                </div>-->
+<!--            </div>-->
 
-      <img src="/image/area7.png" alt="area Image" class="area-img tilted7-image">
-      <img src="/image/area6.png" alt="area Image" class="area-img tilted6-image">
-      <img src="/image/area5.png" alt="area Image" class="area-img tilted5-image">
+<!--            &lt;!&ndash;1F 우측 1 - 4 구역&ndash;&gt;-->
+<!--            <div class="flex flex-col ml-4">-->
+<!--                <style>-->
+<!--                    .tilted3-image {-->
+<!--                        transform: rotate(16deg);-->
+<!--                        margin-right: 25px;-->
+<!--                        margin-left: 7px;-->
+<!--                    }-->
 
-    </div>
-    </div>
+<!--                    .tilted4-image {-->
+<!--                        transform: rotate(30deg);-->
+<!--                        margin-right: 42px;-->
+<!--                        margin-left: -10px;-->
+<!--                    }-->
+<!--                </style>-->
+<!--                <img src="/image/area1.png" alt="area Image" class="ml-1 mr-5 area-img transform -rotate-5">-->
+<!--                <img src="/image/area2.png" alt="area Image" class="ml-3 mr-5 area-img transform -rotate-5">-->
+<!--                <img src="/image/area3.png" alt="area Image" class="area-img tilted3-image">-->
+<!--                <img src="/image/area4.png" alt="area Image" class="area-img tilted4-image">-->
+<!--            </div>-->
+<!--            &lt;!&ndash;2F 우측 24 - 28 구역&ndash;&gt;-->
+<!--            <div class="flex flex-col ml-4">-->
+<!--                <style>-->
+<!--                    .tilted20-image {-->
+<!--                        transform: rotate(252deg);-->
+<!--                        margin-right: 53px;-->
+<!--                        margin-left: -11px;-->
+<!--                    }-->
+<!--                    .tilted24-image {-->
+<!--                        transform: rotate(266deg);-->
+<!--                        margin-right: 42px;-->
+<!--                        margin-left: 3px;-->
+<!--                        margin-top: -16px;-->
+<!--                    }-->
+<!--                    .tilted25-image {-->
+<!--                        transform: rotate(274deg);-->
+<!--                        margin-right: 41px;-->
+<!--                        margin-left: 3px;-->
+<!--                        margin-top: -10px;-->
 
+<!--                    }-->
+
+<!--                    .tilted26-image {-->
+<!--                        transform: rotate(280deg);-->
+<!--                        margin-right: 47px;-->
+<!--                        margin-left: -2px;-->
+<!--                        margin-top: -10px;-->
+<!--                    }-->
+
+<!--                    .tilted27-image {-->
+<!--                        transform: rotate(288deg);-->
+<!--                        margin-right: 62px;-->
+<!--                        margin-left: -19px;-->
+<!--                        margin-top: -14px;-->
+<!--                    }-->
+<!--                </style>-->
+<!--                <img src="/image/area24.png" alt="area Image" class="tilted20-image">-->
+<!--                <img src="/image/area24.png" alt="area Image" class="tilted24-image">-->
+<!--                <img src="/image/area25.png" alt="area Image" class="tilted25-image">-->
+<!--                <img src="/image/area26.png" alt="area Image" class="tilted26-image">-->
+<!--                <img src="/image/area27.png" alt="area Image" class="tilted27-image">-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+<!--        &lt;!&ndash;1F 중앙 5 - 11 구역&ndash;&gt;-->
+<!--        <div class="flex mt-8 justify-center">-->
+
+<!--            <style>-->
+<!--                .tilted11-image {-->
+<!--                    transform: rotate(45deg);-->
+<!--                    margin-top: -48px;-->
+<!--                    margin-bottom: 48px;-->
+<!--                }-->
+
+<!--                .tilted10-image {-->
+<!--                    transform: rotate(30deg);-->
+<!--                    margin-top: -20px;-->
+<!--                    margin-bottom: 20px;-->
+<!--                }-->
+
+<!--                .tilted9-image {-->
+<!--                    transform: rotate(15deg);-->
+<!--                    margin-top: -4px;-->
+<!--                    margin-bottom: 5px;-->
+<!--                }-->
+
+<!--                .tilted7-image {-->
+<!--                    transform: rotate(-15deg);-->
+<!--                    margin-top: -4px;-->
+<!--                    margin-bottom: 5px;-->
+<!--                }-->
+
+<!--                .tilted6-image {-->
+<!--                    transform: rotate(-30deg);-->
+<!--                    margin-top: -20px;-->
+<!--                    margin-bottom: 20px;-->
+<!--                }-->
+
+<!--                .tilted5-image {-->
+<!--                    transform: rotate(-45deg);-->
+<!--                    margin-top: -48px;-->
+<!--                    margin-bottom: 48px;-->
+<!--                }-->
+<!--            </style>-->
+<!--            <img src="/image/area11.png" alt="area Image" class="area-img tilted11-image">-->
+<!--            <img src="/image/area10.png" alt="area Image" class="area-img tilted10-image">-->
+<!--            <img src="/image/area9.png" alt="area Image" class="area-img tilted9-image">-->
+
+<!--            <img src="/image/area8.png" alt="area Image" class="area-img">-->
+
+<!--            <img src="/image/area7.png" alt="area Image" class="area-img tilted7-image">-->
+<!--            <img src="/image/area6.png" alt="area Image" class="area-img tilted6-image">-->
+<!--            <img src="/image/area5.png" alt="area Image" class="area-img tilted5-image">-->
+
+<!--        </div>-->
+<!--        &lt;!&ndash;2F 중앙 29 - 38 구역&ndash;&gt;-->
+<!--        <div class="flex mt-8 justify-center">-->
+
+<!--            <style>-->
+<!--                .tilted38-image {-->
+<!--                    transform: rotate(54deg);-->
+<!--                    margin-top: -129px;-->
+<!--                    margin-bottom: 137px;-->
+<!--                    margin-right: -15px;-->
+<!--                }-->
+
+<!--                .tilted37-image {-->
+<!--                    transform: rotate(43deg);-->
+<!--                    margin-top: -88px;-->
+<!--                    margin-bottom: 93px;-->
+<!--                    margin-right: -10px;-->
+<!--                }-->
+
+<!--                .tilted36-image {-->
+<!--                    transform: rotate(31deg);-->
+<!--                    margin-top: -52px;-->
+<!--                    margin-bottom: 59px;-->
+<!--                    margin-right: -5px;-->
+<!--                }-->
+
+<!--                .tilted35-image {-->
+<!--                    transform: rotate(15deg);-->
+<!--                    margin-top: -28px;-->
+<!--                    margin-bottom: 35px;-->
+<!--                    margin-right: 3px;-->
+<!--                }-->
+
+<!--                .tilted34-image {-->
+<!--                    transform: rotate(1deg);-->
+<!--                    margin-top: -21px;-->
+<!--                    margin-bottom: 27px;-->
+<!--                }-->
+
+<!--                .tilted33-image {-->
+<!--                    transform: rotate(351deg);-->
+<!--                    margin-top: -25px;-->
+<!--                    margin-bottom: 31px;-->
+<!--                }-->
+<!--                .tilted32-image {-->
+<!--                    transform: rotate(340deg);-->
+<!--                    margin-top: -39px;-->
+<!--                    margin-bottom: 46px;-->
+<!--                    margin-left: 0px;-->
+<!--                }-->
+<!--                .tilted31-image {-->
+<!--                    transform: rotate(328deg);-->
+<!--                    margin-top: -61px;-->
+<!--                    margin-bottom: 70px;-->
+<!--                    margin-left: -5px;-->
+<!--                }-->
+<!--                .tilted30-image {-->
+<!--                    transform: rotate(315deg);-->
+<!--                    margin-top: -99px;-->
+<!--                    margin-bottom: 104px;-->
+<!--                    margin-left: -13px;-->
+<!--                }-->
+<!--                .tilted29-image {-->
+<!--                    transform: rotate(300deg);-->
+<!--                    margin-top: -138px;-->
+<!--                    margin-bottom: 146px;-->
+<!--                    margin-left: -22px;-->
+<!--                }-->
+<!--                /*.tilted29-image {*/-->
+<!--                /*    transform: rotate(-45deg);*/-->
+<!--                /*    margin-top: -48px;*/-->
+<!--                /*    margin-bottom: 48px;*/-->
+<!--                /*    margin-left: -19px;*/-->
+<!--                /*}*/-->
+<!--            </style>-->
+<!--            <img src="/image/area38.png" alt="area Image" class="tilted38-image">-->
+<!--            <img src="/image/area37.png" alt="area Image" class="tilted37-image">-->
+<!--            <img src="/image/area36.png" alt="area Image" class="tilted36-image">-->
+<!--            <img src="/image/area35.png" alt="area Image" class="tilted35-image">-->
+<!--            <img src="/image/area34.png" alt="area Image" class="tilted34-image">-->
+<!--            <img src="/image/area33.png" alt="area Image" class="tilted33-image">-->
+<!--            <img src="/image/area32.png" alt="area Image" class="tilted32-image">-->
+<!--            <img src="/image/area31.png" alt="area Image" class="tilted31-image">-->
+<!--            <img src="/image/area30.png" alt="area Image" class="tilted30-image">-->
+<!--            <img src="/image/area30.png" alt="area Image" class="tilted29-image">-->
+<!--&lt;!&ndash;            <img src="/image/area29.png" alt="area Image" class="tilted29-image">&ndash;&gt;-->
+
+<!--        </div>-->
+
+<!--    </div>-->
 </main>
 </body>
 </html>
