@@ -1,0 +1,186 @@
+<html th:lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>공연예매 페이지 1. 관람일/회차 선택</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+<main layout:fragment="main" class="flex items-center justify-center w-full min-h-screen">
+
+    <div class="flex">
+
+        <!-- 관람일 선택 -->
+        <div class="flex justify-center">
+            <div class="p-4">
+                <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">관람일 선택</p>
+                <style>
+                    .custom-input {
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                        padding: 0.32rem 1rem;
+                        background-color: #ffffff;
+                        color: #9B6DFF;
+                        border-color: #9B6DFF;
+                        background-image: none;
+                    }
+                </style>
+                <div class="flex-col">
+                    <label for="startDateInput" class="sr-only">관람일 선택</label>
+                    <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />
+                </div>
+
+                <script>
+                    var startDateInput = document.getElementById('startDateInput');
+                    startDateInput.addEventListener('change', function() {
+                        if (startDateInput.value === '') {
+                            startDateInput.type = 'text';
+                            startDateInput.value = '관람일';
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="inline-block h-[250px] min-h-[1em] w-0.5 self-stretch bg-neutral-200 opacity-100 dark:opacity-50"></div>
+
+        <div class="p-4">
+            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">회차 정보</p>
+            <button class="rounded bg-[#9B6DFF] px-4 py-2 text-white text-sm hover:bg-[#664AFF] active:bg-blue-800">1회차 : 18시 30분 </button>
+        </div>
+
+        <div class="mx-8"></div>
+
+        <!--좌석 등급 / 잔여석-->
+        <div class="max-w-[300px]">
+            <div class="block rounded-lg bg-white text-center border-red-500">
+                <div class="border-b-2 border-neutral-100 px-4 py-2 text-m dark:border-neutral-600 dark:text-neutral-50">좌석 등급 / 잔여석</div>
+                <div class="p-4">
+                    <div class="flex flex-col justify-center mx-auto">
+                        <div class="sm:-mx-6 lg:-mx-8">
+                            <div class="inline-block min-w-full py-1 sm:px-4 lg:px-6 text-center">
+                                <div class="overflow-hidden">
+                                    <table class="w-full text-center text-xxs sm:text-sm font-light">
+                                    <tbody>
+                                        <tr>
+                                            <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                <div class="w-3 h-3 mr-1" style="background-color: #B1B2FF;"></div>
+                                                VIP석 2석
+                                            </td>
+                                            <td class="whitespace-nowrap px-4 py-2">250,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                <div class="w-3 h-3 mr-1" style="background-color: #D2DAFF;"></div>
+                                                SR석 0석
+                                            </td>
+                                            <td class="whitespace-nowrap px-4 py-2">220,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                <div class="w-3 h-3 mr-1" style="background-color: #AAC4FF;"></div>
+                                                R석 10석
+                                            </td>
+                                            <td class="whitespace-nowrap px-4 py-2">198,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                <div class="w-3 h-3 mr-1" style="background-color: #AFBDCA;"></div>
+                                                VIP석 2석
+                                            </td>
+                                            <td class="whitespace-nowrap px-4 py-2">165,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                <div class="w-3 h-3 mr-1" style="background-color: #7795B2;"></div>
+                                                VIP석 2석
+                                            </td>
+                                            <td class="whitespace-nowrap px-4 py-2">132,000</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mx-8"></div>
+
+
+
+        <!-- 정보 페이지 -->
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+
+                    <div class="flex justify-center">
+                        <img src="https://newsimg.hankookilbo.com/2017/11/08/201711081172845620_1.jpg"
+                             class="h-auto max-w-xxxs max-h-80 rounded-lg mr-30 shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30" alt="" />
+                    </div>
+
+                    <div class="max-w-[300px]">
+                        <div class="block rounded-lg bg-white text-center border-red-500 mt-5">
+                            <div class="py-2">
+
+                                <table class="min-w-full text-sm font-light">
+                                    <tbody>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">관람일시</td>
+                                        <td class="whitespace-nowrap px-4 py-2" style="font-size: 12px;">23-07-15</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">선택 좌석</td>
+                                        <td class="whitespace-nowrap px-4 py-2" style="font-size: 12px;">2층-9열-45</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">티켓 금액</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">할인 금액</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 font-medium" style="font-size: 12px;">수수료</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <hr class="h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
+
+                                <div class="mt-3 flex justify-center">
+                                    <p class="text-lg font-bold" style="color:#DC143C; font-size: 16px;">총 결제금액: </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-center">
+                        <button type="submit" class="custom-button rounded-lg border-none py-2 w-full"
+                                style="background-color: #664AFF; color: #ffffff; width: 100%">다음 단계 ></button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+</body>
+</html>
