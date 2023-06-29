@@ -2,201 +2,194 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
 
-
 <head>
     <meta charset="UTF-8">
     <title>공연 정보</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 
 <body>
 
-<main layout:fragment="main" class="flex items-center justify-center w-full min-h-screen">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <div class="image-caption text-2xl" style="font-weight: bold">공연정보</div>
+<main layout:fragment="main" class="flex flex-col items-center justify-center w-full min-h-screen">
 
-                <img src="https://newsimg.hankookilbo.com/2017/11/08/201711081172845620_1.jpg"
-                     class="h-auto max-w-sm max-h-96 rounded-lg mr-30 mt-5 shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30" alt="" />
+    <div class="flex items-center justify-center w-full min-h-screen">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <div class="image-caption text-2xl" style="font-weight: bold">공연정보</div>
 
-                <div class="mt-8 flex justify-center">
-                    <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
-                            style="background-color: #664AFF; color: #ffffff">00 : 00 : 00</button>
-                </div>
+                    <img src="https://newsimg.hankookilbo.com/2017/11/08/201711081172845620_1.jpg"
+                         class="h-auto max-w-sm max-h-96 rounded-lg mr-30 mt-5 shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30" alt="" />
 
-            </div>
-        </div>
-    </div>
-
-    <div class="flex flex-col mb-10">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                <div class="overflow-hidden">
-                    <div class="flex">
-                        <table class="min-w-full ml-10 text-sm font-light">
-
-                            <tbody>
-                            <tr>
-                                <td class="whitespace-nowrap px-6 py-3 font-medium">장소</td>
-                                <td class="whitespace-nowrap px-6 py-3">KSPO-DOME</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap px-6 py-3 font-medium">공연시간</td>
-                                <td class="whitespace-nowrap px-6 py-3">120분</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap px-6 py-3 font-medium">관람연령</td>
-                                <td class="whitespace-nowrap px-6 py-3">8세이상 관람가능</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                    <div>가격</div>
-                                    <div style="color: rgba(0, 0, 0, 0);">2</div>
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-3">
-                                    <div>스탠딩 11,000원</div>
-                                    <div>스탠딩 88,000원</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                    <div>혜택</div>
-                                    <div style="color: rgba(0, 0, 0, 0);">2</div>
-                                    <div style="color: rgba(0, 0, 0, 0);">2</div>
-                                    <div style="color: rgba(0, 0, 0, 0);">2</div>
-                                    <div style="color: rgba(0, 0, 0, 0);">2</div>
-                                    <div style="color: rgba(0, 0, 0, 0);">2</div>
-                                </td>
-                                <td class="whitespace-nowrap px-6 py-3">
-                                    <div>[AD] SKT 고객전용 특별할인 쿠폰받기 ></div>
-                                    <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
-                                    <div>[AD] 티켓 3천원 할인쿠폰 + 편의점 6천원 증정 ></div>
-                                    <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
-                                    <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
-                                    <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap px-6 py-3 font-medium">배송</td>
-                                <td class="whitespace-nowrap px-6 py-3">일반 배송은 배송비가 부과됩니다.</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="flex flex-col mt-5 items-stretch">
-        <div class="flex flex-col text-sm ml-20 mb-1" style="color: #9B6DFF">ⓘ 게임 시작 전, 반드시 확인해주세요!</div>
-        <div class="flex flex-col">
-            <label for="my_modal_9" class="custom-button btn btn-sm font-bold border-none ml-20 w-3/4 mb-7"
-                   style="background-color: #9B6DFF; color: #ffffff">👑 게임 규칙 보러가기</label>
-            <input type="checkbox" id="my_modal_9" class="w-1/3 modal-toggle modal-warning" />
-            <div class="modal">
-                <div class="modal-box">
-                    <h3 class="font-bold text-2xl mb-4">👑 게임 규칙 👑</h3>
-                    <p class="py-2">1. </p>
-                    <p class="py-2">2. </p>
-                    <div class="modal-action">
-                        <label for="my_modal_9" class="btn btn-sm btn-primary border-none align-items-center w-full" style="background-color: #664AFF; color: #ffffff">닫기</label>
+                    <div class="mt-8 flex justify-center">
+                        <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
+                                style="background-color: #664AFF; color: #ffffff">00 : 00 : 00</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="flex flex-col ml-20">
-            <div class="max-w-[300px]">
-                <div class="block rounded-lg bg-white text-center border-red-500">
-                    <div class="border-b-2 border-neutral-100 px-4 py-3 dark:border-neutral-600 dark:text-neutral-50">
-                        관람일 & 회차 정보
-                    </div>
-                    <div class="p-4">
-                        <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200"></p>
-                        <style>
-                            .custom-input {
-                                -webkit-appearance: none;
-                                -moz-appearance: none;
-                                appearance: none;
-                                padding: 0.32rem 1rem;
-                                background-color: #ffffff;
-                                color: #9B6DFF;
-                                border-color: #9B6DFF;
-                                background-image: none;
-                            }
-                        </style>
-                        <div class="flex-col">
-                            <label for="startDateInput" class="sr-only">관람일 선택</label>
-                            <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />
+        <div class="flex flex-col mb-10">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                    <div class="overflow-hidden">
+                        <div class="flex">
+                            <table class="min-w-full ml-10 text-sm font-light">
+
+                                <tbody>
+                                <tr>
+                                    <td class="whitespace-nowrap px-6 py-3 font-medium">장소</td>
+                                    <td class="whitespace-nowrap px-6 py-3">KSPO-DOME</td>
+                                </tr>
+                                <tr>
+                                    <td class="whitespace-nowrap px-6 py-3 font-medium">공연시간</td>
+                                    <td class="whitespace-nowrap px-6 py-3">120분</td>
+                                </tr>
+                                <tr>
+                                    <td class="whitespace-nowrap px-6 py-3 font-medium">관람연령</td>
+                                    <td class="whitespace-nowrap px-6 py-3">8세이상 관람가능</td>
+                                </tr>
+                                <tr>
+                                    <td class="whitespace-nowrap px-6 py-3 font-medium">
+                                        <div>가격</div>
+                                        <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                    </td>
+                                    <td class="whitespace-nowrap px-6 py-3">
+                                        <div>스탠딩 11,000원</div>
+                                        <div>스탠딩 88,000원</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="whitespace-nowrap px-6 py-3 font-medium">
+                                        <div>혜택</div>
+                                        <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                        <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                        <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                        <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                        <div style="color: rgba(0, 0, 0, 0);">2</div>
+                                    </td>
+                                    <td class="whitespace-nowrap px-6 py-3">
+                                        <div>[AD] SKT 고객전용 특별할인 쿠폰받기 ></div>
+                                        <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                                        <div>[AD] 티켓 3천원 할인쿠폰 + 편의점 6천원 증정 ></div>
+                                        <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                                        <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                                        <div>[AD] 티켓할인쿠폰 마감임박! 11,000원 쿠폰받기 ></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="whitespace-nowrap px-6 py-3 font-medium">배송</td>
+                                    <td class="whitespace-nowrap px-6 py-3">일반 배송은 배송비가 부과됩니다.</td>
+                                </tr>
+                                </tbody>
+
+                            </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        <script>
-                            var startDateInput = document.getElementById('startDateInput');
-                            startDateInput.addEventListener('change', function() {
-                                if (startDateInput.value === '') {
-                                    startDateInput.type = 'text';
-                                    startDateInput.value = '관람일';
-                                }
-                            });
-                        </script>
-
-                        </p>
+        <div class="flex flex-col mt-5 items-stretch">
+            <div class="flex flex-col text-sm ml-20 mb-1" style="color: #9B6DFF">ⓘ 게임 시작 전, 반드시 확인해주세요!</div>
+            <div class="flex flex-col">
+                <label for="my_modal_9" class="custom-button btn btn-sm font-bold border-none ml-20 w-3/4 mb-7"
+                       style="background-color: #9B6DFF; color: #ffffff">👑 게임 규칙 보러가기</label>
+                <input type="checkbox" id="my_modal_9" class="w-1/3 modal-toggle modal-warning" />
+                <div class="modal">
+                    <div class="modal-box">
+                        <h3 class="font-bold text-2xl mb-4">👑 게임 규칙 👑</h3>
+                        <p class="py-2">1. </p>
+                        <p class="py-2">2. </p>
+                        <div class="modal-action">
+                            <label for="my_modal_9" class="btn btn-sm btn-primary border-none align-items-center w-full" style="background-color: #664AFF; color: #ffffff">닫기</label>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col mt-7">
-                <style>
-                    select[name="startTime"], select[name="level"] {
-                        -webkit-appearance: none;
-                        -moz-appearance: none;
-                        appearance: none;
-                        padding: 0.2rem 2rem 0.2rem 1rem;
-                        background-color: #ffffff;
-                        color: #9B6DFF;
-                        border-color: #9B6DFF;
-                    }
-                </style>
+            <div class="flex flex-col ml-20">
+                <div class="max-w-[300px]">
+                    <div class="block rounded-lg bg-white text-center border-red-500">
+                        <div class="border-b-2 border-neutral-100 px-4 py-3 dark:border-neutral-600 dark:text-neutral-50">
+                            관람일 & 회차 정보
+                        </div>
+                        <div class="p-4">
+                            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200"></p>
+                            <style>
+                                .custom-input {
+                                    -webkit-appearance: none;
+                                    -moz-appearance: none;
+                                    appearance: none;
+                                    padding: 0.32rem 1rem;
+                                    background-color: #ffffff;
+                                    color: #9B6DFF;
+                                    border-color: #9B6DFF;
+                                    background-image: none;
+                                }
+                            </style>
+                            <div class="flex-col">
+                                <label for="startDateInput" class="sr-only">관람일 선택</label>
+                                <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />
+                            </div>
 
-                <select name="startTime" class="select select w-full">
-                    <option class="" selected disabled>게임 시작 시간 선택하기</option>
-                    <option>30초 후</option>
-                    <option>1분 후</option>
-                    <option>3분 후</option>
-                    <option>5분 후</option>
-                </select>
+                            <script>
+                                var startDateInput = document.getElementById('startDateInput');
+                                startDateInput.addEventListener('change', function() {
+                                    if (startDateInput.value === '') {
+                                        startDateInput.type = 'text';
+                                        startDateInput.value = '관람일';
+                                    }
+                                });
+                            </script>
 
-                <select name="level" class="select select w-full mt-7">
-                    <option value="" selected disabled>게임 난이도 설정하기</option>
-                    <option value="project">초급</option>
-                    <option value="coding">고급</option>
-                </select>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="flex flex-col mt-7">
+                    <style>
+                        select[name="startTime"], select[name="level"] {
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            appearance: none;
+                            padding: 0.2rem 2rem 0.2rem 1rem;
+                            background-color: #ffffff;
+                            color: #9B6DFF;
+                            border-color: #9B6DFF;
+                        }
+                    </style>
+
+                    <select name="startTime" class="select select w-full">
+                        <option class="" selected disabled>게임 시작 시간 선택하기</option>
+                        <option>30초 후</option>
+                        <option>1분 후</option>
+                        <option>3분 후</option>
+                        <option>5분 후</option>
+                    </select>
+
+                    <select name="level" class="select select w-full mt-7">
+                        <option value="" selected disabled>게임 난이도 설정하기</option>
+                        <option value="project">초급</option>
+                        <option value="coding">고급</option>
+                    </select>
+
+                </div>
+                <!--            <div class="mt-7 flex justify-center">-->
+                <!--                <button type="submit" class="custom-button rounded-lg border-none w-full py-4"-->
+                <!--                        style="background-color: #664AFF; color: #ffffff">연습 게임 시작하기</button>-->
+                <!--            </div>-->
+
+                <!--연습 게임 시작하기 버튼 클릭시, concertDate로 이동하도록-->
+                <div class="mt-7 flex justify-center">
+                    <a href="/usr/concert/date" class="custom-button rounded-lg border-none w-full py-4"
+                       style="background-color: #664AFF; color: #ffffff; display: flex; justify-content: center; align-items: center;">연습 게임 시작하기</a>
+                </div>
             </div>
-<!--            <div class="mt-7 flex justify-center">-->
-<!--                <button type="submit" class="custom-button rounded-lg border-none w-full py-4"-->
-<!--                        style="background-color: #664AFF; color: #ffffff">연습 게임 시작하기</button>-->
-<!--            </div>-->
-
-
-            <!--연습 게임 시작하기 버튼 클릭시, concertDate로 이동하도록-->
-            <div class="mt-7 flex justify-center">
-                <a href="/usr/concert/date" class="custom-button rounded-lg border-none w-full py-4"
-                   style="background-color: #664AFF; color: #ffffff; display: flex; justify-content: center; align-items: center;">연습 게임 시작하기</a>
-            </div>
-
-
-
-
-
         </div>
     </div>
-
 </main>
-
 
 <script src="https://cdn.tailwindcss.com"></script>
 
