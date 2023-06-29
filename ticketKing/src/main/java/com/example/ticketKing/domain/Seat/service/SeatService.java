@@ -1,5 +1,7 @@
 package com.example.ticketKing.domain.Seat.service;
 
+import com.example.ticketKing.domain.Hall.entity.Hall;
+import com.example.ticketKing.domain.Hall.repository.HallRepository;
 import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.repository.SeatRepository;
 import com.example.ticketKing.global.rsData.RsData;
@@ -17,17 +19,15 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class SeatService {
     private final SeatRepository seatRepository;
-
-
+    private final HallRepository hallRepository;
 
     public List<Seat> getAllSeats() {
         return seatRepository.findAll();
     }
 
 
-
     @Transactional
-    public RsData<Seat> register(String seatType,Integer seatRow, Integer seatNumber,String status){
+    public RsData<Seat> register(String seatType, Integer seatRow, Integer seatNumber, String status, Hall hall) {
 
         Seat seat = Seat
                 .builder()
@@ -35,11 +35,17 @@ public class SeatService {
                 .seatRow(seatRow)
                 .seatNumber(seatNumber)
                 .status(status)
+                .hall(hall)
                 .build();
 
-    seatRepository.save(seat);
+        seatRepository.save(seat);
 
-    return RsData.of("S-1", "좌석 등록이 완료되었습니다",seat);
+        return RsData.of("S-1", "좌석 등록이 완료되었습니다", seat);
+    }
+
+    public List<Seat> getSeatsByHallAndType(String hallName, String type) {
+        Hall hall = hallRepository.findByName(hallName);
+        return seatRepository.findByHallAndSeatType(hall, type);
     }
 
 
@@ -48,25 +54,47 @@ public class SeatService {
         return seatRepository.findBySeatType(type);
     }
 
-    public int getRow(String type){
-        if(Objects.equals(type, "VIP석")){
-            return 10;
+    public int getRow(String hall, String type) {
+        if (Objects.equals(hall, "KSPO") && Objects.equals(type, "VIP")) {
+            return 24;
+        } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "R")) {
+            return 22;
+        } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "A")) {
+            return 20;
         }
-        else if(Objects.equals(type, "일반석")){
-            return 5;
+        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "VIP")) {
+            return 25;
         }
+        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "S")) {
+            return 15;
+        }
+        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "G")) {
+            return 25;
+        }
+
         return 10;
     }
 
 
-    public int getColumn(String type){
-        if(Objects.equals(type, "VIP석")){
-            return 10;
+    public int getColumn(String hall, String type) {
+        if (Objects.equals(hall, "KSPO") && Objects.equals(type, "VIP")) {
+            return 20;
+        } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "R")) {
+            return 20;
+        } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "A")) {
+            return 26;
         }
-        else if(Objects.equals(type, "일반석")){
-            return 5;
+        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "VIP")) {
+            return 40;
         }
+        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "S")) {
+            return 25;
+        }
+        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "G")) {
+            return 35;
+        }
+
         return 10;
     }
+
 }
-

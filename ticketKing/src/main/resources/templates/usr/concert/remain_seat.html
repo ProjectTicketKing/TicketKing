@@ -33,46 +33,49 @@
     const seatWrapper = document.querySelector(".seat-wrapper");
     let clicked = "";
     let div = "";
+  const rows = [[${rows}]];
+  const columns = [[${columns}]];
 
-for (let i = 0; i < 15; i++) {
-  div = document.createElement("div");
-  seatWrapper.append(div);
-  for (let j = 0; j < 15; j++) {
-    const input = document.createElement('input');
-    input.type = "button";
-    input.name = "seats"
-    input.classList = "seat";
-    mapping(input, i, j);
-    div.append(input);
+  for (let i = 0; i < rows; i++) {
+    div = document.createElement("div");
+    seatWrapper.append(div);
+    for (let j = 0; j < columns; j++) {
+      const input = document.createElement('input');
+      input.type = "button";
+      input.name = "seats";
+      input.classList = "seat";
+      mapping(input, i, j);
+      div.append(input);
 
-    if (input.value === "A1" || input.value === "B2" || input.value === "B3") {
-      input.classList.add("highlighted"); // Add a class for highlighting A1, B2, and B3 buttons
-      input.addEventListener('click', function(e) {
-        console.log(e.target.value);
-        selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
+      if (input.value === "K5" || input.value === "H7" || input.value === "G6") {
+        input.classList.add("highlighted");
+        input.addEventListener('click', function(e) {
+          console.log(e.target.value);
+          selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
 
-        if (input.classList.contains("clicked")) {
-          input.classList.remove("clicked");
-          clicked = document.querySelectorAll(".clicked");
-          selectedSeats.splice(selectedSeats.indexOf(e.target.value), 1);
-          clicked.forEach((data) => {
-            selectedSeats.push(data.value);
-          });
-        } else {
-          input.classList.add("clicked");
-          clicked = document.querySelectorAll(".clicked");
-          clicked.forEach((data) => {
-            selectedSeats.push(data.value);
-          });
-        }
+          if (input.classList.contains("clicked")) {
+            input.classList.remove("clicked");
+            clicked = document.querySelectorAll(".clicked");
+            selectedSeats.splice(selectedSeats.indexOf(e.target.value), 1);
+            clicked.forEach((data) => {
+              selectedSeats.push(data.value);
+            });
+          } else {
+            input.classList.add("clicked");
+            clicked = document.querySelectorAll(".clicked");
+            clicked.forEach((data) => {
+              selectedSeats.push(data.value);
+            });
+          }
 
-        console.log(selectedSeats);
-      });
-    } else {
-      input.disabled = true; // Disable buttons other than A1, B2, and B3
+          console.log(selectedSeats);
+        });
+      } else {
+        input.disabled = true;
+      }
     }
   }
-}
+
 
 function mapping(input, i, j) {
   const alphabet = String.fromCharCode(65 + i); // Convert numeric value to corresponding ASCII character
