@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <style>
+        .seat {
+            width: 20px;
+            height: 20px;
+            transition: background-color 0.4s ease;
+            color: transparent; /* 텍스트를 투명하게 설정 */
+        }
+
+        .seat.clicked {
+            background-color: white;
+            color: black;
+            color: transparent;
+            background-image: linear-gradient(to bottom right, purple, #664AFF);
+        }
+
+        .highlighted {
+            background-color: purple;
+            color: white;
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+<div class="seat-wrapper"></div>
+</body>
+<script>
+    let test = [];
+    let selectedSeats = new Array();
+    let selectedSeatsMap = [];
+    const seatWrapper = document.querySelector(".seat-wrapper");
+    let clicked = "";
+    let div = "";
+    const rows = [[${rows}]];
+    const columns = [[${columns}]];
+
+    for (let i = 0; i < rows; i++) {
+        div = document.createElement("div");
+        seatWrapper.append(div);
+        for (let j = 0; j < columns; j++) {
+            const input = document.createElement('input');
+            input.type = "button";
+            input.name = "seats";
+            input.classList = "seat";
+            mapping(input, i, j);
+            div.append(input);
+
+
+<!--            백에서 처리 가능하면 백으로-->
+            if (input.value === "K5" || input.value === "H7" || input.value === "G6") {
+                input.classList.add("highlighted");
+                input.addEventListener('click', function (e) {
+                    console.log(e.target.value);
+
+                    // Toggle clicked class
+                    input.classList.toggle("clicked");
+
+                    clicked = document.querySelectorAll(".clicked");
+                    selectedSeats = Array.from(clicked).map(data => data.value);
+
+                    console.log(selectedSeats);
+                });
+            } else {
+                input.disabled = true;
+            }
+        }
+    }
+
+    function mapping(input, i, j) {
+        const alphabet = String.fromCharCode(65 + i); // Convert numeric value to corresponding ASCII character
+        input.value = alphabet + j.toString();
+    }
+</script>
+</html>
