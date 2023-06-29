@@ -1,0 +1,349 @@
+<html th:lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>공연예매 페이지 1. 관람일/회차 선택</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+<main layout:fragment="main" class="flex items-center justify-center w-full min-h-screen">
+
+    <div>
+        <div class="flex items-center">
+
+            <!--Floor-->
+            <div class="relative flex gap-4">
+                <div>
+                    <img src="/image/areaF1.png" alt="area Image" class="area-img">
+                    <img src="/image/areaF3.png" alt="area Image" class="area-img mt-5">
+                </div>
+                <div class="col-span-1">
+                    <img src="/image/areaF2.png" alt="area Image" class="area-img mt-5">
+                    <img src="/image/areaF4.png" alt="area Image" class="area-img mt-5">
+                </div>
+
+                <!--1F 좌측 12 - 15 구역-->
+                <div class="absolute flex flex-col -left-[120px]">
+                    <style>
+                        .tilted13-image {
+                            transform: rotate(346deg);
+                            margin-right: 7px;
+                            margin-left: 27px;
+                        }
+
+                        .tilted12-image {
+                            transform: rotate(331deg);
+                            margin-right: -11px;
+                            margin-left: 44px;
+                        }
+                    </style>
+                    <img src="/image/area15.png" alt="area Image" class="mr-1 ml-5 area-img transform -rotate-5">
+                    <img src="/image/area14.png" alt="area Image" class="mr-3 ml-5 area-img transform -rotate-5">
+                    <img src="/image/13area.png" alt="area Image" class="area-img tilted13-image">
+                    <img src="/image/12area.png" alt="area Image" class="area-img tilted12-image">
+                </div>
+
+                <!--1F 우측 1 - 4 구역-->
+                <div class="absolute flex flex-col ml-4 -right-[120px]">
+                    <style>
+                        .tilted3-image {
+                            transform: rotate(16deg);
+                            margin-right: 25px;
+                            margin-left: 7px;
+                        }
+
+                        .tilted4-image {
+                            transform: rotate(30deg);
+                            margin-right: 42px;
+                            margin-left: -10px;
+                        }
+                    </style>
+                    <img src="/image/area1.png" alt="area Image" class="ml-1 mr-5 area-img transform -rotate-5">
+                    <img src="/image/area2.png" alt="area Image" class="ml-3 mr-5 area-img transform -rotate-5">
+                    <img src="/image/area3.png" alt="area Image" class="area-img tilted3-image">
+                    <img src="/image/area4.png" alt="area Image" class="area-img tilted4-image">
+                </div>
+
+                <!--1F 중앙 5 - 11 구역-->
+                <div class="absolute flex mt-8 justify-center -bottom-[120px]">
+                    <style>
+                        .tilted11-image {
+                            transform: rotate(45deg);
+                            margin-top: -48px;
+                            margin-bottom: 48px;
+                        }
+
+                        .tilted10-image {
+                            transform: rotate(30deg);
+                            margin-top: -20px;
+                            margin-bottom: 20px;
+                        }
+
+                        .tilted9-image {
+                            transform: rotate(15deg);
+                            margin-top: -4px;
+                            margin-bottom: 5px;
+                        }
+
+                        .tilted7-image {
+                            transform: rotate(-15deg);
+                            margin-top: -4px;
+                            margin-bottom: 5px;
+                        }
+
+                        .tilted6-image {
+                            transform: rotate(-30deg);
+                            margin-top: -21px;
+                            margin-bottom: 22px;
+                            margin-right: -9px;
+                        }
+
+                        .tilted5-image {
+                            transform: rotate(-45deg);
+                            margin-top: -48px;
+                            margin-bottom: 48px;
+                        }
+                    </style>
+                    <img src="/image/area11.png" alt="area Image" class="area-img tilted11-image">
+                    <img src="/image/area10.png" alt="area Image" class="area-img tilted10-image">
+                    <img src="/image/area9.png" alt="area Image" class="area-img tilted9-image">
+
+                    <img src="/image/area8.png" alt="area Image" class="area-img">
+
+                    <img src="/image/area7.png" alt="area Image" class="area-img tilted7-image">
+                    <img src="/image/area6.png" alt="area Image" class="area-img tilted6-image">
+                    <img src="/image/area5.png" alt="area Image" class="area-img tilted5-image">
+
+                </div>
+
+                <!--2F 좌측 39 - 43 구역-->
+                <div class="absolute -left-[190px] -top-[40px]">
+                    <style>
+                        .tilted43-image {
+                            transform: rotate(113deg);
+                            margin-left: 16px;
+                        }
+                        .tilted42-image {
+                            transform: rotate(97deg);
+                            margin-left: 2px;
+                            margin-top: -20px;
+                        }
+                        .tilted41-image {
+                            transform: rotate(86deg);
+                            margin-left: 0px;
+                            margin-top: -14px;
+                        }
+                        .tilted40-image {
+                            transform: rotate(77deg);
+                            margin-left: 7px;
+                            margin-top: -15px;
+
+                        }
+
+                        .tilted39-image {
+                            transform: rotate(68deg);
+                            margin-left: 23px;
+                            margin-top: -15px;
+                        }
+
+                    </style>
+                    <img src="/image/area43.png" alt="area Image" class="tilted43-image">
+                    <img src="/image/area42.png" alt="area Image" class="tilted42-image">
+                    <img src="/image/area41.png" alt="area Image" class="tilted41-image">
+                    <img src="/image/area40.png" alt="area Image" class="tilted40-image">
+                    <img src="/image/area39.png" alt="area Image" class="tilted39-image">
+                </div>
+
+                <!--2F 중앙 29 - 38 구역-->
+                <div class="absolute flex mt-8 justify-center -bottom-[275px]">
+                    <style>
+                        .tilted38-image {
+                            transform: rotate(44deg);
+                            margin-top: -111px;
+                            margin-bottom: 140px;
+                            margin-left: 11px;
+                        }
+
+                        .tilted37-image {
+                            transform: rotate(35deg);
+                            margin-top: -77px;
+                            margin-bottom: 105px;
+                            margin-left: -15px;
+                        }
+
+                        .tilted36-image {
+                            transform: rotate(23deg);
+                            margin-top: -52px;
+                            margin-bottom: 81px;
+                            margin-left: -11px;
+                        }
+
+                        .tilted35-image {
+                            transform: rotate(12deg);
+                            margin-top: -37px;
+                            margin-bottom: 65px;
+                            margin-left: -6px;
+                        }
+
+                        .tilted34-image {
+                            transform: rotate(1deg);
+                            margin-top: -32px;
+                            margin-bottom: 59px;
+                            margin-left: -4px;
+                        }
+
+                        .tilted33-image {
+                            transform: rotate(357deg);
+                            margin-top: -33px;
+                            margin-bottom: 60px;
+                        }
+                        .tilted32-image {
+                            transform: rotate(350deg);
+                            margin-top: -39px;
+                            margin-bottom: 66px;
+                            margin-left: -1px;
+                        }
+                        .tilted31-image {
+                            transform: rotate(338deg);
+                            margin-top: -54px;
+                            margin-bottom: 80px;
+                            margin-left: -6px;
+                        }
+                        .tilted30-image {
+                            transform: rotate(326deg);
+                            margin-top: -79px;
+                            margin-bottom: 103px;
+                            margin-left: -10px;
+                        }
+                        .tilted29-image {
+                            transform: rotate(315deg);
+                            margin-top: -110px;
+                            margin-bottom: 135px;
+                            margin-left: -17px;
+                        }
+                    </style>
+                    <img src="/image/area38.png" alt="area Image" class="tilted38-image">
+                    <img src="/image/area37.png" alt="area Image" class="tilted37-image">
+                    <img src="/image/area36.png" alt="area Image" class="tilted36-image">
+                    <img src="/image/area35.png" alt="area Image" class="tilted35-image">
+                    <img src="/image/area34.png" alt="area Image" class="tilted34-image">
+                    <img src="/image/area33.png" alt="area Image" class="tilted33-image">
+                    <img src="/image/area32.png" alt="area Image" class="tilted32-image">
+                    <img src="/image/area31.png" alt="area Image" class="tilted31-image">
+                    <img src="/image/area30.png" alt="area Image" class="tilted30-image">
+                    <img src="/image/area29.png" alt="area Image" class="tilted29-image">
+                </div>
+
+                <!--2F 우측 24 - 28 구역-->
+                <div class="absolute flex flex-col ml-4 -right-[230px] -top-[40px]">
+                    <style>
+                        .tilted20-image {
+                            transform: rotate(252deg);
+                            margin-right: 54px;
+                            margin-left: -10px;
+                        }
+                        .tilted25-image {
+                            transform: rotate(266deg);
+                            margin-right: 44px;
+                            margin-left: 1px;
+                            margin-top: -20px;
+                        }
+                        .tilted26-image {
+                            transform: rotate(272deg);
+                            margin-right: 43px;
+                            margin-left: 2px;
+                            margin-top: -13px;
+
+                        }
+
+                        .tilted27-image {
+                            transform: rotate(281deg);
+                            margin-right: 48px;
+                            margin-left: -4px;
+                            margin-top: -15px;
+                        }
+
+                        .tilted28-image {
+                            transform: rotate(288deg);
+                            margin-right: 62px;
+                            margin-left: -19px;
+                            margin-top: -16px;
+                        }
+                    </style>
+                    <img src="/image/area24.png" alt="area Image" class="tilted20-image">
+                    <img src="/image/area25.png" alt="area Image" class="tilted25-image">
+                    <img src="/image/area26.png" alt="area Image" class="tilted26-image">
+                    <img src="/image/area27.png" alt="area Image" class="tilted27-image">
+                    <img src="/image/area28.png" alt="area Image" class="tilted28-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mx-20"></div>
+
+    <!--좌석 등급 / 잔여석-->
+    <div class="max-w-[300px]">
+        <div class="block rounded-lg bg-white text-center border-red-500 ml-20">
+            <div class="border-b-2 border-neutral-100 px-4 py-2 text-m dark:border-neutral-600 dark:text-neutral-50">좌석 등급 / 잔여석</div>
+            <div class="p-4">
+                <div class="flex flex-col justify-center mx-auto">
+                    <div class="sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-1 sm:px-4 lg:px-6 text-center">
+                            <div class="overflow-hidden">
+                                <table class="w-full text-center text-xxs sm:text-sm font-light">
+                                    <tbody>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                            <div class="w-3 h-3 mr-1" style="background-color: #B1B2FF;"></div>
+                                            VIP석 2석
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2">250,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                            <div class="w-3 h-3 mr-1" style="background-color: #D2DAFF;"></div>
+                                            SR석 0석
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2">220,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                            <div class="w-3 h-3 mr-1" style="background-color: #AAC4FF;"></div>
+                                            R석 10석
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2">198,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                            <div class="w-3 h-3 mr-1" style="background-color: #AFBDCA;"></div>
+                                            VIP석 2석
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2">165,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                            <div class="w-3 h-3 mr-1" style="background-color: #7795B2;"></div>
+                                            VIP석 2석
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-2">132,000</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
