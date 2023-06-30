@@ -1,19 +1,20 @@
 package com.example.ticketKing.domain.Seat.controller;
 
 
-import com.example.ticketKing.domain.Seat.entity.Seat;
-import com.example.ticketKing.domain.Seat.service.SeatService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+        import com.example.ticketKing.domain.Seat.entity.Seat;
+        import com.example.ticketKing.domain.Seat.service.SeatService;
+        import lombok.RequiredArgsConstructor;
+        import lombok.extern.slf4j.Slf4j;
+        import org.springframework.stereotype.Controller;
+        import org.springframework.ui.Model;
+        import org.springframework.web.bind.annotation.GetMapping;
+        import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+        import java.util.ArrayList;
+        import java.util.Arrays;
+        import java.util.List;
+        import java.util.stream.Collectors;
+        import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @Controller
@@ -33,8 +34,19 @@ public class SeatController {
         int columns = seatService.getColumn(hall,type);
 
 
+
+        // 유효한 좌석들
+        int[][] validSeats;
+        validSeats = seatService.getValidSeats(hall, type);
+
+        // 2차원 배열을 리스트로 변환
+        List<List<Integer>> validSeatsList = Arrays.stream(validSeats)
+                .map(row -> Arrays.stream(row).boxed().collect(Collectors.toList()))
+                .collect(Collectors.toList());
+
         model.addAttribute("rows", rows);
         model.addAttribute("columns", columns);
+        model.addAttribute("validSeats", validSeatsList);
 
         return "usr/concert/remain_seat";
     }
