@@ -10,6 +10,7 @@ import org.hibernate.resource.beans.container.spi.BeanLifecycleStrategy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -97,4 +98,26 @@ public class SeatService {
         return 10;
     }
 
+    public int[][] getValidSeats(String hallName, String type) {
+        Hall hall = hallRepository.findByName(hallName);
+       List<Seat> seats = seatRepository.findByHallAndSeatType(hall, type);
+
+
+        List<Seat> validSeats = new ArrayList<>();
+        for (Seat seat : seats) {
+            if (seat.getStatus().equals("valid")) {
+                validSeats.add(seat);
+            }
+        }
+
+        Seat[] validSeatsArray = validSeats.toArray(new Seat[0]);
+
+        int[][] seatRowCol = new int[validSeatsArray.length][2];
+        for (int i = 0; i < validSeatsArray.length; i++) {
+            seatRowCol[i][0] = validSeatsArray[i].getSeatRow();
+            seatRowCol[i][1] = validSeatsArray[i].getSeatNumber();
+        }
+        return seatRowCol;
+
+    }
 }

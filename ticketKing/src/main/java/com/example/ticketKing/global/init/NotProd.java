@@ -36,8 +36,8 @@ public class NotProd {
             Hall OLYSDM = hallService.register("OLYSDM",1000).getData();
 
                  Seat seat1 = seatService.register("VIP",1,1,"valid", KSPO).getData();
-                Seat seat2 = seatService.register("VIP",1,2,"valid", KSPO).getData();
-                Seat seat3 = seatService.register("VIP",1,3,"valid", KSPO).getData();
+                Seat seat2 = seatService.register("VIP",2,2,"valid", KSPO).getData();
+                Seat seat3 = seatService.register("VIP",3,3,"valid", KSPO).getData();
                 Seat seat4 = seatService.register("VIP",1,4,"valid", OLYSDM).getData();
                 Seat seat5 = seatService.register("VIP",1,5,"valid", OLYSDM).getData();
 
