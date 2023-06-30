@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 public class HallController {
-    @GetMapping("/usr/hall/hall_KSPO")
+    @GetMapping("/usr/hall/KSPOHall")
     public String showConcertSeatArea() {
         return "usr/hall/hall_KSPOHall";
     }
