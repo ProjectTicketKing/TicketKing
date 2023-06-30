@@ -30,3 +30,4 @@ function scrollToBottom() {
     const chatMessages = document.querySelector('.chat-messages');
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
