@@ -12,4 +12,9 @@ public interface SeatRepository extends JpaRepository<Seat,Long> {
     List<Seat> findBySeatType(String seatType);
 
     List<Seat> findByHallAndSeatType(Hall hall, String seatType);
+
+    Seat findByHallAndSeatTypeAndSeatRowAndSeatNumber(Hall hall, String seatType,Integer seatRow, Integer seatNumber);
+
+
+    List<Seat> findByHallAndSeatTypeAndStatus(Hall hall, String type, String valid);
 }
