@@ -10,10 +10,7 @@ import org.hibernate.resource.beans.container.spi.BeanLifecycleStrategy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -120,4 +117,33 @@ public class SeatService {
         return seatRowCol;
 
     }
+
+
+
+
+
+    public String getSeatStatus(String hallName, String type, int row, int column) {
+
+        Hall hall = hallRepository.findByName(hallName);
+        Seat targetSeat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(hall,type,row,column);
+        return targetSeat.getStatus();
+
+    }
+
+
+    @Transactional
+    public void updateRandomSeatStatusToInvalid(String hallName, String type) {
+        Hall hall = hallRepository.findByName(hallName);
+        List<Seat> seats = seatRepository.findByHallAndSeatTypeAndStatus(hall, type, "valid");
+
+        if (!seats.isEmpty()) {
+            // 랜덤으로 Seat 선택
+            Seat randomSeat = seats.get(new Random().nextInt(seats.size()));
+            randomSeat.setStatus("invalid");
+            seatRepository.save(randomSeat);
+        }
+    }
+
+
+
 }

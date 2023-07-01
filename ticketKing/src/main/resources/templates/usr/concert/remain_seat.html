@@ -45,12 +45,15 @@
     let num = 0;
 
     const validSeats = [[${validSeats}]];
+    console.log('valid seats-->');
+
     console.log(validSeats);
     num = validSeats.length;
 
 <!--    console.log(validSeats.length);-->
 <!--    console.log(validSeats[0].length);-->
-<!--    console.log(validSeats[0][1]);-->
+
+
 
     for(let i=0; i < validSeats.length; i++){
 
@@ -61,11 +64,13 @@
     }
 
     console.log(valid[0]);
-    console.log(secondValid[0]);
     console.log(valid[1]);
-    console.log(secondValid[1]);
-       console.log(valid[2]);
-    console.log(secondValid[2]);
+    console.log(valid[2]);
+
+    reverseMapping(valid[0])
+    reverseMapping(valid[1])
+    reverseMapping(valid[2])
+
 
     for (let i = 0; i < rows; i++) {
         div = document.createElement("div");
@@ -84,7 +89,7 @@
     input.classList.add("highlighted");
     input.addEventListener('click', function (e) {
         console.log(e.target.value);
-
+        console.log(reverseMapping(e.target.value));
         // Toggle clicked class
         input.classList.toggle("clicked");
 
@@ -110,6 +115,18 @@
 
 
 }
+
+    function reverseMapping(inputValue) {
+        if (inputValue) { // inputValue가 존재하는 경우에만 함수 실행
+            const alphabetIndex = inputValue.charCodeAt(0) - 65; // Convert ASCII character to numeric value
+            const row = alphabetIndex;
+            const column = parseInt(inputValue.slice(1));
+            console.log(row);
+            console.log(column);
+
+            return { row, column };
+        }
+    }
 
 </script>
 </html>
