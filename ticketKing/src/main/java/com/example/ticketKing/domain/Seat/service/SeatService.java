@@ -115,7 +115,6 @@ public class SeatService {
             seatRowCol[i][1] = validSeatsArray[i].getSeatNumber();
         }
         return seatRowCol;
-
     }
 
 

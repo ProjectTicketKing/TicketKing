@@ -3,9 +3,14 @@ package com.example.ticketKing.domain.Seat.controller;
 
 import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.service.SeatService;
+import com.example.ticketKing.global.security.SecurityMember;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,28 +47,14 @@ public class SeatController {
 
     @GetMapping("/usr/concert/{hall}/seats/{type}")
     public String getSeatList(Model model, @PathVariable("hall") String hall, @PathVariable("type") String type) {
-        // 서비스 단에서 seatType이 뭔 지 확인해서 해당하는 row와 column 받아오는 코드 작성
-        int rows = seatService.getRow(hall, type);
-        int columns = seatService.getColumn(hall, type);
+        model.addAttribute("hall", hall);
+        model.addAttribute("type", type);
 
-        // 유효한 좌석들
-        int[][] validSeats;
-        validSeats = seatService.getValidSeats(hall, type);
-
-        // 2차원 배열을 리스트로 변환
-        List<List<Integer>> validSeatsList = Arrays.stream(validSeats)
-                .map(row -> Arrays.stream(row).boxed().collect(Collectors.toList()))
-                .collect(Collectors.toList());
-
-        model.addAttribute("rows", rows);
-        model.addAttribute("columns", columns);
-        model.addAttribute("validSeats", validSeatsList);
-
-        // 스케줄링이 시작되지 않았을 때만 스케줄링 시작
-        if (!isSchedulingStarted) {
-            startSeatStatusUpdateSchedule(hall, type);
-            isSchedulingStarted = true;
-        }
+//        // 스케줄링이 시작되지 않았을 때만 스케줄링 시작
+//        if (!isSchedulingStarted) {
+//            startSeatStatusUpdateSchedule(hall, type);
+//            isSchedulingStarted = true;
+//        }
 
         return "usr/concert/remain_seat";
     }
@@ -72,6 +63,18 @@ public class SeatController {
     @PreDestroy
     private void stopScheduledExecutorService() {
         stopSeatStatusUpdateSchedule();
+    }
+
+    @MessageMapping("/seats/{hall}/{type}/seatInfo")
+    @SendTo("/topic/seats/{hall}/{type}")
+    public String sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request) {
+
+        log.info("hall : {}", hall);
+        log.info("type : {}", type);
+        log.info("row : {}", request.getRow());
+        log.info("column : {}", request.getColumn());
+
+        return "false";
     }
 
 }

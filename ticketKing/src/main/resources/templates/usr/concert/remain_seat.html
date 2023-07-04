@@ -3,7 +3,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/reset.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         .seat {
             width: 20px;
@@ -25,108 +27,21 @@
             color: transparent;
         }
     </style>
+    <script th:inline="javascript">
+        const hall = [[${hall}]];
+        console.log(hall)
+        const type = [[${type}]];
+        console.log(type)
+        const token = /*[[${_csrf.token}]]*/ '';
+    </script>
+    <script th:src="@{/js/seat.js}" type="application/javascript"></script>
+
+
 </head>
 <body>
+<div>heelop</div>
+
 <div class="seat-wrapper"></div>
+
 </body>
-<script>
-    let test = [];
-    let selectedSeats = new Array();
-    let selectedSeatsMap = [];
-    const seatWrapper = document.querySelector(".seat-wrapper");
-    let clicked = "";
-    let div = "";
-    const rows = [[${rows}]];
-    const columns = [[${columns}]];
-    let seatNum = "";
-
-    let valid = [];
-    let secondValid = new Array();
-    let num = 0;
-
-    const validSeats = [[${validSeats}]];
-    console.log('valid seats-->');
-
-    console.log(validSeats);
-    num = validSeats.length;
-
-<!--    console.log(validSeats.length);-->
-<!--    console.log(validSeats[0].length);-->
-
-
-
-    for(let i=0; i < validSeats.length; i++){
-
-    secondMapping(validSeats[i][0],validSeats[i][1]);
-    valid.push(seatNum);
-    secondValid.push(seatNum);
-
-    }
-
-    console.log(valid[0]);
-    console.log(valid[1]);
-    console.log(valid[2]);
-
-    reverseMapping(valid[0])
-    reverseMapping(valid[1])
-    reverseMapping(valid[2])
-
-
-    for (let i = 0; i < rows; i++) {
-        div = document.createElement("div");
-        seatWrapper.append(div);
-        for (let j = 0; j < columns; j++) {
-            const input = document.createElement('input');
-            input.type = "button";
-            input.name = "seats";
-            input.classList = "seat";
-            mapping(input, i, j);
-            div.append(input);
-
-
-<!--            백에서 처리 가능하면 백으로-->
-     if (valid.includes(input.value)) {
-    input.classList.add("highlighted");
-    input.addEventListener('click', function (e) {
-        console.log(e.target.value);
-        console.log(reverseMapping(e.target.value));
-        // Toggle clicked class
-        input.classList.toggle("clicked");
-
-        clicked = document.querySelectorAll(".clicked");
-        selectedSeats = Array.from(clicked).map(data => data.value);
-
-        console.log(selectedSeats);
-    });
-} else {
-    input.disabled = true;
-}
-        }
-    }
-
-    function mapping(input, i, j) {
-        const alphabet = String.fromCharCode(65 + i); // Convert numeric value to corresponding ASCII character
-        input.value = alphabet + j.toString();
-    }
-
-    function secondMapping(i,j) {
-        const alphabet = String.fromCharCode(65 + i);
-        seatNum = alphabet + j.toString();
-
-
-}
-
-    function reverseMapping(inputValue) {
-        if (inputValue) { // inputValue가 존재하는 경우에만 함수 실행
-            const alphabetIndex = inputValue.charCodeAt(0) - 65; // Convert ASCII character to numeric value
-            const row = alphabetIndex;
-            const column = parseInt(inputValue.slice(1));
-            console.log(row);
-            console.log(column);
-
-            return { row, column };
-        }
-    }
-
-</script>
 </html>

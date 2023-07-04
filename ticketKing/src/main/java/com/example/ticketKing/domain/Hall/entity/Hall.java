@@ -27,5 +27,4 @@ public class Hall extends BaseEntity {
     private List<Concert> concerts;
 
 
-
 }
