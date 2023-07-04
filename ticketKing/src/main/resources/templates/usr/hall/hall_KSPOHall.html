@@ -20,33 +20,49 @@
             <!--Floor-->
             <div class="relative flex gap-4">
                 <div>
-                    <img src="/image/areaF1.png" alt="area Image" class="area-img">
-                    <img src="/image/areaF3.png" alt="area Image" class="area-img mt-5">
+                    <a th:href="@{/usr/concert/KSPO/seats/VIP}">
+                        <img th:src="@{/image/areaF1.png}" alt="area Image" class="area-img">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/VIP}">
+                        <img th:src="@{/image/areaF3.png}" alt="area Image" class="area-img mt-5">
+                    </a>
                 </div>
                 <div class="col-span-1">
-                    <img src="/image/areaF2.png" alt="area Image" class="area-img mt-5">
-                    <img src="/image/areaF4.png" alt="area Image" class="area-img mt-5">
+                    <a th:href="@{/usr/concert/KSPO/seats/VIP}">
+                        <img th:src="@{/image/areaF2.png}" alt="area Image" class="area-img mt-5">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/VIP}">
+                        <img th:src="@{/image/areaF4.png}" alt="area Image" class="area-img mt-5">
+                    </a>
                 </div>
 
                 <!--1F 좌측 12 - 15 구역-->
                 <div class="absolute flex flex-col -left-[120px]">
                     <style>
-                        .tilted13-image {
+                        a, a tilted13-image {
                             transform: rotate(346deg);
                             margin-right: 7px;
                             margin-left: 27px;
                         }
 
-                        .tilted12-image {
+                        a, a tilted12-image {
                             transform: rotate(331deg);
                             margin-right: -11px;
                             margin-left: 44px;
                         }
                     </style>
-                    <img src="/image/area15.png" alt="area Image" class="mr-1 ml-5 area-img transform -rotate-5">
-                    <img src="/image/area14.png" alt="area Image" class="mr-3 ml-5 area-img transform -rotate-5">
-                    <img src="/image/13area.png" alt="area Image" class="area-img tilted13-image">
-                    <img src="/image/12area.png" alt="area Image" class="area-img tilted12-image">
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area15.png}" alt="area Image" class="mr-1 ml-5 area-img transform -rotate-5">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area14.png}" alt="area Image" class="mr-3 ml-5 area-img transform -rotate-5">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/13area.png}" alt="area Image" class="area-img tilted13-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/12area.png}" alt="area Image" class="area-img tilted13-image">
+                    </a>
                 </div>
 
                 <!--1F 우측 1 - 4 구역-->
@@ -64,10 +80,18 @@
                             margin-left: -10px;
                         }
                     </style>
-                    <img src="/image/area1.png" alt="area Image" class="ml-1 mr-5 area-img transform -rotate-5">
-                    <img src="/image/area2.png" alt="area Image" class="ml-3 mr-5 area-img transform -rotate-5">
-                    <img src="/image/area3.png" alt="area Image" class="area-img tilted3-image">
-                    <img src="/image/area4.png" alt="area Image" class="area-img tilted4-image">
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area1.png}" alt="area Image" class="ml-1 mr-5 area-img transform -rotate-5">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area2.png}" alt="area Image" class="ml-3 mr-5 area-img transform -rotate-5">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area3.png}" alt="area Image" class="area-img tilted3-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area4.png}" alt="area Image" class="area-img tilted4-image">
+                    </a>
                 </div>
 
                 <!--1F 중앙 5 - 11 구역-->
@@ -101,7 +125,6 @@
                             transform: rotate(-30deg);
                             margin-top: -21px;
                             margin-bottom: 22px;
-                            margin-right: -9px;
                         }
 
                         .tilted5-image {
@@ -110,22 +133,28 @@
                             margin-bottom: 48px;
                         }
                     </style>
-                    <a href="http://localhost:8080/usr/concert/KSPO/seats/VIP">
-                        <img src="/image/area11.png" alt="area Image" class="area-img tilted11-image">
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area11.png}" alt="area Image" class="area-img tilted11-image">
                     </a>
-                    <a href="http://localhost:8080/usr/concert/KSPO/seats/VIP">
-                    <img src="/image/area10.png" alt="area Image" class="area-img tilted10-image">
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area10.png}" alt="area Image" class="area-img tilted10-image">
                     </a>
-                    <a href="http://localhost:8080/usr/concert/KSPO/seats/VIP">
-                    <img src="/image/area9.png" alt="area Image" class="area-img tilted9-image">
-                    </a>
-                    <a href="http://localhost:8080/usr/concert/KSPO/seats/VIP">
-                    <img src="/image/area8.png" alt="area Image" class="area-img">
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area9.png}" alt="area Image"class="area-img tilted9-image">
                     </a>
 
-                    <img src="/image/area7.png" alt="area Image" class="area-img tilted7-image">
-                    <img src="/image/area6.png" alt="area Image" class="area-img tilted6-image">
-                    <img src="/image/area5.png" alt="area Image" class="area-img tilted5-image">
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area8.png}" alt="area Image" class="area-img">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area7.png}" alt="area Image" class="area-img tilted7-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area6.png}" alt="area Image" class="area-img tilted6-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/R}">
+                        <img th:src="@{/image/area5.png}" alt="area Image" class="area-img tilted5-image">
+                    </a>
 
                 </div>
 
@@ -160,11 +189,21 @@
                         }
 
                     </style>
-                    <img src="/image/area43.png" alt="area Image" class="tilted43-image">
-                    <img src="/image/area42.png" alt="area Image" class="tilted42-image">
-                    <img src="/image/area41.png" alt="area Image" class="tilted41-image">
-                    <img src="/image/area40.png" alt="area Image" class="tilted40-image">
-                    <img src="/image/area39.png" alt="area Image" class="tilted39-image">
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area43.png}" alt="area Image" class="tilted43-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area42.png}" alt="area Image" class="tilted42-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area41.png}" alt="area Image" class="tilted41-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area40.png}" alt="area Image" class="tilted40-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area39.png}" alt="area Image" class="tilted39-image">
+                    </a>
                 </div>
 
                 <!--2F 중앙 29 - 38 구역-->
@@ -235,16 +274,36 @@
                             margin-left: -17px;
                         }
                     </style>
-                    <img src="/image/area38.png" alt="area Image" class="tilted38-image">
-                    <img src="/image/area37.png" alt="area Image" class="tilted37-image">
-                    <img src="/image/area36.png" alt="area Image" class="tilted36-image">
-                    <img src="/image/area35.png" alt="area Image" class="tilted35-image">
-                    <img src="/image/area34.png" alt="area Image" class="tilted34-image">
-                    <img src="/image/area33.png" alt="area Image" class="tilted33-image">
-                    <img src="/image/area32.png" alt="area Image" class="tilted32-image">
-                    <img src="/image/area31.png" alt="area Image" class="tilted31-image">
-                    <img src="/image/area30.png" alt="area Image" class="tilted30-image">
-                    <img src="/image/area29.png" alt="area Image" class="tilted29-image">
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area38.png}" alt="area Image" class="tilted38-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area37.png}" alt="area Image" class="tilted37-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area36.png}" alt="area Image" class="tilted36-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area35.png}" alt="area Image" class="tilted35-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area34.png}" alt="area Image" class="tilted34-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area33.png}" alt="area Image" class="tilted33-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area32.png}" alt="area Image" class="tilted32-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area31.png}" alt="area Image" class="tilted31-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area30.png}" alt="area Image" class="tilted30-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area29.png}" alt="area Image" class="tilted29-image">
+                    </a>
                 </div>
 
                 <!--2F 우측 24 - 28 구역-->
@@ -283,11 +342,21 @@
                             margin-top: -16px;
                         }
                     </style>
-                    <img src="/image/area24.png" alt="area Image" class="tilted20-image">
-                    <img src="/image/area25.png" alt="area Image" class="tilted25-image">
-                    <img src="/image/area26.png" alt="area Image" class="tilted26-image">
-                    <img src="/image/area27.png" alt="area Image" class="tilted27-image">
-                    <img src="/image/area28.png" alt="area Image" class="tilted28-image">
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area24.png}" alt="area Image" class="tilted20-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area25.png}" alt="area Image" class="tilted25-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area26.png}" alt="area Image" class="tilted26-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area27.png}" alt="area Image" class="tilted27-image">
+                    </a>
+                    <a th:href="@{/usr/concert/KSPO/seats/A}">
+                        <img th:src="@{/image/area28.png}" alt="area Image" class="tilted28-image">
+                    </a>
                 </div>
             </div>
         </div>
@@ -353,4 +422,6 @@
 
 </main>
 </body>
+
+
 </html>

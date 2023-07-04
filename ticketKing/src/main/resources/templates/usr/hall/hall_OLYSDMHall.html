@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+<link th:href="@{/css/KSPOhall.css}" rel="stylesheet">
 <main layout:fragment="main" class="flex items-center justify-center w-full min-h-screen">
 
     <div>
@@ -20,12 +20,20 @@
             <!--Floor-->
             <div class="relative flex gap-4">
                 <div>
-                    <img src="/image/FF.png" alt="area Image" class="area-img">
-                    <img src="/image/FF.png" alt="area Image" class="area-img mt-5 mb-10">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/VIP}">
+                        <img th:src="@{/image/FF.png}" alt="area Image" class="area-img">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/VIP}">
+                        <img th:src="@{/image/FF.png}" alt="area Image" class="area-img mt-5 mb-10">
+                    </a>
                 </div>
                 <div class="col-span-1">
-                    <img src="/image/FF.png" alt="area Image" class="area-img">
-                    <img src="/image/FF.png" alt="area Image" class="area-img mt-5 mb-10">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/VIP}">
+                        <img th:src="@{/image/FF.png}" alt="area Image" class="area-img">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/VIP}">
+                        <img th:src="@{/image/FF.png}" alt="area Image" class="area-img mt-5 mb-10">
+                    </a>
                 </div>
 
 
@@ -104,21 +112,40 @@
 
                         }
                     </style>
-                    <img src="/image/20area.png" alt="area Image" class="area-img tilted_20-image">
-                    <img src="/image/19area.png" alt="area Image" class="area-img tilted_19-image">
 
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/20area.png}" alt="area Image" class="area-img tilted_20-image">
+                    </a>
 
-                    <img src="/image/18area.png" alt="area Image" class="area-img tilted_18-image">
-                    <img src="/image/17area.png" alt="area Image" class="area-img tilted_17-image">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/19area.png}" alt="area Image" class="area-img tilted_19-image">
+                    </a>
 
-                    <img src="/image/16area.png" alt="area Image" class="area-img tilted_16-image">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/18area.png}" alt="area Image" class="area-img tilted_18-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/17area.png}" alt="area Image" class="area-img tilted_17-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/16area.png}" alt="area Image" class="area-img tilted_16-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/15area.png}" alt="area Image" class="area-img tilted_15-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/14area.png}" alt="area Image" class="area-img tilted_14-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/13_area.png}" alt="area Image" class="area-img tilted_13-image">
+                    </a>
 
-                    <img src="/image/15area.png" alt="area Image" class="area-img tilted_15-image">
-                    <img src="/image/14area.png" alt="area Image" class="area-img tilted_14-image">
-                    <img src="/image/13_area.png" alt="area Image" class="area-img tilted_13-image">
-
-                    <img src="/image/12_area.png" alt="area Image" class="area-img tilted_12-image">
-                    <img src="/image/11area.png" alt="area Image" class="area-img tilted_11-image">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/12_area.png}" alt="area Image" class="area-img tilted_12-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/S}">
+                        <img th:src="@{/image/11area.png}" alt="area Image" class="area-img tilted_11-image">
+                    </a>
 
                 </div>
 
@@ -134,7 +161,9 @@
                         }
 
                     </style>
-                    <img src="/image/60area.png" alt="area Image" class="tilted_60-image">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/60area.png}" alt="area Image" class="tilted_60-image">
+                    </a>
                 </div>
 
                 <!--2F 59구역-->
@@ -148,7 +177,9 @@
                         }
 
                     </style>
-                    <img src="/image/59area.png" alt="area Image" class="tilted_59-image">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/59area.png}" alt="area Image" class="tilted_59-image">
+                    </a>
                 </div>
 
                 <!--2F 중앙-->
@@ -221,16 +252,36 @@
                         }
 
                     </style>
-                    <img src="/image/58area.png" alt="area Image" class="tilted_58-image">
-                    <img src="/image/57area.png" alt="area Image" class="tilted_57-image">
-                    <img src="/image/56area.png" alt="area Image" class="tilted_56-image">
-                    <img src="/image/55area.png" alt="area Image" class="tilted_55-image">
-                    <img src="/image/54area.png" alt="area Image" class="tilted_54-image">
-                    <img src="/image/53area.png" alt="area Image" class="tilted_53-image">
-                    <img src="/image/52area.png" alt="area Image" class="tilted_52-image">
-                    <img src="/image/51area.png" alt="area Image" class="tilted_51-image">
-                    <img src="/image/50area.png" alt="area Image" class="tilted_50-image">
-                    <img src="/image/49area.png" alt="area Image" class="tilted_49-image">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/58area.png}" alt="area Image" class="tilted_58-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/57area.png}" alt="area Image" class="tilted_57-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/56area.png}" alt="area Image" class="tilted_56-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/55area.png}" alt="area Image" class="tilted_55-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/54area.png}" alt="area Image" class="tilted_54-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/53area.png}" alt="area Image" class="tilted_53-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/52area.png}" alt="area Image" class="tilted_52-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/51area.png}" alt="area Image" class="tilted_51-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/50area.png}" alt="area Image" class="tilted_50-image">
+                    </a>
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/49area.png}" alt="area Image" class="tilted_49-image">
+                    </a>
 
                 </div>
 
@@ -244,7 +295,9 @@
                             margin-top: 306px;
                         }
                     </style>
-                    <img src="/image/48area.png" alt="area Image" class="tilted_48-image">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/48area.png}" alt="area Image" class="tilted_48-image">
+                    </a>
                 </div>
 
                 <!--2F 47 구역-->
@@ -257,11 +310,10 @@
                             margin-top: 392px;
                         }
                     </style>
-                    <img src="/image/47area.png" alt="area Image" class="tilted_47-image">
+                    <a th:href="@{/usr/concert/OLYSDM/seats/G}">
+                        <img th:src="@{/image/47area.png}" alt="area Image" class="tilted_47-image">
+                    </a>
                 </div>
-
-
-
             </div>
         </div>
     </div>
