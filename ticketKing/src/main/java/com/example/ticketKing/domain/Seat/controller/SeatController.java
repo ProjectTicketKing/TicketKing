@@ -50,11 +50,11 @@ public class SeatController {
         model.addAttribute("hall", hall);
         model.addAttribute("type", type);
 
-//        // 스케줄링이 시작되지 않았을 때만 스케줄링 시작
-//        if (!isSchedulingStarted) {
-//            startSeatStatusUpdateSchedule(hall, type);
-//            isSchedulingStarted = true;
-//        }
+        // 스케줄링이 시작되지 않았을 때만 스케줄링 시작
+        if (!isSchedulingStarted) {
+            startSeatStatusUpdateSchedule(hall, type);
+            isSchedulingStarted = true;
+        }
 
         return "usr/concert/remain_seat";
     }
@@ -68,6 +68,7 @@ public class SeatController {
     @MessageMapping("/seats/{hall}/{type}/seatInfo")
     @SendTo("/topic/seats/{hall}/{type}")
     public String sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request) {
+
 
         log.info("hall : {}", hall);
         log.info("type : {}", type);
