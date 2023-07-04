@@ -2,11 +2,9 @@
 let test = [];
 let selectedSeats = new Array();
 let selectedSeatsMap = [];
-const seatWrapper = document.querySelector(".seat-wrapper");
+let seatWrapper;
 let clicked = "";
 let div = "";
-const rows = [[${rows}]];
-const columns = [[${columns}]];
 let seatNum = "";
 
 let valid = [];
@@ -14,39 +12,17 @@ let secondValid = new Array();
 let num = 0;
 
 
-const validSeats = [[${validSeats}]];
+// const validSeats = [[${validSeats}]];
 console.log('valid seats-->');
 
-console.log(validSeats);
-num = validSeats.length;
+// console.log(validSeats);
+// num = validSeats.length;
 
 let stompClient = null;
-let fromId = 0;
-let ChatMessageUl = null;
-
-// 클릭했을 때 [[${seat.hall.name}]]; 값이 들어오도록 해야함
-let hallName = "";
-let seatType = "";
-
-
-// let hallName = [[${seat.hall.name}]];//"KSPO";
-// let seatType = [[${seat.seatType}]];        //"VIP";
-
-// const chatRoomId = /*[[${chatRoom.id}]]*/ '';
-const token = /*[[${_csrf.token}]]*/ '';
 
 
 <!--    console.log(validSeats.length);-->
 <!--    console.log(validSeats[0].length);-->
-
-
-for(let i=0; i < validSeats.length; i++){
-
-    secondMapping(validSeats[i][0],validSeats[i][1]);
-    valid.push(seatNum);
-    secondValid.push(seatNum);
-
-}
 
 console.log(valid[0]);
 console.log(valid[1]);
@@ -56,38 +32,52 @@ reverseMapping(valid[0])
 reverseMapping(valid[1])
 reverseMapping(valid[2])
 
+function pdo(body) {
+    const validSeats = body.validSeatsList;
+    const columns = body.columns;
+    const rows = body.rows;
+    seatWrapper.replaceChildren();
+    console.log(validSeats)
+    for(let i=0; i < validSeats.length; i++){
 
-for (let i = 0; i < rows; i++) {
-    div = document.createElement("div");
-    seatWrapper.append(div);
-    for (let j = 0; j < columns; j++) {
-        const input = document.createElement('input');
-        input.type = "button";
-        input.name = "seats";
-        input.classList = "seat";
-        mapping(input, i, j);
-        div.append(input);
+        secondMapping(validSeats[i][0],validSeats[i][1]);
+        valid.push(seatNum);
+        secondValid.push(seatNum);
+    }
+
+    for (let i = 0; i < rows; i++) {
+        div = document.createElement("div");
+        seatWrapper.append(div);
+        for (let j = 0; j < columns; j++) {
+            const input = document.createElement('input');
+            input.type = "button";
+            input.name = "seats";
+            input.classList = "seat";
+            mapping(input, i, j);
+            div.append(input);
 
 
-        <!--            백에서 처리 가능하면 백으로-->
-        if (valid.includes(input.value)) {
-            input.classList.add("highlighted");
-            input.addEventListener('click', function (e) {
-                console.log(e.target.value);
-                console.log(reverseMapping(e.target.value));
-                // Toggle clicked class
-                input.classList.toggle("clicked");
+            <!--            백에서 처리 가능하면 백으로-->
+            if (valid.includes(input.value)) {
+                input.classList.add("highlighted");
+                input.addEventListener('click', function (e) {
+                    console.log(e.target.value);
+                    const [row, column] = reverseMapping(e.target.value);
+                    // Toggle clicked class
+                    input.classList.toggle("clicked");
 
-                clicked = document.querySelectorAll(".clicked");
-                selectedSeats = Array.from(clicked).map(data => data.value);
-
-                console.log(selectedSeats);
-            });
-        } else {
-            input.disabled = true;
+                    clicked = document.querySelectorAll(".clicked");
+                    selectedSeats = Array.from(clicked).map(data => data.value);
+                    SeatClickEvent(row, column);
+                    console.log(selectedSeats);
+                });
+            } else {
+                input.disabled = true;
+            }
         }
     }
 }
+
 
 function mapping(input, i, j) {
     const alphabet = String.fromCharCode(65 + i); // Convert numeric value to corresponding ASCII character
@@ -110,7 +100,7 @@ function reverseMapping(inputValue) {
         console.log(row);
         console.log(column);
 
-        return { row, column };
+        return [row, column];
     }
 }
 
@@ -118,9 +108,9 @@ function reverseMapping(inputValue) {
 
 //소켓적용
 function getSeatStatus() {
+    console.log("getSeatStatus")
 
-
-    fetch(`/usr/concert/${hallName}/seats/${seatType}`, {
+    fetch(`/api/usr/concert/${hall}/seats/${type}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -128,8 +118,9 @@ function getSeatStatus() {
         }})
         .then(response => response.json())
         .then(body => {
+            pdo(body);
 
-            drawSeat(body);
+            // drawSeat(body);
         });
 }
 
@@ -155,18 +146,17 @@ document.querySelectorAll('.seat').forEach(function(seat) {
 });
 
 //클릭으로 row와 column (프론트에서 백으로 정보전달)
-function SeatClickEvent(row, column, hallName, seatType) {
+function SeatClickEvent(row, column) {
     const seatData = {
 
         row: row,
         column: column,
-        hallName: hallName,
-        seatType: seatType
+        hallName: hall,
+        seatType: type
 
     };
 
-    stompClient.send(`/app/seats/${hallName}/${seatType}/seatInfo`, {}, JSON.stringify(seatData));
-
+    stompClient.send(`/app/seats/${hall}/${type}/seatInfo`, {}, JSON.stringify(seatData));
 }
 
 
@@ -181,15 +171,22 @@ function connect() {
     stompClient.connect(headers, function (frame) {
         console.log('Connected: ' + frame);
 
-        stompClient.subscribe(`/topic/seats/${hallName}/${seatType}`, function (seatData) {
-            getSeatStatus();
+        stompClient.subscribe(`/topic/seats/${hall}/${type}`, function (seatData) {
+            if (seatData.body === "ok") {
+                getSeatStatus();
+                alert("bad");
+            } else {
+                alert("good");
+            }
         });
     });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     // ChatMessageUl = document.querySelector('.chat__message-ul');
+    seatWrapper = document.querySelector(".seat-wrapper");
     connect();
+    getSeatStatus();
 });
 
 
