@@ -28,11 +28,14 @@
         }
     </style>
     <script th:inline="javascript">
+        const token = /*[[${_csrf.token}]]*/ '';
+    </script>
+
+    <script th:inline="javascript">
         const hall = [[${hall}]];
         console.log(hall)
         const type = [[${type}]];
         console.log(type)
-        const token = /*[[${_csrf.token}]]*/ '';
     </script>
     <script th:src="@{/js/seat.js}" type="application/javascript"></script>
 

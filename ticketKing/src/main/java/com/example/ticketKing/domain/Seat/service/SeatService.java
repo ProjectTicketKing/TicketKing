@@ -145,4 +145,20 @@ public class SeatService {
 
 
 
+    public String checkSeatStatus(String hall, String type, Integer row, Integer col){
+    Hall targetedHall = hallRepository.findByName(hall);
+
+     Seat seat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(targetedHall, type, row, col);
+
+        if (seat != null) {
+            if (seat.getStatus().equals("valid")) {
+                return "valid";
+            } else if (seat.getStatus().equals("invalid")) {
+                return "invalid";
+            }
+        }
+        return "none-exist";
+    }
+
+
 }
