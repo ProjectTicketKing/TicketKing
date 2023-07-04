@@ -145,7 +145,7 @@ document.querySelectorAll('.seat').forEach(function(seat) {
     });
 });
 
-//클릭으로 row와 column (프론트에서 백으로 정보전달)
+// 클릭으로 row와 column (프론트에서 백으로 정보전달)
 function SeatClickEvent(row, column) {
     const seatData = {
 
@@ -160,6 +160,7 @@ function SeatClickEvent(row, column) {
 }
 
 
+
 function connect() {
     var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
@@ -172,15 +173,20 @@ function connect() {
         console.log('Connected: ' + frame);
 
         stompClient.subscribe(`/topic/seats/${hall}/${type}`, function (seatData) {
-            if (seatData.body === "ok") {
+            if (seatData.body === "invalid") {
                 getSeatStatus();
-                alert("bad");
+                alert("실패");
+
+                    setTimeout(function () {
+                                    location.reload();
+                                }, 300);
             } else {
-                alert("good");
+                alert("성공");
             }
         });
     });
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     // ChatMessageUl = document.querySelector('.chat__message-ul');

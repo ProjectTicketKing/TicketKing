@@ -15,9 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +28,7 @@ public class SeatController {
 
     private final SeatService seatService;
     private ScheduledExecutorService executor;
-    private boolean isSchedulingStarted = false;
+    private Set<String> scheduledHalls = new HashSet<>();
 
     // 스케줄링 시작 메서드
     private void startSeatStatusUpdateSchedule(String hall, String type) {
@@ -51,9 +49,9 @@ public class SeatController {
         model.addAttribute("type", type);
 
         // 스케줄링이 시작되지 않았을 때만 스케줄링 시작
-        if (!isSchedulingStarted) {
+        if (!scheduledHalls.contains(hall)) {
             startSeatStatusUpdateSchedule(hall, type);
-            isSchedulingStarted = true;
+            scheduledHalls.add(hall);
         }
 
         return "usr/concert/remain_seat";
@@ -68,14 +66,14 @@ public class SeatController {
     @MessageMapping("/seats/{hall}/{type}/seatInfo")
     @SendTo("/topic/seats/{hall}/{type}")
     public String sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request) {
-
-
         log.info("hall : {}", hall);
         log.info("type : {}", type);
         log.info("row : {}", request.getRow());
         log.info("column : {}", request.getColumn());
 
-        return "false";
-    }
+        // 가져온 Seat의 status가 valid이면 => valid
+        // 가져온 Seat의 status가 invalid이면 => invalid
+        String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
 
+       return status;     }
 }

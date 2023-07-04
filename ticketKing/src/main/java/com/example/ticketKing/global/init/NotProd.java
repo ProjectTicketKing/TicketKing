@@ -46,6 +46,13 @@ public class NotProd {
                 Seat seat9 = seatService.register("VIP",2,4,"valid", OLYSDM).getData();
                 Seat seat10 = seatService.register("VIP",2,5,"valid", OLYSDM).getData();
 
+                Seat seat11 = seatService.register("VIP",5,6,"valid", OLYSDM).getData();
+                Seat seat12 = seatService.register("VIP",5,7,"valid", OLYSDM).getData();
+                Seat seat13 = seatService.register("VIP",6,1,"valid", OLYSDM).getData();
+                Seat seat14 = seatService.register("VIP",6,2,"valid", OLYSDM).getData();
+                Seat seat15 = seatService.register("VIP",6,3,"valid", OLYSDM).getData();
+                Seat seat16 = seatService.register("VIP",6,4,"valid", OLYSDM).getData();
+
 //                Seat seat11 = seatService.register("VIP",3,1,"valid").getData();
 //                Seat seat12 = seatService.register("VIP",3,2,"valid").getData();
 //                Seat seat13 = seatService.register("VIP",3,3,"valid").getData();
