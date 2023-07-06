@@ -34,8 +34,8 @@
                 return;
             }
 
-            if (form.username.value.length < 4) {
-                toastWarning('아이디를 4자 이상 입력해주세요.');
+            if (form.username.value.length < 4 || form.username.value.length > 16) {
+                toastWarning('아이디를 4자 이상 16자 이하로 입력해주세요.');
                 form.username.focus();
                 return;
             }
@@ -50,8 +50,8 @@
                 return;
             }
 
-            if (form.password.value.length < 4) {
-                toastWarning('비밀번호를 4자 이상 입력해주세요.');
+            if (form.password.value.length < 4 || form.password.value.length > 16) {
+                toastWarning('비밀번호를 4자 이상 16자 이하로 입력해주세요.');
                 form.password.focus();
                 return;
             }
