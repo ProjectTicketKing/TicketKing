@@ -1,4 +1,8 @@
 spring:
+#  data:
+#    redis:
+#      host: localhost
+
   mvc:
     hidden-method:
       filter:
