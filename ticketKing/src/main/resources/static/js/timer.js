@@ -8,8 +8,10 @@ var selectedLevel;
 
 // Event listener for DOMContentLoaded to record the start time when the button is loaded
 document.addEventListener("DOMContentLoaded", function() {
-    var startButton = document.getElementById('startButton');
-    startButton.addEventListener('click', startGame); // startGame 함수를 click 이벤트 핸들러로 할당
+
+  var startButton = document.getElementById('startButton');
+  startButton.addEventListener('click', startGame); // startGame 함수를 click 이벤트 핸들러로 할당
+
 });
 
 
@@ -94,6 +96,8 @@ function openModal() {
 
     // 타이머가 종료되면 모달을 자동으로 닫도록 설정
     if (selectedLevel === "basic") {
+       closeModal();
+
         // 초급 난이도 선택 시 다른 대기 시간 설정
         if (timeDifference >= 0 && timeDifference < 300) {
             timerInterval2 = setTimeout(function() {
@@ -121,6 +125,7 @@ function openModal() {
         } else {
             timerInterval2 = setTimeout(function() {
                 closeModal();
+
             }, 40000); // 40초 후에 자동으로 닫힘 (대기 시간)
         }
     }

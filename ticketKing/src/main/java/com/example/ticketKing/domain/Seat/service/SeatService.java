@@ -2,6 +2,7 @@ package com.example.ticketKing.domain.Seat.service;
 
 import com.example.ticketKing.domain.Hall.entity.Hall;
 import com.example.ticketKing.domain.Hall.repository.HallRepository;
+import com.example.ticketKing.domain.Robot.Robot;
 import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.repository.SeatRepository;
 import com.example.ticketKing.global.rsData.RsData;
@@ -10,7 +11,9 @@ import org.hibernate.resource.beans.container.spi.BeanLifecycleStrategy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +21,8 @@ import java.util.*;
 public class SeatService {
     private final SeatRepository seatRepository;
     private final HallRepository hallRepository;
+
+    private Integer numRobots = 5;
 
     public List<Seat> getAllSeats() {
         return seatRepository.findAll();
@@ -119,8 +124,6 @@ public class SeatService {
 
 
 
-
-
     public String getSeatStatus(String hallName, String type, int row, int column) {
 
         Hall hall = hallRepository.findByName(hallName);
@@ -142,6 +145,41 @@ public class SeatService {
             seatRepository.save(randomSeat);
         }
     }
+
+
+
+
+    // Robot 도입
+    public void manageRobots(String hallName, String type){
+
+        while(numRobots>0){
+            randomSeatUpdate(hallName, type);
+            numRobots--;
+        }
+    }
+
+
+    @Transactional
+    public void randomSeatUpdate(String hallName, String type) {
+        Hall hall = hallRepository.findByName(hallName);
+        List<Seat> seats = seatRepository.findByHallAndSeatTypeAndStatus(hall, type, "valid");
+
+        // 로봇 객체 생성
+        Robot robot = new Robot();
+        boolean reservationSuccess = robot.tryReserve();
+
+        if (!seats.isEmpty() && reservationSuccess) {
+            // 랜덤으로 Seat 선택
+            Seat randomSeat = seats.get(new Random().nextInt(seats.size()));
+            randomSeat.setStatus("invalid");
+            randomSeat.setReservedBy(robot.getId());
+            seatRepository.save(randomSeat);
+        }
+
+    }
+
+
+
 
 
 
