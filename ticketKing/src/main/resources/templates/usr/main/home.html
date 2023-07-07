@@ -60,9 +60,7 @@
 
         <div class="navbar-end">
         </div>
-        <form th:if="${@rq.login}" th:action="|/usr/member/me|" method="post" class="m-0">
-            <button th:if="${@rq.login}" type="button" class="btn border-none" style="background-color: black; color: #9B6DFF;">마이페이지</button>
-        </form>
+        <a href="usr/member/me" th:if="${#authorization.expr('isAuthenticated()')}" class="link link-hover mr-3">마이페이지</a>
 
         <a th:if="${@rq.logout}" href="/usr/member/login" class="btn border-none" style="background-color: black; color: #9B6DFF">로그인</a>
 

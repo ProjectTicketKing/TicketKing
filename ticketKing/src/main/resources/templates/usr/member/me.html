@@ -11,10 +11,6 @@
 
 
 <main layout:fragment="main" class="pt-2">
-
-    <form method="POST" th:action="|/member/me/${member.id}|" onsubmit="ModifyForm__submit(this); return false;"
-              enctype="multipart/form-data"
-              class="gap-5 flex flex-col justify-center items-center flex-grow">
         <div class="flex-col flex items-start justify-start pt-2 pl-60">
             <h1 class="text-xl font-bold">계정관리</h1>
             <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">기본정보</h2>
@@ -22,9 +18,7 @@
         <div class="flex-col flex items-center justify-center">
             <div id="profile" class="w-64 h-64 overflow-hidden">
                 <img class="mask mask-circle shadow-2xl w-full h-full"
-                     th:if="${member.photo == null}" th:src="@{/image/sample_profile.jpg}" alt="profile"/>
-                <img class="mask mask-circle shadow-2xl w-full h-full"
-                     th:if="${member.photo != null}" th:src="${member.photo.filePath}" alt="profile"/>
+                     th:src="@{/image/sample_profile.jpg}" alt="profile"/>
             </div>
 
             <table class="table" style="width: 500px">
@@ -41,7 +35,7 @@
 
             </table>
             <div class="flex justify-end">
-                <button id="modifyActive" class="btn btn-outline btn-primary" onclick="modify_active();" type="button">회원정보수정</button>
+                <button id="modifyActive" class="btn btn-outline btn-primary" onclick="" type="button">회원정보수정</button>
             </div>
         </div>
         <div class="flex-col flex items-start justify-start pt-2 pl-60">
@@ -64,11 +58,7 @@
             </div>
         </div>
         <div class="flex justify-end">
-            <button class="mt-5 ml-100 text text-xs text-[#7A7A7A]" onclick="modify_active();" type="button"
-                    onclick="confirm('모든 회원 정보가 삭제됩니다. 탈퇴하시겠습니까?')?$(this).next().submit():false;">회원탈퇴
-            </button>
         </div>
-    </form>
 </main>
 
 </body>
