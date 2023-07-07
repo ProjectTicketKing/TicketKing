@@ -3,70 +3,80 @@
       layout:decorate="~{usr/layout/layout.html}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
 </head>
-<body>
+<body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.tailwindcss.com"></script>
 
 
 <main layout:fragment="main" class="pt-2">
-    <div class="flex-col flex items-start justify-start pt-2 pl-60">
-        <h1 class="text-xl font-bold">계정관리</h1>
-        <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">기본정보</h2>
-    </div>
-    <div class="flex-col flex items-center justify-center">
-        <div id="profile" class="w-64 h-64 overflow-hidden">
-            <img class="mask mask-circle shadow-2xl w-full h-full"
-                 th:if="${account.picture == null}" src="/sample_profile.jpg" alt="profile"/>
-            <img class="mask mask-circle shadow-2xl w-full h-full"
-                 th:if="${account.picture != null}" th:src="${account.picture.filePath}" alt="profile"/>
-        </div>
 
-        <table class="table" style="width: 500px">
-            <tr>
-                <td th:text="${email}" colspan="2"></td>
-            </tr>
-            <tr>
-                <td th:if="${emailVerified} == true" colspan="2">인증완료</td>
-                <td th:unless="${emailVerified}" colspan="2"><a href="/usr/member/emailVerification" class="btn btn-sm">이메일인증하기</a></td>
-            </tr>
-            <tr>
-                <td th:text="${username}" colspan="2">님</td>
-            </tr>
+    <form method="POST" th:action="|/member/me/${member.id}|" onsubmit="ModifyForm__submit(this); return false;"
+              enctype="multipart/form-data"
+              class="gap-5 flex flex-col justify-center items-center flex-grow">
+        <div class="flex-col flex items-start justify-start pt-2 pl-60">
+            <h1 class="text-xl font-bold">계정관리</h1>
+            <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">기본정보</h2>
+        </div>
+        <div class="flex-col flex items-center justify-center">
+            <div id="profile" class="w-64 h-64 overflow-hidden">
+                <img class="mask mask-circle shadow-2xl w-full h-full"
+                     th:if="${member.photo == null}" th:src="@{/image/sample_profile.jpg}" alt="profile"/>
+                <img class="mask mask-circle shadow-2xl w-full h-full"
+                     th:if="${member.photo != null}" th:src="${member.photo.filePath}" alt="profile"/>
+            </div>
 
-        </table>
-        <div class="flex justify-end">
-            <button id="modifyActive" class="btn btn-outline btn-primary" onclick="modify_active();" type="button">회원정보수정</button>
+            <table class="table" style="width: 500px">
+                <tr>
+                     <td th:text="${email}" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td th:if="${emailVerified} == true" colspan="2">인증완료</td>
+                    <td th:unless="${emailVerified}" colspan="2"><a href="/usr/member/emailVerification" class="btn btn-sm">이메일인증하기</a></td>
+                </tr>
+                <tr>
+                    <td th:text="${username}" colspan="2">님</td>
+                </tr>
+
+            </table>
+            <div class="flex justify-end">
+                <button id="modifyActive" class="btn btn-outline btn-primary" onclick="modify_active();" type="button">회원정보수정</button>
+            </div>
         </div>
-    </div>
-    <div class="flex-col flex items-start justify-start pt-2 pl-60">
-        <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">연습결과</h2>
-    </div>
-    <div class="flex-col flex items-center justify-center">
-        <div class="border-2 border-[#7A7A7A] rounded-xl font-bold text-xs text-black mt-5">
-            <ul class="bg-[#c0a8f6] border-b-2 border-[#7A7A7A] rounded-lg flex justify-center items-center" style="width: 700px; height: 30px">
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 성공횟수</li>
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 실패횟수</li>
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">총 도전횟수</li>
-                <li class="flex justify-center items-center" style="width: inherit; height: inherit;">승률</li>
-            </ul>
-            <ul class="flex justify-center items-center" style="width: 700px; height: 60px">
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
-                <li class="flex justify-center items-center" style="width: inherit; height: inherit;"></li>
-            </ul>
+        <div class="flex-col flex items-start justify-start pt-2 pl-60">
+            <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">연습결과</h2>
+        </div>
+        <div class="flex-col flex items-center justify-center">
+            <div class="border-2 border-[#7A7A7A] rounded-xl font-bold text-xs text-black mt-5">
+                <ul class="bg-[#c0a8f6] border-b-2 border-[#7A7A7A] rounded-lg flex justify-center items-center" style="width: 700px; height: 30px">
+                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 성공횟수</li>
+                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 실패횟수</li>
+                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">총 도전횟수</li>
+                    <li class="flex justify-center items-center" style="width: inherit; height: inherit;">승률</li>
+                </ul>
+                <ul class="flex justify-center items-center" style="width: 700px; height: 60px">
+                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
+                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
+                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
+                    <li class="flex justify-center items-center" style="width: inherit; height: inherit;"></li>
+                </ul>
+            </div>
         </div>
         <div class="flex justify-end">
-            <button class="btn bg-error border-error text-white hover:text-error"
+            <button class="mt-5 ml-100 text text-xs text-[#7A7A7A]" onclick="modify_active();" type="button"
                     onclick="confirm('모든 회원 정보가 삭제됩니다. 탈퇴하시겠습니까?')?$(this).next().submit():false;">회원탈퇴
             </button>
-            <form th:action="|/usr/member/withdrawal|" method="post" hidden></form>
         </div>
-    </div>
+    </form>
 </main>
 
-<script src="https://cdn.tailwindcss.com"></script>
-
 </body>
+
+<footer layout:fragment="footer" class="bg-black text-center dark:bg-neutral-700 lg:text-left">
+    <div class="p-4 text-center text-neutral-500 dark:text-neutral-200">
+        © 2023 TicketKing
+    </div>
+</footer>
+
 </html>

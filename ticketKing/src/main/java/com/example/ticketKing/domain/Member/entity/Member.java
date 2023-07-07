@@ -2,11 +2,9 @@ package com.example.ticketKing.domain.Member.entity;
 
 
 import com.example.ticketKing.domain.Practice.entity.Practice;
+import com.example.ticketKing.domain.photo.entity.Photo;
 import com.example.ticketKing.global.baseEntity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +27,8 @@ public class Member extends BaseEntity {
     private String password;
     @Column(nullable = false)
     private String email;
+    @OneToOne(orphanRemoval = true)
+    private Photo photo;
 
     @OneToMany(mappedBy = "member", fetch = LAZY)
     private List<Practice> practices;
