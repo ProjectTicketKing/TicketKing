@@ -8,8 +8,10 @@ var selectedLevel;
 
 // Event listener for DOMContentLoaded to record the start time when the button is loaded
 document.addEventListener("DOMContentLoaded", function() {
+
   var startButton = document.getElementById('startButton');
   startButton.addEventListener('click', startGame); // startGame 함수를 click 이벤트 핸들러로 할당
+
 });
 
 
@@ -79,6 +81,8 @@ function padZero(value) {
     return value < 10 ? '0' + value : value;
 }
 
+var timeInterval2 = null;
+
 function openModal() {
     var modal = document.getElementById('modal');
     var queueCountElement = document.getElementById('queueCount');
@@ -92,59 +96,52 @@ function openModal() {
 
     // 타이머가 종료되면 모달을 자동으로 닫도록 설정
     if (selectedLevel === "basic") {
-         // 초급 난이도 선택 시 다른 대기 시간 설정
-         if (timeDifference >= 0 && timeDifference < 300) {
-             timerInterval = setInterval(function() {
-                 closeModal();
-             }, 10000); // 10초 후에 자동으로 닫힘 (대기 시간)
-         } else if (timeDifference >= 300 && timeDifference < 500) {
-             timerInterval = setInterval(function() {
-                 closeModal();
-             }, 20000); // 20초 후에 자동으로 닫힘 (대기 시간)
-         } else if (timeDifference >= 500) {
-             timerInterval = setInterval(function() {
-                 closeModal();
+       closeModal();
+
+        // 초급 난이도 선택 시 다른 대기 시간 설정
+        if (timeDifference >= 0 && timeDifference < 300) {
+            timerInterval2 = setTimeout(function() {
+                closeModal();
+            }, 10000); // 10초 후에 자동으로 닫힘 (대기 시간)
+        } else if (timeDifference >= 300 && timeDifference < 500) {
+            timerInterval2 = setTimeout(function() {
+                closeModal();
+            }, 20000); // 20초 후에 자동으로 닫힘 (대기 시간)
+        } else {
+            timerInterval2 = setTimeout(function() {
+                closeModal();
             }, 30000); // 30초 후에 자동으로 닫힘 (대기 시간)
-         }
-    } else if (selectedLevel === "advanced") {
+        }
+    } else {
         // 고급 난이도 선택 시 다른 대기 시간 설정
         if (timeDifference >= 0 && timeDifference < 200) {
-             timerInterval = setInterval(function() {
-                 closeModal();
-             }, 20000); // 20초 후에 자동으로 닫힘 (대기 시간)
+            timerInterval2 = setTimeout(function() {
+                closeModal();
+            }, 20000); // 20초 후에 자동으로 닫힘 (대기 시간)
         } else if (timeDifference >= 200 && timeDifference < 400) {
-             timerInterval = setInterval(function() {
-                  closeModal();
-             }, 30000); // 30초 후에 자동으로 닫힘 (대기 시간)
-        } else if (timeDifference >= 400) {
-             timerInterval = setInterval(function() {
-                  closeModal();
+            timerInterval2 = setTimeout(function() {
+                closeModal();
+            }, 30000); // 30초 후에 자동으로 닫힘 (대기 시간)
+        } else {
+            timerInterval2 = setTimeout(function() {
+                closeModal();
+
             }, 40000); // 40초 후에 자동으로 닫힘 (대기 시간)
         }
     }
 
 
     // 모달 닫기 버튼 클릭 이벤트
-    var modalCloseButton = document.getElementById('modalCloseButton');
-    modalCloseButton.onclick = function() {
-      clearInterval(timerInterval); // 타이머 중지
-      closeModal(); // 모달 창 닫기
-    };
+    //var modalCloseButton = document.getElementById('modalCloseButton');
+    //modalCloseButton.onclick = function() {
+    //    clearInterval(timerInterval); // 타이머 중지
+    //    closeModal(); // 모달 창 닫기
+    // };
 }
 
 function closeModal() {
-    var modal = document.getElementById('modal');
-    var queueCountElement = document.getElementById('queueCount');
-
-    // 대기열 수 초기화
-    queueCount = 0;
-    queueCountElement.innerText = queueCount;
-
-    // 대기열 모달 창 닫기
-    modal.style.display = 'none';
-
     // 다른 페이지로 이동 (여기서는 '예매 페이지'로 이동하도록 설정)
-      window.location.href = '/usr/concert/date'; // 예매 페이지로 이동하는 로직 추가
+    location.href = '/usr/concert/date'; // 예매 페이지로 이동하는 로직 추가
 }
 
 // timeDifference에 따라 다른 메시지를 보여주는 함수
