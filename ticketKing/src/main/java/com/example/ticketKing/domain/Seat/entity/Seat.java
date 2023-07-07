@@ -29,7 +29,7 @@ public class Seat extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Hall hall;
 
-    private String reservedBy; // 예약을 한 사용자 정보
+
 
 
     public Seat(String seatType, int seatRow, int seatNumber, String status) {

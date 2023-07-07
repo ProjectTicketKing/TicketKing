@@ -75,21 +75,5 @@ public class SeatController {
         // 가져온 Seat의 status가 invalid이면 => invalid
         String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
 
-       return status;     }
-
-
-
-    @MessageMapping("/manageRobots/{hall}/{type}")
-    public void manageRobots(@DestinationVariable String hall, @DestinationVariable String type, @DestinationVariable int numRobots) {
-        seatService.manageRobots(hall, type);
-    }
-
-
-    @MessageMapping("/randomSeatUpdate/{hall}/{type}")
-    public void randomSeatUpdate(@DestinationVariable String hall, @DestinationVariable String type) {
-        seatService.randomSeatUpdate(hall, type);
-    }
-
-
-
+        return status;     }
 }
