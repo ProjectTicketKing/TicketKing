@@ -119,8 +119,6 @@ public class SeatService {
 
 
 
-
-
     public String getSeatStatus(String hallName, String type, int row, int column) {
 
         Hall hall = hallRepository.findByName(hallName);
