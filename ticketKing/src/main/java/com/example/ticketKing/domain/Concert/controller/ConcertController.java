@@ -21,7 +21,10 @@ public class ConcertController {
         return "usr/concert/concert_date";
     }
 
-
+    @GetMapping("/usr/concert/delivery")
+    public String showConcertDelivery() {
+        return "usr/concert/concert_delivery";
+    }
 
 }
 
