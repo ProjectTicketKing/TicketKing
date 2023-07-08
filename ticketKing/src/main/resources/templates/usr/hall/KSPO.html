@@ -14,7 +14,7 @@
 
 <main layout:fragment="main" class="flex flex-col items-center justify-center w-full min-h-screen">
     <!-- 예매창 네비바 -->
-    <nav class="border border-[#9a6cfd] font-bold text-xs text-white mb-20">
+    <nav class="border border-[#9a6cfd] font-bold text-xs text-white mb-20 mt-5">
         <ul class="flex justify-center items-center" style="width: 1070px; height: 60px">
             <li class="flex justify-center items-center border px-5 py-2 bg-[#c0a8f6] mt-0 px-0" style="width: inherit; height: inherit;">01.관람일/회차선택</li>
             <li class="flex justify-center items-center border px-5 py-2 bg-[#9a6cfd] mx-0 px-0" style="width: inherit; height: inherit;">02.좌석선택</li>
@@ -27,7 +27,7 @@
     <div>
         <div class="flex items-center">
 
-            <div class="relative absolute -right-[60px] flex gap-4">
+            <div class="relative absolute -right-[60px] -top-[-30px] flex gap-4">
                 <!--Floor-->
                 <div>
                     <a th:href="@{/usr/concert/KSPO/seats/VIP}">
