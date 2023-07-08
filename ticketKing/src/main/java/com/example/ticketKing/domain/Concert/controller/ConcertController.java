@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 public class ConcertController {
-    @GetMapping("/usr/concert/concert")
+    @GetMapping("/usr/concert")
     public String showConcert() {
         return "usr/concert/concert";
     }
