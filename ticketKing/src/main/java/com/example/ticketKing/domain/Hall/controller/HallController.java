@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 @RequiredArgsConstructor
 public class HallController {
-    @GetMapping("/usr/concert/{hall}")
+    @GetMapping("/usr/concert/{hall}/stage")
     public String showConcertSeatArea(@PathVariable("hall")String hallName) {
         return "usr/hall/"+hallName;
     }
