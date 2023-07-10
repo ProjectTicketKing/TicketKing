@@ -1,6 +1,7 @@
 package com.example.ticketKing.domain.Seat.controller;
 
 
+import com.example.ticketKing.domain.Seat.SktRsData;
 import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.service.SeatService;
 import com.example.ticketKing.global.security.SecurityMember;
@@ -30,6 +31,11 @@ public class SeatController {
     private ScheduledExecutorService executor;
     private Set<String> scheduledHalls = new HashSet<>();
 
+    Integer finalRow = 0;
+    Integer finalCol = 0;
+
+
+
     // 스케줄링 시작 메서드
     private void startSeatStatusUpdateSchedule(String hall, String type) {
         executor = Executors.newSingleThreadScheduledExecutor();
@@ -54,6 +60,13 @@ public class SeatController {
             scheduledHalls.add(hall);
         }
 
+
+        System.out.println("Confirm CHECk!!!!!!!!!!!!!");
+        System.out.println("Confirm CHECk!!!!!!!!!!!!!");
+        System.out.println("Confirm CHECk!!!!!!!!!!!!!");
+        System.out.println(finalRow);
+        System.out.println(finalCol);
+
         return "usr/concert/remain_seat";
     }
 
@@ -65,15 +78,59 @@ public class SeatController {
 
     @MessageMapping("/seats/{hall}/{type}/seatInfo")
     @SendTo("/topic/seats/{hall}/{type}")
-    public String sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request) {
-        log.info("hall : {}", hall);
-        log.info("type : {}", type);
-        log.info("row : {}", request.getRow());
-        log.info("column : {}", request.getColumn());
+    public SktRsData<List<Integer>> sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request) {
+//        log.info("hall : {}", hall);
+//        log.info("type : {}", type);
+//        log.info("row : {}", request.getRow());
+//        log.info("column : {}", request.getColumn());
+//
 
         // 가져온 Seat의 status가 valid이면 => valid
         // 가져온 Seat의 status가 invalid이면 => invalid
         String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
+        Integer row = request.getRow();
+        Integer column = request.getColumn();
 
-        return status;     }
+
+        List<Integer> rowCol = new ArrayList<>();
+        rowCol.add(row);
+        rowCol.add(column);
+        SktRsData seatData = new SktRsData(status,rowCol);
+
+        // RsData 만들어서 status, message, data 만들어서
+        // Signal Type
+        // subscribe단에서 type을 줘서 프론트에서 if문을 써서 처리할 수 있도록
+        // data generic타입으로
+        // 프론트 단에서 리스트처리
+
+
+//        return status;
+
+        return seatData;
+    }
+
+
+
+    @MessageMapping("/seats/{hall}/{type}/confirmInfo")
+//    @SendTo("/topic/seats/{hall}/{type}")
+    public void sendConfirmMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request) {
+
+
+        log.info("hall : {}", hall);
+        log.info("type : {}", type);
+        log.info("row : {}", request.getRow());
+        log.info("column : {}", request.getColumn());
+        String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
+
+
+
+//        finalRow = row;
+//        finalCol = column;
+
+//        log.info("final confirm row : {}", finalRow);
+//        log.info("final confirm column : {}",  finalCol);
+
+
+    }
+
 }

@@ -7,6 +7,9 @@ let clicked = "";
 let div = "";
 let seatNum = "";
 
+let seatRow = 0;
+let seatColumn = 0;
+
 let valid = [];
 let secondValid = new Array();
 let num = 0;
@@ -160,6 +163,21 @@ function SeatClickEvent(row, column) {
 }
 
 
+// 클릭으로 row와 column (프론트에서 백으로 정보전달)
+function ConfirmClickEvent(row, column) {
+    const seatData = {
+
+        row: row,
+        column: column,
+        hallName: hall,
+        seatType: type
+
+    };
+
+    stompClient.send(`/app/seats/${hall}/${type}/confirmInfo`, {}, JSON.stringify(seatData));
+}
+
+
 
 function connect() {
     var socket = new SockJS('/ws');
@@ -173,7 +191,10 @@ function connect() {
         console.log('Connected: ' + frame);
 
         stompClient.subscribe(`/topic/seats/${hall}/${type}`, function (seatData) {
-            if (seatData.body === "invalid") {
+            const parsedData = JSON.parse(seatData.body);
+
+
+            if (parsedData.status === "invalid") {
                 getSeatStatus();
                 alert("실패");
 
@@ -182,6 +203,23 @@ function connect() {
                                 }, 300);
             } else {
                 alert("성공");
+                console.log("성공 seatData.body 확인");
+                console.log(parsedData.status);
+                console.log(parsedData.data[0]);
+
+                seatRow = parsedData.data[0];
+                seatColumn = parsedData.data[1];
+const seatRowValueElement = document.getElementById('seatRowValue');
+seatRowValueElement.textContent = seatRow.toString();
+const seatColumnValueElement = document.getElementById('seatColumnValue');
+seatColumnValueElement.textContent = seatColumn.toString();
+
+//                console.log(seatData.body.status);
+//                console.log(seatData.body.data);
+//                console.log(seatData.body.data[0]);
+//                console.log(seatData.body.data[1]);
+
+
             }
         });
     });
@@ -195,4 +233,7 @@ document.addEventListener("DOMContentLoaded", function() {
     getSeatStatus();
 });
 
+function confirmSeat(){
+    ConfirmClickEvent(seatRow, seatColumn);
+}
 
