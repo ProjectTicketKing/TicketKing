@@ -13,6 +13,6 @@ public class HallController {
     public String showConcertSeatArea(Model model, @PathVariable("hall")String hallName) {
         model.addAttribute("hallName",hallName);
         return "usr/hall/"+hallName;
-          }
+    }
 
 }
