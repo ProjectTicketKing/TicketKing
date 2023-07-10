@@ -25,149 +25,175 @@
 
     <div class="flex flex-col bg-[#F2F4F4] rounded-bl-lg rounded-br-lg w-[1070px] h-[550px]">
 
-        <div class="flex justify-center w-full min-h-screen mt-10">
-            <div class="flex">
-                <!--결제방식 선택 -->
-                <div class="p-4">
-                    <p class="flex flex-col mb-2 text-base text-neutral-600 dark:text-neutral-200">결제 방식 선택</p>
 
-                    <div class="flex flex-col">
-                        <style>
-                            select[name="startTime"], select[name="level"] {
-                                -webkit-appearance: none;
-                                -moz-appearance: none;
-                                appearance: none;
-                                padding: 0.2rem 2rem 0.2rem 1rem;
-                                background-color: #ffffff;
-                                color: #9B6DFF;
-                                border-color: #9B6DFF;
-                            }
-                        </style>
 
-                        <select id="timeSelect" name="startTime" class="select select w-[180px]">
-                            <option class="" selected disabled>결제 방식</option>
-                            <option value="5">무통장 입금</option>
-                            <option value="30">신용카드</option>
-                            <option value="60">휴대폰 결제</option>
-                            <option value="180">공연예매권</option>
-                        </select>
+        <div class="flex flex-col justify-start mx-12 mb-50">
+            <div class="flex justify-center w-full mt-10">
+                <div class="flex mt-5">
+                    <div class="absolute -top-[-520px] -right-[-470px] rounded-lg white-square">
+                        <div class="p-6 text-left">
+                            <p class="text-black text-left mb-2">무통장 입금 유의사항</p>
+                            <hr class="h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
+                            <p class="text-black text-xs mt-1" style="font-weight: 300;">- 예매시 지정 입금일시까지 부여 받은 은행 구좌로 입금하셔야 합니다.</p>
+                            <p class="text-black text-xs mt-1" style="font-weight: 300;">- 입금마감시간은 예매일 다음날 밤 11시 59분까지입니다. 일부 스포츠 상품은 입금마감시간이 다를 수 있으며, 예매내역 확인/<br>취소페이지에서 확인 가능합니다.</p>
+                            <p class="text-black text-xs mt-1" style="font-weight: 300;">- 은행에 따라서 밤 11시 30분 이후로는 온라인입금이 제한될 수 있으며, 입금마감시간까지 미입금된 경우는 예매가 자동 취소<br>됩니다.</p>
+                            <p class="text-black text-xs mt-1" style="font-weight: 300;">- 주말/공휴일은 은행영업일이 아니므로 인터넷뱅킹이나 폰뱅킹을 이용하셔야 합니다.</p>
+                        </div>
 
                     </div>
                 </div>
 
-                <div class="mx-4"></div>
+                <div class="flex">
+                    <!--결제방식 선택 -->
+                    <div class="p-4">
+                        <p class="flex flex-col mb-2 text-base text-neutral-600 dark:text-neutral-200">결제 방식 선택</p>
+
+                        <div class="flex flex-col">
+                            <style>
+                                select[name="startTime"], select[name="level"] {
+                                    -webkit-appearance: none;
+                                    -moz-appearance: none;
+                                    appearance: none;
+                                    padding: 0.2rem 2rem 0.2rem 1rem;
+                                    background-color: #ffffff;
+                                    color: #9B6DFF;
+                                    border-color: #9B6DFF;
+                                }
+                            </style>
+
+                            <select id="timeSelect" name="startTime" class="select select w-[180px]">
+                                <option class="" selected disabled>결제 방식</option>
+                                <option value="5">무통장 입금</option>
+                                <option value="30">신용카드</option>
+                                <option value="60">휴대폰 결제</option>
+                                <option value="180">공연예매권</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="mx-4"></div>
 
 
-                <div class="inline-block h-[250px] min-h-[1em] w-0.5 self-stretch bg-neutral-200 opacity-100 dark:opacity-50"></div>
+                    <div class="inline-block h-[250px] min-h-[1em] w-0.5 self-stretch bg-neutral-200 opacity-100 dark:opacity-50"></div>
 
-                <!--결제수단 입력 -->
-                <div class="p-4 ml-6">
-                    <p class="flex flex-col mb-2 text-base text-neutral-600 dark:text-neutral-200">결제 수단 입력</p>
-                    <div class="w-[400px]">
-                        <table class="table-auto w-full">
-                            <thead>
-                            <tr>
-                                <th class="border border-t-2 px-6 py-2 whitespace-nowrap text-xs text-center bg-gray-200" colspan="2">무통장입금</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="border px-3 py-2 whitespace-nowrap text-xs text-center bg-gray-100">입금액</td>
-                                <td class="border px-36 py-2 text-xs text-center">113,500원</td>
-                            </tr>
-                            <tr>
-                                <td class="border px-3 py-2 whitespace-nowrap text-xs text-center bg-gray-100">입금하실은행</td>
-                                <td class="border px-6 py-2 text-xs text-center">
-                                    <select data-te-select-init>
-                                        <option value="1">입금하실 은행을 선택하세요.</option>
-                                        <option value="2">국민은행</option>
-                                        <option value="2">우리은행</option>
-                                        <option value="3">농협은행</option>
-                                        <option value="3">새마을금고</option>
-                                    </select>
+                    <!--결제수단 입력 -->
+                    <div class="p-4 ml-6">
+                        <p class="flex flex-col mb-2 text-base text-neutral-600 dark:text-neutral-200">결제 수단 입력</p>
+                        <div class="w-[400px]">
+                            <table class="table-auto w-full">
+                                <thead>
+                                <tr>
+                                    <th class="border border-t-2 px-6 py-2 whitespace-nowrap text-xs text-center bg-gray-200" colspan="2">무통장입금</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="border px-3 py-2 whitespace-nowrap text-xs text-center bg-gray-100">입금액</td>
+                                    <td class="border px-36 py-2 text-xs text-center">113,500원</td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-3 py-2 whitespace-nowrap text-xs text-center bg-gray-100">입금하실은행</td>
+                                    <td class="border px-6 py-2 text-xs text-center">
+                                        <select data-te-select-init>
+                                            <option value="1">입금하실 은행을 선택하세요.</option>
+                                            <option value="2">국민은행</option>
+                                            <option value="2">우리은행</option>
+                                            <option value="3">농협은행</option>
+                                            <option value="3">새마을금고</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <td class="border px-1 py-2 text-xs text-center" colspan="2">
+                                    <span style="color: #DC143C;">티켓팅 연습게임을 위한 가상 화면입니다. <br>실제로 이루어지는 것이 아니므로 착오없으시길 바랍니다.</span>
                                 </td>
-                            </tr>
-                            <td class="border px-1 py-2 text-xs text-center" colspan="2">
-                                <span style="color: #DC143C;">티켓팅 연습게임을 위한 가상 화면입니다. <br>실제로 이루어지는 것이 아니므로 착오없으시길 바랍니다.</span>
-                            </td>
 
-                            <tr>
-                                <td class="border px-3 py-2 text-xs text-center">입금마감시간</td>
-                                <td class="border px-4 py-2 text-xs text-center">0000년 00원 00일 오후 23시 59분</td>
-                            </tr>
-                            <tr>
-                                <td class="border px-3 py-2 text-xs text-center">예금주명</td>
-                                <td class="border px-4 py-2 text-xs text-center">티켓킹</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                <tr>
+                                    <td class="border px-3 py-2 text-xs text-center">입금마감시간</td>
+                                    <td class="border px-4 py-2 text-xs text-center">0000년 00원 00일 오후 23시 59분</td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-3 py-2 text-xs text-center">예금주명</td>
+                                    <td class="border px-4 py-2 text-xs text-center">티켓킹</td>
+                                </tr>
+                                </tbody>
+                            </table>
 
+                        </div>
+                        <div class="mx-8"></div>
                     </div>
+
                     <div class="mx-8"></div>
-                </div>
 
-                <div class="mx-8"></div>
+                    <!-- 정보 페이지 -->
+                    <div class="card mb-3 ml-2" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
 
-                <!-- 정보 페이지 -->
-                <div class="card mb-3 ml-2" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
+                                <div class="max-w-[300px]">
+                                    <div class="block rounded-lg bg-white text-center border-red-500 mt-1">
+                                        <div class="flex justify-center">
+                                            <img src="https://newsimg.hankookilbo.com/2017/11/08/201711081172845620_1.jpg"
+                                                 class="h-auto max-w-xxxs max-h-60 rounded-lg mt-2 mr-30 shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30" alt="" />
+                                        </div>
 
-                            <div class="max-w-[300px]">
-                                <div class="block rounded-lg bg-white text-center border-red-500 mt-1">
-                                    <div class="flex justify-center">
-                                        <img src="https://newsimg.hankookilbo.com/2017/11/08/201711081172845620_1.jpg"
-                                             class="h-auto max-w-xxxs max-h-60 rounded-lg mt-2 mr-30 shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30" alt="" />
-                                    </div>
+                                        <div class="py-2">
 
-                                    <div class="py-2">
-
-                                        <table class="min-w-full text-sm font-light">
-                                            <tbody>
-                                            <tr>
-                                                <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">관람일시</td>
-                                                <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">23-07-15</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">선택 좌석</td>
-                                                <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">2층-9열-45</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">티켓 금액</td>
-                                                <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">121,000원</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">할인 금액</td>
-                                                <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">0원</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">수수료</td>
-                                                <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">1,000원</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <hr class="h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
-                                        <div class="mt-1 flex justify-center">
-                                            <p class="text-lg font-bold" style="color:#DC143C; font-size: 13px;">총 결제금액: 122,000원</p>
+                                            <table class="min-w-full text-sm font-light">
+                                                <tbody>
+                                                <tr>
+                                                    <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">관람일시</td>
+                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">23-07-15</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">선택 좌석</td>
+                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">2층-9열-45</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">티켓 금액</td>
+                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">121,000원</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">할인 금액</td>
+                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">0원</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">수수료</td>
+                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">1,000원</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr class="h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50" />
+                                            <div class="mt-1 flex justify-center">
+                                                <p class="text-lg font-bold" style="color:#DC143C; font-size: 13px;">총 결제금액: 122,000원</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="mt-3 flex justify-between">
-                                <button type="submit" class="custom-button rounded-lg border-none py-2"
-                                        style="background-color: #ffffff; color: #664AFF; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/delivery'"> &lt; 이전 단계</button>
-                                <div class="w-1/12"></div>
-                                <button type="submit" class="custom-button rounded-lg border-none py-2"
-                                        style="background-color: #664AFF; color: #ffffff; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/fee'">다음 단계 &gt;</button>
+                                <div class="mt-3 flex justify-between">
+                                    <button type="submit" class="custom-button rounded-lg border-none py-2"
+                                            style="background-color: #ffffff; color: #664AFF; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/delivery'"> &lt; 이전 단계</button>
+                                    <div class="w-1/12"></div>
+                                    <button type="submit" class="custom-button rounded-lg border-none py-2"
+                                            style="background-color: #664AFF; color: #ffffff; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/fee'">다음 단계 &gt;</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
         </div>
     </div>
+    </div>
+    <style>
+        .white-square {
+            width: 720px;
+            height: 181px;
+            background-color: white;
+        }
+    </style>
+
 
 
 </main>
