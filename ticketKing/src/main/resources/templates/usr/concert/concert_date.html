@@ -167,7 +167,7 @@
 
                         <div class="mt-8 flex justify-center">
                             <button type="submit" class="custom-button rounded-lg border-none py-2 w-full"
-                                    style="background-color: #664AFF; color: #ffffff; width: 100%">다음 단계 ></button>
+                                    style="background-color: #664AFF; color: #ffffff; width: 100%" onclick="window.location.href='/usr/concert/' + hallValue + '/stage'">다음 단계 ></button>
                         </div>
                     </div>
                 </div>
@@ -179,3 +179,8 @@
 </body>
 
 </html>
+
+
+<script th:inline="javascript">
+  var hallValue = [[${hallValue}]];
+    </script>
