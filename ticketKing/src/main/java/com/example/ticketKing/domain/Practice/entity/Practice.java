@@ -24,5 +24,4 @@ public class Practice extends BaseEntity {
 
 
 
-
 }
