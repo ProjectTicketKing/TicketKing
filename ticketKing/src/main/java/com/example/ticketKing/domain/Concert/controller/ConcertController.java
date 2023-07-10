@@ -26,5 +26,16 @@ public class ConcertController {
         return "usr/concert/concert_delivery";
     }
 
+    @GetMapping("/usr/concert/payment")
+    public String showConcertPayment() {
+        return "usr/concert/concert_payment";
+    }
+    @GetMapping("/usr/concert/fee")
+    public String showConcertFee() {
+        return "usr/concert/concert_fee";
+    }
+
+
+
 }
 
