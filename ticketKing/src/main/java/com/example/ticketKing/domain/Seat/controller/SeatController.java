@@ -1,13 +1,18 @@
 package com.example.ticketKing.domain.Seat.controller;
 
 
+import com.example.ticketKing.domain.Practice.entity.Practice;
+import com.example.ticketKing.domain.Practice.service.PracticeService;
 import com.example.ticketKing.domain.Seat.SktRsData;
 import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.service.SeatService;
+import com.example.ticketKing.global.rq.Rq;
+import com.example.ticketKing.global.rsData.RsData;
 import com.example.ticketKing.global.security.SecurityMember;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.scope.ScopedProxyFactoryBean;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -28,6 +33,9 @@ import java.util.stream.IntStream;
 public class SeatController {
 
     private final SeatService seatService;
+    private final PracticeService practiceService;
+    private final Rq rq;
+
     private ScheduledExecutorService executor;
     private Set<String> scheduledHalls = new HashSet<>();
 
@@ -66,6 +74,7 @@ public class SeatController {
         System.out.println("Confirm CHECk!!!!!!!!!!!!!");
         System.out.println(finalRow);
         System.out.println(finalCol);
+
 
         return "usr/concert/remain_seat";
     }
@@ -120,7 +129,14 @@ public class SeatController {
         log.info("type : {}", type);
         log.info("row : {}", request.getRow());
         log.info("column : {}", request.getColumn());
-        String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
+//        String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
+//
+//       finalRow = request.getRow();
+//       finalCol = request.getColumn();
+
+
+
+        practiceService.register(hall,type, request.getRow(), request.getColumn());
 
 
 
