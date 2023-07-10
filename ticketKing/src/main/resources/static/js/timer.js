@@ -132,9 +132,39 @@ function openModal() {
 
 }
 
+// 대기열 모달 닫기 및 보안 문자 모달 열기
 function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+    openCaptchaModal();
+}
+
+
+function checkCaptcha() {
+    var captchaInput = document.getElementById('captchaInput').value;
+    var expectedAnswers = ["263S2V", "263s2v"]; // 정답
+
+    if (expectedAnswers.includes(captchaInput)) {
+        // 검증 성공시 모달 닫기
+        closeCaptchaModal();
+    } else {
+        // 보안 문자가 올바르지 않다면 알림 처리
+        alert("보안 문자가 올바르지 않습니다.");
+    }
+}
+
+
+// 보안 문자 모달 열기
+function openCaptchaModal() {
+    document.getElementById('modal2').style.display = 'block';
+}
+
+// 보안 문자 모달 닫기
+function closeCaptchaModal() {
+    document.getElementById('modal2').style.display = 'none';
+
     // 다른 페이지로 이동 (여기서는 '예매 페이지'로 이동하도록 설정)
-      location.href = '/usr/concert/' + hallValue + '/date'; // 예매 페이지로 이동하는 로직 추가
+    location.href = '/usr/concert/' + hallValue + '/date'; // 예매 페이지로 이동하는 로직 추가
+
 }
 
 
