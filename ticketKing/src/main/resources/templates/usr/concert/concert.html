@@ -7,8 +7,6 @@
     <title>공연 정보</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
 </head>
 
 <body>
@@ -114,8 +112,8 @@
 
             <div class="flex flex-col ml-20">
                 <div class="max-w-[300px]">
-                    <div class="block rounded-lg bg-white text-center border-red-500">
-                        <div class="border-b-2 border-neutral-100 px-4 py-3 dark:border-neutral-600 dark:text-neutral-50">
+                    <div class="block rounded-lg bg-[#F2F4F4] text-center border-red-500">
+                        <div class="border-b-2 border-neutral-300 px-4 py-3 dark:border-neutral-600 dark:text-neutral-50">
                             관람일 & 회차 정보
                         </div>
                         <div class="p-4">
@@ -154,7 +152,7 @@
 
                 <div class="flex flex-col mt-7">
                     <style>
-                        select[name="startTime"], select[name="level"] {
+                        select[name="startTime"], select[name="levelSelect"] {
                             -webkit-appearance: none;
                             -moz-appearance: none;
                             appearance: none;
@@ -193,7 +191,7 @@
         <div class="modal-content">
             <h2>예매 대기 중</h2>
             <hr class="divider">
-            <p>대기 인원 <span id="queueCount" style="color: red;">0</span></p>
+            <p1>대기 인원 <span id="queueCount" style="color: red;">0</span></p1>
             <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
                     style="background-color: #664AFF; color: #ffffff" onclick="window.location.href='/usr/concert/' + hallValue">게임 종료</button>
         </div>
@@ -229,8 +227,9 @@
             margin-bottom: 20px;
         }
 
-        .modal-content p {
+        .modal-content p1 {
             margin-bottom: 25px;
+            font-size: 20px;
         }
 
         .modal-content .divider {
@@ -253,7 +252,7 @@
 
         <div class="modal-content">
             <h2>문자를 입력해주세요</h2>
-            <p>부정예매방지를 위해 아래의 문자를 입력해주세요.<br>인증 후 좌석을 선택할 수 있습니다.</p>
+            <p style="color: red;">부정예매방지를 위해 아래의 문자를 입력해주세요.<br>인증 후 좌석을 선택할 수 있습니다.</p>
             <img th:src="@{/image/보안 문자.png}" alt="CAPTCHA Image">
             <input type="text" id="captchaInput" placeholder="보안 문자 입력">
             <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
