@@ -5,7 +5,8 @@ var startTime; // Variable to store the start time
 var timeDifference;
 var levelSelect;
 var selectedLevel;
-
+//var hallValue = "[[${hallValue}]]";// Access the hallValue from Thymeleaf
+//var hallValue = "KSPO";
 // Event listener for DOMContentLoaded to record the start time when the button is loaded
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -25,7 +26,6 @@ function startGame() {
 
     levelSelect = document.getElementById('levelSelect');
     selectedLevel = levelSelect.value; // 사용자가 선택한 레벨 값
-
 
 
     if (isNaN(selectedTime)) {
@@ -96,7 +96,7 @@ function openModal() {
 
     // 타이머가 종료되면 모달을 자동으로 닫도록 설정
     if (selectedLevel === "basic") {
-       closeModal();
+
 
         // 초급 난이도 선택 시 다른 대기 시간 설정
         if (timeDifference >= 0 && timeDifference < 300) {
@@ -141,7 +141,7 @@ function openModal() {
 
 function closeModal() {
     // 다른 페이지로 이동 (여기서는 '예매 페이지'로 이동하도록 설정)
-    location.href = '/usr/concert/date'; // 예매 페이지로 이동하는 로직 추가
+      location.href = '/usr/concert/' + hallValue + '/date'; // 예매 페이지로 이동하는 로직 추가
 }
 
 // timeDifference에 따라 다른 메시지를 보여주는 함수
