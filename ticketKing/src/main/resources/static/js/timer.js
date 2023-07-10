@@ -96,7 +96,7 @@ function openModal() {
 
     // 타이머가 종료되면 모달을 자동으로 닫도록 설정
     if (selectedLevel === "basic") {
-       closeModal();
+
 
         // 초급 난이도 선택 시 다른 대기 시간 설정
         if (timeDifference >= 0 && timeDifference < 300) {
