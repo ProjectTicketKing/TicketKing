@@ -144,6 +144,7 @@ function closeModal() {
       location.href = '/usr/concert/' + hallValue + '/date'; // 예매 페이지로 이동하는 로직 추가
 }
 
+
 // timeDifference에 따라 다른 메시지를 보여주는 함수
 function showMessage() {
     var queueCountElement = document.getElementById('queueCount');
@@ -151,21 +152,45 @@ function showMessage() {
     if (selectedLevel === "basic") {
         // 초급 난이도 선택 시 다른 대기 인원 설정
         if (timeDifference >= 0 && timeDifference < 300) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 33;
+            decreaseQueueCount(33, 1, 10000);
         } else if (timeDifference >= 300 && timeDifference < 500) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 120;
+            decreaseQueueCount(100, 1, 16000);
         } else if (timeDifference >= 500) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 1300;
+            decreaseQueueCount(1000, 1, 30000);
         }
     } else if (selectedLevel === "advanced") {
         // 고급 난이도 선택 시 다른 대기 인원 설정
         if (timeDifference >= 0 && timeDifference < 200) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 120;
+            decreaseQueueCount(100, 1, 8000);
         } else if (timeDifference >= 200 && timeDifference < 400) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 700;
+            decreaseQueueCount(500, 1, 12000);
         } else if (timeDifference >= 400) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 3000;
+            decreaseQueueCount(2000, 1, 16000);
         }
     }
+
+    function decreaseQueueCount(startCount, endCount, duration) {
+        var queueCountElement = document.getElementById('queueCount');
+        var steps = Math.abs(startCount - endCount);
+        var stepDuration = duration / steps;
+
+        var decreaseInterval = setInterval(function() {
+            if (startCount > endCount) {
+                queueCountElement.innerText = startCount;
+                startCount -= getRandomInterval(10);
+            } else {
+                queueCountElement.innerText = endCount;
+                clearInterval(decreaseInterval);
+            }
+        }, stepDuration);
+    }
+
+    function getRandomInterval(maxInterval) {
+        var minInterval = 1;
+        return Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
+    }
+
+
+
 
 }
