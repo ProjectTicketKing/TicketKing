@@ -27,10 +27,21 @@ public class ConcertController {
 
 
 
-    @GetMapping("/usr/concert/delivery")
+    @GetMapping("/usr/concert/{hall}/delivery")
     public String showConcertDelivery() {
         return "usr/concert/concert_delivery";
     }
+
+
+    @GetMapping("/usr/concert/{hall}/payment")
+    public String showConcertPayment() {
+        return "usr/concert/concert_payment";
+    }
+    @GetMapping("/usr/concert/{hall}/fee")
+    public String showConcertFee() {
+        return "usr/concert/concert_fee";
+    }
+
 
 
 }
