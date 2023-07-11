@@ -27,15 +27,15 @@ public class NotProd {
             @Override
             @Transactional
             public void run(String... args) throws Exception {
-            Member memberUser1 = memberService.join("user1","1234","user1@gmail.com").getData();
-            Member memberUser2 = memberService.join("user2","1234","user2@gmail.com").getData();
-            Member memberUser3 = memberService.join("user3","1234","user3@gmail.com").getData();
-            Member memberUser4 = memberService.join("user4","1234","user4@gmail.com").getData();
+                Member memberUser1 = memberService.join("user1","1234","user1@gmail.com").getData();
+                Member memberUser2 = memberService.join("user2","1234","user2@gmail.com").getData();
+                Member memberUser3 = memberService.join("user3","1234","user3@gmail.com").getData();
+                Member memberUser4 = memberService.join("user4","1234","user4@gmail.com").getData();
 
-            Hall KSPO = hallService.register("KSPO",1000).getData();
-            Hall OLYSDM = hallService.register("OLYSDM",1000).getData();
+                Hall KSPO = hallService.register("KSPO",1000).getData();
+                Hall OLYSDM = hallService.register("OLYSDM",1000).getData();
 
-                 Seat seat1 = seatService.register("VIP",1,1,"valid", KSPO).getData();
+                Seat seat1 = seatService.register("VIP",1,1,"valid", KSPO).getData();
                 Seat seat2 = seatService.register("VIP",2,2,"valid", KSPO).getData();
                 Seat seat3 = seatService.register("VIP",3,3,"valid", KSPO).getData();
                 Seat seat4 = seatService.register("VIP",1,4,"valid", OLYSDM).getData();
