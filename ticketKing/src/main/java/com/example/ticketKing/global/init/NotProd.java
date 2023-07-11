@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Configuration
 @Profile({"local", "test"})
 public class NotProd {
@@ -27,10 +29,25 @@ public class NotProd {
             @Override
             @Transactional
             public void run(String... args) throws Exception {
-                Member memberUser1 = memberService.join("user1","1234","user1@gmail.com").getData();
-                Member memberUser2 = memberService.join("user2","1234","user2@gmail.com").getData();
-                Member memberUser3 = memberService.join("user3","1234","user3@gmail.com").getData();
-                Member memberUser4 = memberService.join("user4","1234","user4@gmail.com").getData();
+
+                Member memberAdmin1 = Member.builder()
+                        .username("admin").password("admin").email("admin@admin.com")
+                        .authority(0)
+                        .build();
+
+                List<Member> members = List.of(
+                        Member.builder()
+                                .username("user1").password("1234").email("user1@test.com")
+                                .build(),
+                        Member.builder()
+                                .username("user2").password("1234").email("user2@test.com")
+                                .build(),
+                        Member.builder()
+                                .username("user3").password("1234").email("user3@test.com")
+                                .build()
+                );
+                memberService.create(memberAdmin1);
+                members.forEach(memberService::create);
 
                 Hall KSPO = hallService.register("KSPO",1000).getData();
                 Hall OLYSDM = hallService.register("OLYSDM",1000).getData();
