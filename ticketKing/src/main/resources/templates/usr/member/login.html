@@ -1,15 +1,55 @@
 <html th:lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <meta charset="UTF-8">
     <title>로그인</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- toastr 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
+
+    <!-- 폰트어썸 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 공통 JS 불러오기 -->
+    <script src="/resource/common/common.js"></script>
+    <script src="/js/validator.js"></script>
+    <!-- 공통 CSS 불러오기 -->
+    <link th:href="@{/resource/common/common.css}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        const params = JSON.parse('[( ${@rq.paramsJsonStr} )]');
+
+        if (params.msg) {
+            toastNotice(params.msg[0]);
+        }
+        if (params.errorMsg) {
+            toastWarning(params.errorMsg[0]);
+        }
+        // history.back 에 의해서 돌아온 경우에 실행됨
+        // 평소에도 실행됨
+        $(window).bind("pageshow", function (event) {
+            const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
+            if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+            } else if (!document.referrer) {
+                const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___null";
+                if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                    toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                    localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+                }
+            }
+        });
+    </script>
 </head>
 
-<body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
-
-
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
-<script src="https://cdn.tailwindcss.com"></script>
-
+<body class="text-black min-h-screen flex flex-col">
 
 <header style="display: flex; justify-content: center; align-items: center; margin-top: 60px; margin-bottom: 60px;">
     <div style="margin: 0 auto;">
@@ -19,55 +59,8 @@
     </div>
 </header>
 
-
 <main style="display: flex; justify-content: center; align-items: center;">
     <!-- 기존 내용 -->
-    <script>
-        function LoginForm__submit(form) {
-            // username 이(가) 올바른지 체크
-
-            const emailRegExp = new RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
-
-            form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
-
-            if (form.username.value.length == 0) {
-                toastWarning('아이디를 입력해주세요.');
-                form.username.focus();
-                return false;
-            }
-
-            if (form.username.value.length < 4 || form.username.value.length > 16) {
-                toastWarning('아이디를 4자 이상 16자 이하로 입력해주세요.');
-                form.username.focus();
-                return false;
-            }
-
-            // password 이(가) 올바른지 체크
-
-            form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
-
-            if (form.password.value.length == 0) {
-                form.password.focus();
-                toastWarning('비밀번호를 입력해주세요.');
-                return false;
-            }
-
-            if (form.password.value.length < 4 || form.password.value.length > 16) {
-                toastWarning('비밀번호를 4자 이상 16자 이하로 입력해주세요.');
-                form.password.focus();
-                return false;
-            }
-
-            if (!emailRegExp.test(form.email.value)){
-                toastWarning('이메일 형식을 지켜야 합니다.')
-                form.email.focus();
-                return false;
-            }
-
-
-            form.submit(); // 폼 발송
-        }
-    </script>
 
     <div class="max-w-2xl w-full px-4">
         <h1 class="mb-4">
@@ -95,13 +88,16 @@
                 <!--                <span>로그인</span>-->
                 <span class="text-white" style="font-size: 17px;">로그인</span>
             </button>
-            <div class="login-signup">
-                        <span class="text">계정이 없으신가요?
-                            <a th:href="@{/usr/member/join}" class="text signup-link" style="color: #4070f4">회원가입</a>
-                        </span>
+            <div class="find-member">
+                <span class="text">아이디/비밀번호를 잊으셨나요?
+                    <a th:href="@{/usr/member/findMember}" class="text" style="color: #4070f4">계정찾기</a>
+                </span>
             </div>
-
-            </th:block>
+            <div class="login-signup">
+                <span class="text">계정이 없으신가요?
+                    <a th:href="@{/usr/member/join}" class="text signup-link" style="color: #4070f4">회원가입</a>
+                </span>
+            </div>
 
             <!--            <a href="/oauth2/authorization/kakao" class="btn btn-block btn-outline gap-1">-->
             <!--                <i class="fa-solid fa-comment text-[color:#ffe812]"></i>-->
