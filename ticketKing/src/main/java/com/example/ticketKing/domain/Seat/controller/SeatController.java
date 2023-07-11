@@ -1,6 +1,7 @@
 package com.example.ticketKing.domain.Seat.controller;
 
 
+import com.example.ticketKing.domain.Member.entity.Member;
 import com.example.ticketKing.domain.Practice.entity.Practice;
 import com.example.ticketKing.domain.Practice.service.PracticeService;
 import com.example.ticketKing.domain.Seat.SktRsData;
@@ -87,13 +88,8 @@ public class SeatController {
 
     @MessageMapping("/seats/{hall}/{type}/seatInfo")
     @SendTo("/topic/seats/{hall}/{type}")
-    public SktRsData<List<Integer>> sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request) {
-//        log.info("hall : {}", hall);
-//        log.info("type : {}", type);
-//        log.info("row : {}", request.getRow());
-//        log.info("column : {}", request.getColumn());
-//
-
+    public SktRsData<List<Integer>> sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request
+                                                    ) {
         // 가져온 Seat의 status가 valid이면 => valid
         // 가져온 Seat의 status가 invalid이면 => invalid
         String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
@@ -112,9 +108,6 @@ public class SeatController {
         // data generic타입으로
         // 프론트 단에서 리스트처리
 
-
-//        return status;
-
         return seatData;
     }
 
@@ -122,29 +115,21 @@ public class SeatController {
 
     @MessageMapping("/seats/{hall}/{type}/confirmInfo")
 //    @SendTo("/topic/seats/{hall}/{type}")
-    public void sendConfirmMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request) {
+    public void sendConfirmMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request,
+                                   @AuthenticationPrincipal SecurityMember securityMember) {
 
 
         log.info("hall : {}", hall);
         log.info("type : {}", type);
         log.info("row : {}", request.getRow());
         log.info("column : {}", request.getColumn());
-//        String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
-//
-//       finalRow = request.getRow();
-//       finalCol = request.getColumn();
+
+        log.info("securityMember : {}", securityMember);
+        log.info("securityMember id : {} ", securityMember.getId());
 
 
+        practiceService.register(hall,type, request.getRow(), request.getColumn(), securityMember.getId());
 
-        practiceService.register(hall,type, request.getRow(), request.getColumn());
-
-
-
-//        finalRow = row;
-//        finalCol = column;
-
-//        log.info("final confirm row : {}", finalRow);
-//        log.info("final confirm column : {}",  finalCol);
 
 
     }

@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,20 +26,30 @@ public class PracticeService {
     private final SeatRepository seatRepository;
     private final MemberRepository memberRepository;
     private final HallRepository hallRepository;
-    private final Rq rq;
+
 
     @Transactional
-    public RsData<Practice> register(String hallName, String type,Integer row, Integer col){
+    public RsData<Practice> register(String hallName, String type,Integer row, Integer col,Long userId){
 
-        Member member = rq.getMember();
+//        Member member = rq.getMember();
         Hall hall = hallRepository.findByName(hallName);
         Seat seat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(hall, type, row, col);
+        Member member = null;
+        Optional<Member> memData = memberRepository.findById(userId);
+        
+        if (memData.isPresent()) {
+            member = memData.get();
+        } else {
+        }
+     
         Practice practice = Practice
                         .builder()
                         .seat(seat)
                          .member(member)
                          .build();
 
+
+        practiceRepository.save(practice);
 
         System.out.println("register practice !!!!!!!!!!!!!!!");
         System.out.println("register practice !!!!!!!!!!!!!!!");
