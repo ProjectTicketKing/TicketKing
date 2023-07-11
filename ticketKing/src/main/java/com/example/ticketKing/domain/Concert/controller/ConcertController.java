@@ -16,30 +16,44 @@ public class ConcertController {
     }
 
 
-    @GetMapping("/usr/concert/{hall}/cost")
-    public String showConcertCost(Model model, @PathVariable String hall) {return "usr/concert/concert_cost"; }
-
-    @GetMapping("/usr/concert/{hall}/date")
-    public String showConcertDate(Model model, @PathVariable String hall) {
+    @GetMapping("/usr/concert/{hall}/{level}/cost")
+    public String showConcertCost(Model model, @PathVariable String hall, @PathVariable String level) {
         model.addAttribute("hallValue", hall);
+        model.addAttribute("selectedLevel", level);
+        return "usr/concert/concert_cost"; }
+
+    @GetMapping("/usr/concert/{hall}/{level}/date")
+    public String showConcertDate(Model model, @PathVariable String hall, @PathVariable String level) {
+        model.addAttribute("hallValue", hall);
+        model.addAttribute("selectedLevel", level);
         return "usr/concert/concert_date";
     }
 
 
-    @GetMapping("/usr/concert/{hall}/delivery")
-    public String showConcertDelivery(Model model, @PathVariable String hall) {
+    @GetMapping("/usr/concert/{hall}/{level}/delivery")
+    public String showConcertDelivery(Model model, @PathVariable String hall,@PathVariable String level) {
+
+        model.addAttribute("hallValue", hall);
+        model.addAttribute("selectedLevel", level);
         return "usr/concert/concert_delivery";
+
     }
 
 
-    @GetMapping("/usr/concert/{hall}/payment")
-    public String showConcertPayment(Model model, @PathVariable String hall) {
+    @GetMapping("/usr/concert/{hall}/{level}/payment")
+    public String showConcertPayment(Model model, @PathVariable String hall,@PathVariable String level) {
+        model.addAttribute("hallValue", hall);
+        model.addAttribute("selectedLevel", level);
         return "usr/concert/concert_payment";
     }
-    @GetMapping("/usr/concert/{hall}/fee")
-    public String showConcertFee(Model model, @PathVariable String hall) {
+    @GetMapping("/usr/concert/{hall}/{level}/fee")
+    public String showConcertFee(Model model, @PathVariable String hall ,@PathVariable String level) {
+
+        model.addAttribute("hallValue", hall);
+        model.addAttribute("selectedLevel", level);
         return "usr/concert/concert_fee";
     }
+    
 
 
 

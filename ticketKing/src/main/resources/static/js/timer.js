@@ -163,7 +163,7 @@ function closeCaptchaModal() {
     document.getElementById('modal2').style.display = 'none';
 
     // 다른 페이지로 이동 (여기서는 '예매 페이지'로 이동하도록 설정)
-    location.href = '/usr/concert/' + hallValue + '/date'; // 예매 페이지로 이동하는 로직 추가
+    location.href = '/usr/concert/' + hallValue + '/' + selectedLevel +'/date'; // 예매 페이지로 이동하는 로직 추가
 
 }
 
