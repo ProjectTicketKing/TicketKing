@@ -27,31 +27,33 @@
 
 </head>
 
-<body class="bg-[#FFFFFF] text-black min-h-screen flex flex-col">
+
+<body class="bg-[#ffffff] text-black min-h-screen flex flex-col">
+
 
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <nav layout:fragment="nav" class="flex-0">
-    <div class="navbar text bg-[#F2F4F4]">
+    <div class="navbar text bg-[#ffffff]">
         <div class="navbar-start">
             <a class="navbar-brand" href="/">
-                <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="Bootstrap" style="max-height: 30px;">
+                <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="Bootstrap" style="max-height: 30px;" onclick="location.reload()">
             </a>
         </div>
 
         <div class="navbar-end">
         </div>
         <form th:if="${@rq.login}" th:action="|/usr/member/me|" method="post" class="m-0">
-            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #F2F4F4; color: #9B6DFF;">마이페이지</button>
+            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #ffffff; color: #9B6DFF;">마이페이지</button>
         </form>
 
-        <a th:if="${@rq.logout}" href="/usr/member/login" class="btn btn-sm bg mx-2 border-none" style="background-color: #F2F4F4; color: #9B6DFF">로그인</a>
+        <a th:if="${@rq.logout}" href="/usr/member/login" class="btn btn-sm bg mx-2 border-none" style="background-color: #ffffff; color: #9B6DFF">로그인</a>
 
         <!--            <a href="/usr/member/me" th:if="${@rq.login}" class="btn btn-sm rounded-lg font-bold mx-2 border-none bg-opacity-0" style="background-color: #121212; color: #9B6DFF">MY PAGE</a>-->
 
         <form th:if="${@rq.login}" th:action="|/usr/member/logout|" method="post" class="m-0">
-            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #F2F4F4; color: #9B6DFF;">로그아웃</button>
+            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #ffffff; color: #9B6DFF;">로그아웃</button>
         </form>
     </div>
 </nav>

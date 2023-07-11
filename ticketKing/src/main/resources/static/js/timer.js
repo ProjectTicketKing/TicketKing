@@ -10,8 +10,8 @@ var selectedLevel;
 // Event listener for DOMContentLoaded to record the start time when the button is loaded
 document.addEventListener("DOMContentLoaded", function() {
 
-  var startButton = document.getElementById('startButton');
-  startButton.addEventListener('click', startGame); // startGame 함수를 click 이벤트 핸들러로 할당
+    var startButton = document.getElementById('startButton');
+    startButton.addEventListener('click', startGame); // startGame 함수를 click 이벤트 핸들러로 할당
 
 });
 
@@ -102,47 +102,71 @@ function openModal() {
         if (timeDifference >= 0 && timeDifference < 300) {
             timerInterval2 = setTimeout(function() {
                 closeModal();
-            }, 10000); // 10초 후에 자동으로 닫힘 (대기 시간)
+            }, 7000); // 7초 후에 자동으로 닫힘 (대기 시간)
         } else if (timeDifference >= 300 && timeDifference < 500) {
             timerInterval2 = setTimeout(function() {
                 closeModal();
-            }, 20000); // 20초 후에 자동으로 닫힘 (대기 시간)
+            }, 10000); // 10초 후에 자동으로 닫힘 (대기 시간)
         } else {
             timerInterval2 = setTimeout(function() {
                 closeModal();
-            }, 30000); // 30초 후에 자동으로 닫힘 (대기 시간)
+            }, 15000); // 15초 후에 자동으로 닫힘 (대기 시간)
         }
     } else {
         // 고급 난이도 선택 시 다른 대기 시간 설정
         if (timeDifference >= 0 && timeDifference < 200) {
             timerInterval2 = setTimeout(function() {
                 closeModal();
-            }, 20000); // 20초 후에 자동으로 닫힘 (대기 시간)
+            }, 10000); // 10초 후에 자동으로 닫힘 (대기 시간)
         } else if (timeDifference >= 200 && timeDifference < 400) {
             timerInterval2 = setTimeout(function() {
                 closeModal();
-            }, 30000); // 30초 후에 자동으로 닫힘 (대기 시간)
+            }, 15000); // 15초 후에 자동으로 닫힘 (대기 시간)
         } else {
             timerInterval2 = setTimeout(function() {
                 closeModal();
 
-            }, 40000); // 40초 후에 자동으로 닫힘 (대기 시간)
+            }, 20000); // 20초 후에 자동으로 닫힘 (대기 시간)
         }
     }
 
-
-    // 모달 닫기 버튼 클릭 이벤트
-    //var modalCloseButton = document.getElementById('modalCloseButton');
-    //modalCloseButton.onclick = function() {
-    //    clearInterval(timerInterval); // 타이머 중지
-    //    closeModal(); // 모달 창 닫기
-    // };
 }
 
+// 대기열 모달 닫기 및 보안 문자 모달 열기
 function closeModal() {
-    // 다른 페이지로 이동 (여기서는 '예매 페이지'로 이동하도록 설정)
-      location.href = '/usr/concert/' + hallValue + '/date'; // 예매 페이지로 이동하는 로직 추가
+    document.getElementById('modal').style.display = 'none';
+    openCaptchaModal();
 }
+
+
+function checkCaptcha() {
+    var captchaInput = document.getElementById('captchaInput').value;
+    var expectedAnswers = ["263S2V", "263s2v"]; // 정답
+
+    if (expectedAnswers.includes(captchaInput)) {
+        // 검증 성공시 모달 닫기
+        closeCaptchaModal();
+    } else {
+        // 보안 문자가 올바르지 않다면 알림 처리
+        alert("보안 문자가 올바르지 않습니다.");
+    }
+}
+
+
+// 보안 문자 모달 열기
+function openCaptchaModal() {
+    document.getElementById('modal2').style.display = 'block';
+}
+
+// 보안 문자 모달 닫기
+function closeCaptchaModal() {
+    document.getElementById('modal2').style.display = 'none';
+
+    // 다른 페이지로 이동 (여기서는 '예매 페이지'로 이동하도록 설정)
+    location.href = '/usr/concert/' + hallValue + '/date'; // 예매 페이지로 이동하는 로직 추가
+
+}
+
 
 // timeDifference에 따라 다른 메시지를 보여주는 함수
 function showMessage() {
@@ -151,21 +175,41 @@ function showMessage() {
     if (selectedLevel === "basic") {
         // 초급 난이도 선택 시 다른 대기 인원 설정
         if (timeDifference >= 0 && timeDifference < 300) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 33;
+            decreaseQueueCount(150, 1, 7000); //7초
         } else if (timeDifference >= 300 && timeDifference < 500) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 120;
+            decreaseQueueCount(330, 1, 10000); //10초
         } else if (timeDifference >= 500) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 1300;
+            decreaseQueueCount(1000, 1, 15000); //15초
         }
     } else if (selectedLevel === "advanced") {
         // 고급 난이도 선택 시 다른 대기 인원 설정
         if (timeDifference >= 0 && timeDifference < 200) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 120;
+            decreaseQueueCount(300, 1, 10000); //10초
         } else if (timeDifference >= 200 && timeDifference < 400) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 700;
+            decreaseQueueCount(550, 1, 15000); //15초
         } else if (timeDifference >= 400) {
-            queueCountElement.innerText = parseInt(queueCountElement.innerText) + 3000;
+            decreaseQueueCount(2000, 1, 20000); //20초
         }
+    }
+
+    function decreaseQueueCount(startCount, endCount, duration) {
+        var decrementAmount = 9; // 9명씩 감소
+        var steps = Math.ceil(Math.abs(startCount - endCount) / decrementAmount); // 단계 수 계산
+        var stepDuration = duration / steps;
+        var currentCount = startCount;
+
+        var decreaseInterval = setInterval(function() {
+            if (currentCount > endCount) {
+                queueCountElement.innerText = currentCount;
+                currentCount -= decrementAmount;
+                if (currentCount < endCount) {
+                    currentCount = endCount; // 최소값으로 설정
+                }
+            } else {
+                queueCountElement.innerText = endCount;
+                clearInterval(decreaseInterval);
+            }
+        }, stepDuration);
     }
 
 }
