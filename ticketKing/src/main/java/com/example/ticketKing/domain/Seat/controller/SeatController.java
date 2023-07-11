@@ -1,19 +1,14 @@
 package com.example.ticketKing.domain.Seat.controller;
 
 
-import com.example.ticketKing.domain.Member.entity.Member;
-import com.example.ticketKing.domain.Practice.entity.Practice;
 import com.example.ticketKing.domain.Practice.service.PracticeService;
-import com.example.ticketKing.domain.Seat.SktRsData;
-import com.example.ticketKing.domain.Seat.entity.Seat;
+import com.example.ticketKing.domain.Seat.dto.SktRsData;
 import com.example.ticketKing.domain.Seat.service.SeatService;
 import com.example.ticketKing.global.rq.Rq;
-import com.example.ticketKing.global.rsData.RsData;
 import com.example.ticketKing.global.security.SecurityMember;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aop.scope.ScopedProxyFactoryBean;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -26,8 +21,7 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 @RequiredArgsConstructor
 @Controller
 @Slf4j
@@ -100,6 +94,8 @@ public class SeatController {
         List<Integer> rowCol = new ArrayList<>();
         rowCol.add(row);
         rowCol.add(column);
+
+
         SktRsData seatData = new SktRsData(status,rowCol);
 
         // RsData 만들어서 status, message, data 만들어서
@@ -109,6 +105,7 @@ public class SeatController {
         // 프론트 단에서 리스트처리
 
         return seatData;
+
     }
 
 
