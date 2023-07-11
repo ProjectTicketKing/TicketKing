@@ -16,75 +16,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- 공통 JS 불러오기 -->
-    <script th:src="@{/resource/common/common.js}"></script>
+    <script src="/resource/common/common.js"></script>
+    <script src="/js/validator.js"></script>
     <!-- 공통 CSS 불러오기 -->
     <link th:href="@{/resource/common/common.css}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
         // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
         const params = JSON.parse('[( ${@rq.paramsJsonStr} )]');
+
+        if (params.msg) {
+            toastNotice(params.msg[0]);
+        }
+        if (params.errorMsg) {
+            toastWarning(params.errorMsg[0]);
+        }
+        // history.back 에 의해서 돌아온 경우에 실행됨
+        // 평소에도 실행됨
+        $(window).bind("pageshow", function (event) {
+            const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
+            if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+            } else if (!document.referrer) {
+                const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___null";
+                if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                    toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                    localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+                }
+            }
+        });
     </script>
 
 </head>
 
-
-<body class="bg-[#ffffff] text-black min-h-screen flex flex-col">
-
-
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
 
 <nav layout:fragment="nav" class="flex-0">
-    <div class="navbar text bg-[#ffffff]">
+    <div class="navbar text bg-[#F2F4F4]">
         <div class="navbar-start">
             <a class="navbar-brand" href="/">
-                <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="Bootstrap" style="max-height: 30px;" onclick="location.reload()">
+                <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="Bootstrap" style="max-height: 30px;">
             </a>
         </div>
 
         <div class="navbar-end">
         </div>
-        <form th:if="${@rq.login}" th:action="|/usr/member/me|" method="post" class="m-0">
-            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #ffffff; color: #9B6DFF;">마이페이지</button>
-        </form>
+        <a th:href="|/usr/member/me|" th:if="${#authorization.expr('isAuthenticated()')}" class="btn btn-sm bg mx-2 border-none" style="background-color: #F2F4F4; color: #9B6DFF">마이페이지</a>
 
-        <a th:if="${@rq.logout}" href="/usr/member/login" class="btn btn-sm bg mx-2 border-none" style="background-color: #ffffff; color: #9B6DFF">로그인</a>
+        <a th:if="${@rq.logout}" th:href="@{/usr/member/login}" class="btn btn-sm bg mx-2 border-none" style="background-color: #F2F4F4; color: #9B6DFF">로그인</a>
 
         <!--            <a href="/usr/member/me" th:if="${@rq.login}" class="btn btn-sm rounded-lg font-bold mx-2 border-none bg-opacity-0" style="background-color: #121212; color: #9B6DFF">MY PAGE</a>-->
 
         <form th:if="${@rq.login}" th:action="|/usr/member/logout|" method="post" class="m-0">
-            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #ffffff; color: #9B6DFF;">로그아웃</button>
+            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #F2F4F4; color: #9B6DFF;">로그아웃</button>
         </form>
     </div>
 </nav>
 
 <main layout:fragment="main" class="flex-1"></main>
-
-<script th:inline="javascript">
-    // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
-    // const params = /*[[ ${param} ]]*/ null;
-    if (params.msg) {
-        toastNotice(params.msg[0]);
-    }
-    if (params.errorMsg) {
-        toastWarning(params.errorMsg[0]);
-    }
-    // history.back 에 의해서 돌아온 경우에 실행됨
-    // 평소에도 실행됨
-    $(window).bind("pageshow", function (event) {
-        const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
-        if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
-            toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
-            localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
-        } else if (!document.referrer) {
-            const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___null";
-            if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
-                toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
-                localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
-            }
-        }
-    });
-</script>
 
 </body>
 

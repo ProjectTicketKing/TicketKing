@@ -1,10 +1,54 @@
 <html th:lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <meta charset="UTF-8">
     <title>회원가입</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- toastr 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
+
+    <!-- 폰트어썸 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 공통 JS 불러오기 -->
+    <script src="/resource/common/common.js"></script>
+    <script src="/js/validator.js"></script>
+    <!-- 공통 CSS 불러오기 -->
+    <link th:href="@{/resource/common/common.css}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        const params = JSON.parse('[( ${@rq.paramsJsonStr} )]');
+
+        if (params.msg) {
+            toastNotice(params.msg[0]);
+        }
+        if (params.errorMsg) {
+            toastWarning(params.errorMsg[0]);
+        }
+        // history.back 에 의해서 돌아온 경우에 실행됨
+        // 평소에도 실행됨
+        $(window).bind("pageshow", function (event) {
+            const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
+            if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+            } else if (!document.referrer) {
+                const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___null";
+                if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                    toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                    localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+                }
+            }
+        });
+    </script>
 </head>
 
-<body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
+<body class="text-black min-h-screen flex flex-col">
 
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -62,12 +106,12 @@
             회원가입
         </h1>
 
-        <form th:action method="POST" class="flex flex-col gap-6" onsubmit="LoginForm__submit(this); return false;">
+        <form th:action method="POST" class="flex flex-col gap-6" onsubmit="JoinForm__submit(this); return false;">
             <div class="form-control">
-                <label class="label">
+                <label for="username" class="label">
                     <span class="label-text">ID</span>
                 </label>
-                <input type="text" name="username" placeholder="아이디를 입력해주세요." class="input input-bordered" autofocus/>
+                <input id="username" type="text" name="username" placeholder="아이디를 입력해주세요." class="input input-bordered" autofocus/>
 
             </div>
 
@@ -122,8 +166,6 @@
                         <a th:href="@{/usr/member/login}" class="text signup-link" style="color: #4070f4">로그인</a>
                     </span>
             </div>
-
-            </th:block>
 
         </form>
     </div>

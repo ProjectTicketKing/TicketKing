@@ -1,70 +1,191 @@
-<html th:lang="ko" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{usr/layout/layout.html}">
+<html th:lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>마이페이지</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- toastr 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
+
+    <!-- 폰트어썸 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 공통 JS 불러오기 -->
+    <script src="/resource/common/common.js"></script>
+    <script src="/js/validator.js"></script>
+    <!-- 공통 CSS 불러오기 -->
+    <link th:href="@{/resource/common/common.css}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        const params = JSON.parse('[( ${@rq.paramsJsonStr} )]');
+
+        if (params.msg) {
+            toastNotice(params.msg[0]);
+        }
+        if (params.errorMsg) {
+            toastWarning(params.errorMsg[0]);
+        }
+        // history.back 에 의해서 돌아온 경우에 실행됨
+        // 평소에도 실행됨
+        $(window).bind("pageshow", function (event) {
+            const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
+            if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+            } else if (!document.referrer) {
+                const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___null";
+                if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                    toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                    localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+                }
+            }
+        });
+    </script>
+
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+
+    <style>
+        .input-group span {
+            width: 100px;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+    </style>
+
 </head>
+
 <body class="bg-[#F2F4F4] text-black min-h-screen flex flex-col">
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
-<script src="https://cdn.tailwindcss.com"></script>
 
-
-<main layout:fragment="main" class="pt-2">
-        <div class="flex-col flex items-start justify-start pt-2 pl-60">
-            <h1 class="text-xl font-bold">계정관리</h1>
-            <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">기본정보</h2>
+<nav class="flex-0">
+    <div class="navbar text bg-[#F2F4F4]">
+        <div class="navbar-start">
+            <a class="navbar-brand" href="/">
+                <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="Bootstrap" style="max-height: 30px;">
+            </a>
         </div>
-        <div class="flex-col flex items-center justify-center">
-            <div id="profile" class="w-64 h-64 overflow-hidden">
-                <img class="mask mask-circle shadow-2xl w-full h-full"
+
+        <div class="navbar-end">
+        </div>
+        <a th:href="|/usr/member/me|" th:if="${#authorization.expr('isAuthenticated()')}" class="btn btn-sm bg mx-2 border-none" style="background-color: #F2F4F4; color: #9B6DFF">마이페이지</a>
+
+        <a th:if="${@rq.logout}" th:href="@{/usr/member/login}" class="btn btn-sm bg mx-2 border-none" style="background-color: #F2F4F4; color: #9B6DFF">로그인</a>
+
+        <!--            <a href="/usr/member/me" th:if="${@rq.login}" class="btn btn-sm rounded-lg font-bold mx-2 border-none bg-opacity-0" style="background-color: #121212; color: #9B6DFF">MY PAGE</a>-->
+
+        <form th:if="${@rq.login}" th:action="|/usr/member/logout|" method="post" class="m-0">
+            <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #F2F4F4; color: #9B6DFF;">로그아웃</button>
+        </form>
+    </div>
+</nav>
+
+<script>
+    function modify_active() {
+        //$("#profile").addClass("hidden-input");
+        $("#imageUrl").removeClass("hidden-input");
+        $("#passwordText").removeClass("hidden-input");
+        $("#passwordValidationText").removeClass("hidden-input");
+        $("#email").prop("disabled", false);
+        $("#modifyActive").addClass("hidden-input");
+        $('#modifySubmit').removeClass("hidden-input");
+    }
+
+</script>
+
+
+<main class="pt-2">
+    <div class="flex-col flex items-start justify-start pt-2 pl-60">
+        <h1 class="text-xl font-bold">계정관리</h1>
+        <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">기본정보</h2>
+    </div>
+    <div class="flex-col flex items-center justify-center flex-grow">
+        <form method="POST" th:action="|/usr/member/me/${member.id}|" onsubmit="ModifyForm__submit(this); return false;"
+              enctype="multipart/form-data"
+              class="gap-5 flex flex-col justify-center items-center flex-grow">
+            <div class="w-64 h-64 overflow-hidden">
+                <img id="profile" class="mask mask-circle shadow-2xl w-full h-full"
+                     th:if="${member.photo == null}"
                      th:src="@{/image/sample_profile.jpg}" alt="profile"/>
+                <img class="mask mask-circle shadow-2xl w-full h-full"
+                     th:if="${member.photo != null}" th:src="${member.photo.filePath}" alt="profile"/>
+            </div>
+            <input id="imageUrl" type="file"
+                   class="file-input file-input-bordered file-input-sm file-input-bordered w-full max-w-xs hidden-input"/>
+            <div class="form-control">
+                <label class="input-group max-w-sm min-w-sm">
+                    <span>아이디</span>
+                    <input id="username" name="username" type="text" placeholder="아이디를 입력해주세요." class="input input-bordered"
+                           disabled
+                           th:value="${member.username}"/>
+                </label>
+            </div>
+            <div id="passwordText" class="form-control hidden-input">
+                <label class="input-group max-w-sm min-w-sm">
+                    <span>비밀번호</span>
+                    <input id="password" name="password" type="password" placeholder="비밀번호를 입력해주세요."
+                           class="input input-bordered"/>
+                </label>
+            </div>
+            <div id="passwordValidationText" class="form-control hidden-input">
+                <label class="input-group max-w-sm min-w-sm">
+                    <span>비밀번호 확인</span>
+                    <input id="passwordValidation" name="passwordValidation" type="password" placeholder="비밀번호를 재입력해주세요."
+                           class="input input-bordered"/>
+                </label>
+            </div>
+            <div class="form-control">
+                <label class="input-group">
+                    <span>이메일</span>
+                    <input id="email" name="email" type="text" placeholder="example@example.com" class="input input-bordered"
+                           disabled
+                           th:value="${member.email}"/>
+                </label>
             </div>
 
-            <table class="table" style="width: 500px">
-                <tr>
-                     <td th:text="${email}" colspan="2"></td>
-                </tr>
-                <tr>
-                    <td th:if="${emailVerified} == true" colspan="2">인증완료</td>
-                    <td th:unless="${emailVerified}" colspan="2"><a href="/usr/member/emailVerification" class="btn btn-sm">이메일인증하기</a></td>
-                </tr>
-                <tr>
-                    <td th:text="${username}" colspan="2">님</td>
-                </tr>
-
-            </table>
-            <div class="flex justify-end">
-                <button id="modifyActive" class="btn btn-outline btn-primary" onclick="" type="button">회원정보수정</button>
+            <div id="modify-group" class="flex justify-end">
+                <button id="modifyActive" class="btn btn-outline btn-primary" onclick="modify_active();" type="button">회원정보수정</button>
+                <button id="modifySubmit" class="btn btn-primary hidden-input">변경완료</button>
             </div>
+        </form>
+    </div>
+    <div class="flex-col flex items-start justify-start pt-2 pl-60">
+        <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">연습결과</h2>
+    </div>
+    <div class="flex-col flex items-center justify-center">
+        <div class="border-2 border-[#7A7A7A] rounded-xl font-bold text-xs text-black mt-5">
+            <ul class="bg-[#c0a8f6] border-b-2 border-[#7A7A7A] rounded-lg flex justify-center items-center" style="width: 50vw; height: 7vh">
+                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 성공횟수</li>
+                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 실패횟수</li>
+                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">총 도전횟수</li>
+                <li class="flex justify-center items-center" style="width: inherit; height: inherit;">승률</li>
+            </ul>
+            <ul class="flex justify-center items-center" style="width: 50vw; height: 10vh">
+                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
+                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
+                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
+                <li class="flex justify-center items-center" style="width: inherit; height: inherit;"></li>
+            </ul>
         </div>
-        <div class="flex-col flex items-start justify-start pt-2 pl-60">
-            <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">연습결과</h2>
-        </div>
-        <div class="flex-col flex items-center justify-center">
-            <div class="border-2 border-[#7A7A7A] rounded-xl font-bold text-xs text-black mt-5">
-                <ul class="bg-[#c0a8f6] border-b-2 border-[#7A7A7A] rounded-lg flex justify-center items-center" style="width: 700px; height: 30px">
-                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 성공횟수</li>
-                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 실패횟수</li>
-                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">총 도전횟수</li>
-                    <li class="flex justify-center items-center" style="width: inherit; height: inherit;">승률</li>
-                </ul>
-                <ul class="flex justify-center items-center" style="width: 700px; height: 60px">
-                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
-                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
-                    <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
-                    <li class="flex justify-center items-center" style="width: inherit; height: inherit;"></li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex justify-end">
-        </div>
+    </div>
+    <div class="flex justify-center items-center">
+        <form method="POST" th:action="|/member/withdraw/${member.id}|" style="display: inline"
+              onsubmit="Withdraw__Submit(this); return false;" class="self-start">
+            <button class="link self-start" style="margin-top: 50px; margin-left: 600px;">탈퇴하기</button>
+        </form>
+    </div>
 </main>
 
 </body>
 
-<footer layout:fragment="footer" class="bg-black text-center dark:bg-neutral-700 lg:text-left">
-    <div class="p-4 text-center text-neutral-500 dark:text-neutral-200">
+<footer class="fixed left-0 bottom-0 w-full bg-gray-200 text-center">
+    <div class="py-4 text-neutral-500">
         © 2023 TicketKing
     </div>
 </footer>
