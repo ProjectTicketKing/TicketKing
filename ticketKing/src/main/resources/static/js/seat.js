@@ -175,6 +175,7 @@ function ConfirmClickEvent(row, column) {
     };
 
     stompClient.send(`/app/seats/${hall}/${type}/confirmInfo`, {}, JSON.stringify(seatData));
+
 }
 
 
@@ -214,11 +215,6 @@ seatRowValueElement.textContent = seatRow.toString();
 const seatColumnValueElement = document.getElementById('seatColumnValue');
 seatColumnValueElement.textContent = seatColumn.toString();
 
-//                console.log(seatData.body.status);
-//                console.log(seatData.body.data);
-//                console.log(seatData.body.data[0]);
-//                console.log(seatData.body.data[1]);
-
 
             }
         });
@@ -235,5 +231,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function confirmSeat(){
     ConfirmClickEvent(seatRow, seatColumn);
+    location.href = '/usr/concert/' + hall + '/cost';
 }
 
