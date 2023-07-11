@@ -26,8 +26,4 @@ public class Competition extends BaseEntity {
     @OneToMany(mappedBy = "competition", fetch = LAZY)
     private List<Seat> seat;
 
-
-//    public String getLevel() {
-//        return this.level;
-//    }
 }

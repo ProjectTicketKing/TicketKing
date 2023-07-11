@@ -9,6 +9,8 @@ var typeValue;
 //var hallValue = "[[${hallValue}]]";// Access the hallValue from Thymeleaf
 //var hallValue = "KSPO";
 // Event listener for DOMContentLoaded to record the start time when the button is loaded
+
+
 document.addEventListener("DOMContentLoaded", function() {
 
     var startButton = document.getElementById('startButton');
@@ -23,33 +25,94 @@ function startGame() {
     var timeSelect = document.getElementById('timeSelect');
     var selectedTime = parseInt(timeSelect.value, 10);
 
-//    var levelSelect = document.getElementById('levelSelect');
+    var levelSelect = document.getElementById('levelSelect');
+    var selectedLevel = levelSelect.value; // 사용자가 선택한 레벨 값
 
-    levelSelect = document.getElementById('levelSelect');
-    selectedLevel = levelSelect.value; // 사용자가 선택한 레벨 값
+    function ajaxCall() {
+        const token = $("meta[name='_csrf']").attr("content");
+        const header = $("meta[name='_csrf_header']").attr("content");
 
-    // AJAX 요청을 통해 선택한 레벨 값을 백엔드로 전송
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/start-schedule', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // 요청이 성공적으로 처리되었을 때의 동작
-            console.log('레벨 값 전송 완료');
+        var jsonData = {
+            hall: hallValue,
+            type: typeValue,
+            level: selectedLevel
+        };
 
-            var responseData = JSON.parse(xhr.responseText);
-            var hallValue = responseData.hall;
-            typeValue = responseData.type;
+        fetch('/csrf/ajax', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token
+            },
+            body: JSON.stringify(jsonData),
+            cache: 'no-cache',
+            mode: 'same-origin'
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('레벨 값 전송 완료');
+                } else {
+                    throw new Error('레벨 값 전송 실패');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
 
-            // 여기서 예매 페이지로 이동하도록 처리
-            window.location.href = '/usr/concert/' + hallValue + '/seats/' + typeValue;
-        }
-    };
-    xhr.send(JSON.stringify({
+    ajaxCall();
+
+    // AJAX 요청을 백엔드로 보낼 때 level 값을 전송
+    var request = {
         hall: hallValue,
         type: typeValue,
         level: selectedLevel
-    }));
+    };
+
+    fetch('/start-schedule', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(request),
+        cache: 'no-cache',
+        mode: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('스케줄링 시작 완료');
+            } else {
+                throw new Error('스케줄링 시작 실패');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+
+
+    // // AJAX 요청을 통해 선택한 레벨 값을 백엔드로 전송
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/start-schedule', true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.onreadystatechange = function() {
+    //     if (xhr.readyState === 4 && xhr.status === 200) {
+    //         // 요청이 성공적으로 처리되었을 때의 동작
+    //         console.log('레벨 값 전송 완료');
+    //
+    //         var responseData = JSON.parse(xhr.responseText);
+    //         var hallValue = responseData.hall;
+    //         typeValue = responseData.type;
+    //
+    //         // 여기서 예매 페이지로 이동하도록 처리
+    //         window.location.href = '/usr/concert/' + hallValue + '/seats/' + typeValue;
+    //     }
+    // };
+    // xhr.send(JSON.stringify({
+    //     hall: hallValue,
+    //     type: typeValue,
+    //     level: selectedLevel
+    // }));
 
 
     if (isNaN(selectedTime)) {

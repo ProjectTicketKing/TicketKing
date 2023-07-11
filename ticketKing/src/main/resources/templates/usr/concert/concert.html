@@ -7,6 +7,11 @@
     <title>공연 정보</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script th:inline="javascript">
+        var hallValue = [[${hallValue}]];
+    </script>
+    <script th:src="@{/js/timer.js}" type="application/javascript"></script>
+
 </head>
 
 <body>
@@ -329,7 +334,3 @@
 
 </html>
 
-<script th:inline="javascript">
-    var hallValue = [[${hallValue}]];
-</script>
-<script th:src="@{/js/timer.js}" type="application/javascript"></script>

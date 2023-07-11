@@ -53,7 +53,8 @@ public class SeatController {
 
         executor = Executors.newSingleThreadScheduledExecutor();
 
-        if (selectedLevel == null) {
+        if (selectedLevel == null || (!selectedLevel.equals("basic") && !selectedLevel.equals("advanced"))) {
+            // 예외 처리 로직 또는 기본값 설정
             selectedLevel = "basic";
         }
 
@@ -67,10 +68,6 @@ public class SeatController {
         } else if (selectedLevel.equals("advanced")) {
             initialDelay = 1000;
             period = 1000; // 3 seconds
-        } else {
-            selectedLevel = "basic";
-            initialDelay = 5000;
-            period = 5000; // 5 seconds
         }
 
         executor.scheduleAtFixedRate(() -> seatService.updateRandomSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
