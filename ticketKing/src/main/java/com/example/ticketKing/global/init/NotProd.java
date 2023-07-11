@@ -22,6 +22,7 @@ public class NotProd {
             SeatService seatService,
             HallService hallService
 
+
     ) {
         return new CommandLineRunner() {
             @Override
@@ -34,6 +35,7 @@ public class NotProd {
 
                 Hall KSPO = hallService.register("KSPO",1000).getData();
                 Hall OLYSDM = hallService.register("OLYSDM",1000).getData();
+
 
                 Seat seat1 = seatService.register("VIP",1,1,"valid", KSPO).getData();
                 Seat seat2 = seatService.register("VIP",2,2,"valid", KSPO).getData();
@@ -53,23 +55,6 @@ public class NotProd {
                 Seat seat15 = seatService.register("VIP",6,3,"valid", OLYSDM).getData();
                 Seat seat16 = seatService.register("VIP",6,4,"valid", OLYSDM).getData();
 
-//                Seat seat11 = seatService.register("VIP",3,1,"valid").getData();
-//                Seat seat12 = seatService.register("VIP",3,2,"valid").getData();
-//                Seat seat13 = seatService.register("VIP",3,3,"valid").getData();
-//                Seat seat14 = seatService.register("VIP",3,4,"valid").getData();
-//                Seat seat15 = seatService.register("VIP",3,5,"valid").getData();
-//
-//                Seat seat16 = seatService.register("VIP",4,1,"valid").getData();
-//                Seat seat17 = seatService.register("VIP",4,2,"valid").getData();
-//                Seat seat18 = seatService.register("VIP",4,3,"valid").getData();
-//                Seat seat19 = seatService.register("VIP",4,4,"valid").getData();
-//                Seat seat20 = seatService.register("VIP",4,5,"valid").getData();
-//
-//                Seat seat21 = seatService.register("VIP",5,1,"valid").getData();
-//                Seat seat22 = seatService.register("VIP",5,2,"valid").getData();
-//                Seat seat23 = seatService.register("VIP",5,3,"valid").getData();
-//                Seat seat25 = seatService.register("VIP",5,4,"valid").getData();
-//                Seat seat26 = seatService.register("VIP",5,5,"valid").getData();
 
             }
         };

@@ -5,6 +5,7 @@ var startTime; // Variable to store the start time
 var timeDifference;
 var levelSelect;
 var selectedLevel;
+var typeValue;
 //var hallValue = "[[${hallValue}]]";// Access the hallValue from Thymeleaf
 //var hallValue = "KSPO";
 // Event listener for DOMContentLoaded to record the start time when the button is loaded
@@ -26,6 +27,29 @@ function startGame() {
 
     levelSelect = document.getElementById('levelSelect');
     selectedLevel = levelSelect.value; // 사용자가 선택한 레벨 값
+
+    // AJAX 요청을 통해 선택한 레벨 값을 백엔드로 전송
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/start-schedule', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // 요청이 성공적으로 처리되었을 때의 동작
+            console.log('레벨 값 전송 완료');
+
+            var responseData = JSON.parse(xhr.responseText);
+            var hallValue = responseData.hall;
+            typeValue = responseData.type;
+
+            // 여기서 예매 페이지로 이동하도록 처리
+            window.location.href = '/usr/concert/' + hallValue + '/seats/' + typeValue;
+        }
+    };
+    xhr.send(JSON.stringify({
+        hall: hallValue,
+        type: typeValue,
+        level: selectedLevel
+    }));
 
 
     if (isNaN(selectedTime)) {

@@ -1,8 +1,10 @@
 package com.example.ticketKing.domain.Seat.controller;
 
 
+
 import com.example.ticketKing.domain.Practice.service.PracticeService;
 import com.example.ticketKing.domain.Seat.dto.SktRsData;
+
 import com.example.ticketKing.domain.Seat.service.SeatService;
 import com.example.ticketKing.global.rq.Rq;
 import com.example.ticketKing.global.security.SecurityMember;
@@ -33,6 +35,9 @@ public class SeatController {
 
     private ScheduledExecutorService executor;
     private Set<String> scheduledHalls = new HashSet<>();
+    
+    private Seat seat;
+    private String selectedLevel;
 
     Integer finalRow = 0;
     Integer finalCol = 0;
@@ -40,17 +45,55 @@ public class SeatController {
 
 
     // 스케줄링 시작 메서드
-    private void startSeatStatusUpdateSchedule(String hall, String type) {
+    @PostMapping("/start-schedule")
+    private void startSeatStatusUpdateSchedule(@RequestBody ScheduleRequestDTO request) {
+        String hall = request.getHall();
+        String type = request.getType();
+        String selectedLevel = request.getLevel();
+
         executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(() -> seatService.updateRandomSeatStatusToInvalid(hall, type), 5000, 5000, TimeUnit.MILLISECONDS);
+
+        if (selectedLevel == null) {
+            selectedLevel = "basic";
+        }
+
+        long initialDelay = 0;
+        long period = 0;
+
+
+        if (selectedLevel.equals("basic")) {
+            initialDelay = 5000;
+            period = 5000; // 5 seconds
+        } else if (selectedLevel.equals("advanced")) {
+            initialDelay = 1000;
+            period = 1000; // 3 seconds
+        } else {
+            selectedLevel = "basic";
+            initialDelay = 5000;
+            period = 5000; // 5 seconds
+        }
+
+        executor.scheduleAtFixedRate(() -> seatService.updateRandomSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
     }
 
+
+
+//        // 스케줄링 시작 메서드
+//    private void startSeatStatusUpdateSchedule(String hall, String type) {
+//        executor = Executors.newSingleThreadScheduledExecutor();
+//        String level = seat.getCompetition().getLevel();
+//
+//        executor.scheduleAtFixedRate(() -> seatService.updateRandomSeatStatusToInvalid(hall, type), 5000, 5000, TimeUnit.MILLISECONDS);
+//    }
+
+    
     // 스케줄링 중지 메서드
     private void stopSeatStatusUpdateSchedule() {
         if (executor != null && !executor.isShutdown()) {
             executor.shutdown();
         }
     }
+
 
     @GetMapping("/usr/concert/{hall}/seats/{type}")
     public String getSeatList(Model model, @PathVariable("hall") String hall, @PathVariable("type") String type) {
@@ -59,7 +102,9 @@ public class SeatController {
 
         // 스케줄링이 시작되지 않았을 때만 스케줄링 시작
         if (!scheduledHalls.contains(hall)) {
-            startSeatStatusUpdateSchedule(hall, type);
+            ScheduleRequestDTO request = new ScheduleRequestDTO(selectedLevel, hall, type); // ScheduleRequestDTO 객체 생성
+            selectedLevel = request.getLevel(); // 선택한 레벨 값 초기화
+            startSeatStatusUpdateSchedule(request);
             scheduledHalls.add(hall);
         }
 
@@ -73,6 +118,7 @@ public class SeatController {
 
         return "usr/concert/remain_seat";
     }
+
 
     // 애플리케이션 컨텍스트 종료 시 스케줄링 종료 메서드 호출
     @PreDestroy

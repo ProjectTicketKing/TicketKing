@@ -1,5 +1,6 @@
 package com.example.ticketKing.domain.Seat.entity;
 
+import com.example.ticketKing.domain.Competition.entity.Competition;
 import com.example.ticketKing.domain.Hall.entity.Hall;
 import com.example.ticketKing.global.baseEntity.BaseEntity;
 import jakarta.persistence.*;
@@ -29,8 +30,8 @@ public class Seat extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Hall hall;
 
-
-
+    @ManyToOne(fetch = LAZY)
+    private Competition competition;
 
     public Seat(String seatType, int seatRow, int seatNumber, String status) {
         this.seatType = seatType;
