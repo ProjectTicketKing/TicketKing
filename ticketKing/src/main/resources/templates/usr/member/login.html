@@ -70,17 +70,17 @@
 
         <form th:action method="POST" class="flex flex-col gap-6" onsubmit="LoginForm__submit(this); return false;">
             <div class="form-control">
-                <label class="label">
+                <label for="username" class="label">
                     <span class="label-text">ID</span>
                 </label>
-                <input type="text" name="username" placeholder="ID" class="input input-bordered" autofocus/>
+                <input id="username" type="text" name="username" placeholder="ID" class="input input-bordered" autofocus/>
             </div>
 
             <div class="form-control">
-                <label class="label">
+                <label for="password" class="label">
                     <span class="label-text">Password</span>
                 </label>
-                <input type="password" name="password" placeholder="Password" class="input input-bordered"/>
+                <input id="password" type="password" name="password" placeholder="Password" class="input input-bordered"/>
             </div>
 
             <button id="btn-login-1" class="btn btn-md btn-accent gap-3 border-none" style="background-color: #9B6DFF;">

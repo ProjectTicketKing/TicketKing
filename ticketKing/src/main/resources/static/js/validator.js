@@ -53,6 +53,12 @@ function JoinForm__submit(form) {
         return false;
     }
 
+    if (!form.personalInfoAgreement.checked) {
+        alert('개인정보 수집 및 활용 약관에 동의해주세요.')
+        form.personalInfoAgreement.focus();
+        return;
+    }
+
     form.submit();
 }
 
