@@ -105,6 +105,7 @@ function reverseMapping(inputValue) {
 
         return [row, column];
     }
+
 }
 
 
@@ -112,6 +113,7 @@ function reverseMapping(inputValue) {
 //소켓적용
 function getSeatStatus() {
     console.log("getSeatStatus")
+
 
     fetch(`/api/usr/concert/${hall}/seats/${type}`, {
         method: "GET",
@@ -144,7 +146,7 @@ document.querySelectorAll('.seat').forEach(function(seat) {
         const column = seat.dataset.column;
 
         // SeatClickEvent 함수 호출 시 row와 column 값을 전달
-        SeatClickEvent(row, column, hallName, seatType);
+        SeatClickEvent(row, column);
     });
 });
 
@@ -210,10 +212,11 @@ function connect() {
 
                 seatRow = parsedData.data[0];
                 seatColumn = parsedData.data[1];
-const seatRowValueElement = document.getElementById('seatRowValue');
-seatRowValueElement.textContent = seatRow.toString();
-const seatColumnValueElement = document.getElementById('seatColumnValue');
-seatColumnValueElement.textContent = seatColumn.toString();
+
+                const seatRowValueElement = document.getElementById('seatRowValue');
+                seatRowValueElement.textContent = seatRow.toString();
+                const seatColumnValueElement = document.getElementById('seatColumnValue');
+                seatColumnValueElement.textContent = seatColumn.toString();
 
 
             }
@@ -229,8 +232,11 @@ document.addEventListener("DOMContentLoaded", function() {
     getSeatStatus();
 });
 
+
+
+
 function confirmSeat(){
     ConfirmClickEvent(seatRow, seatColumn);
-    location.href = '/usr/concert/' + hall + '/cost';
+    location.href = '/usr/concert/' + hall + '/' + selectedLevel + '/cost';
 }
 

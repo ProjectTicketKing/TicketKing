@@ -201,7 +201,7 @@
                                             style="background-color: #ffffff; color: #664AFF; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue"> &lt; 이전 단계</button>
                                     <div class="w-1/12"></div>
                                     <button type="submit" class="custom-button rounded-lg border-none py-2"
-                                            style="background-color: #664AFF; color: #ffffff; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/stage'">다음 단계 &gt;</button>
+                                            style="background-color: #664AFF; color: #ffffff; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/stage'">다음 단계 &gt;</button>
                                 </div>
                             </div>
                         </div>
@@ -229,4 +229,5 @@
 </html>
 <script th:inline="javascript">
   var hallValue = [[${hallValue}]];
+  var selectedLevel = [[${selectedLevel}]];
 </script>
