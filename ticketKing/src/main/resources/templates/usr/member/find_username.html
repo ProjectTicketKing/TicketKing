@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>find username - TicketKing</title>
+</head>
+<body>
+<div style="display:flex; justify-content: center; align-items: center; flex-direction: column;">
+  <h1>TicketKing - 계정찾기</h1>
+  <div style="display:flex; justify-content: center; align-items: center; flex-direction: column;">
+    <p><span th:text="${email}"></span>님의 아이디를 찾았습니다.</p>
+    <h3 th:text="${username}"
+        style="border-radius: 10px; border: 2px solid #9B6DFF; padding: 30px; width: 100%; text-align: center;"></h3>
+    <a th:href="@{/usr/member/login}" target="_blank" style="color: #9B6DFF;">로그인하러 가기</a>
+  </div>
+</div>
+</body>
+</html>
