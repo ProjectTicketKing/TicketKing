@@ -57,11 +57,9 @@ public class PhotoController {
                     .build();
 
             photoRepository.save(photo);
-            //저장된 파일로 변경하여 보여주기 위해
             File file = new File(absolutePath + path + "/" + newFileName);
 
             if (!file.exists()) {
-                //디렉토리 존재하지 않을 때 생성
                 file.mkdirs();
             }
 
