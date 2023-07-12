@@ -66,9 +66,16 @@ function ModifyForm__submit(form) {
     form.password.value = form.password.value.trim();
     form.passwordValidation.value = form.passwordValidation.value.trim();
     form.email.value = form.email.value.trim();
+    form.username.value = form.username.value.trim();
 
     if (form.password.value !== form.passwordValidation.value) {
         toastWarning('동일한 비밀번호를 입력해주세요');
+        form.password.focus();
+        return false;
+    }
+
+    if (form.password.value.length < passwordValueMinLength || passwordValueMaxLength < form.password.value.length) {
+        toastWarning('비밀번호는 공백 없이 4자 이상 16자 이하로 작성해야 합니다.');
         form.password.focus();
         return false;
     }
@@ -85,8 +92,23 @@ function ModifyForm__submit(form) {
         return false;
     }
 
+    if (form.file.files.length > 0) {
+        const file = form.file.files[0];
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+        if (!allowedExtensions.exec(file.name)) {
+            toastWarning('지원되는 파일 형식은 JPG, JPEG, PNG입니다.');
+            return false;
+        }
+        const fileSizeLimit = 5 * 1024 * 1024; // 5MB
+        if (file.size > fileSizeLimit) {
+            toastWarning('파일 크기는 최대 5MB를 초과할 수 없습니다.');
+            return false;
+        }
+    }
+
     form.submit();
 }
+
 
 function Withdraw__Submit(form) {
     let isConfirm = confirm('탈퇴한 회원은 복구할 수 없습니다.\n그래도 탈퇴하시겠습니까?');

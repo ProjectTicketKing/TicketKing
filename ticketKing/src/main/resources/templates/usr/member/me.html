@@ -88,13 +88,14 @@
 
 <script>
     function modify_active() {
-        //$("#profile").addClass("hidden-input");
         $("#imageUrl").removeClass("hidden-input");
         $("#passwordText").removeClass("hidden-input");
         $("#passwordValidationText").removeClass("hidden-input");
         $("#email").prop("disabled", false);
         $("#modifyActive").addClass("hidden-input");
         $('#modifySubmit').removeClass("hidden-input");
+        $("#modifyCancel").removeClass("hidden-input");
+        $("#withdrawActive").removeClass("hidden-input");
     }
 
 </script>
@@ -106,9 +107,7 @@
         <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">기본정보</h2>
     </div>
     <div class="flex-col flex items-center justify-center flex-grow">
-        <form method="POST" th:action="|/usr/member/me/${member.id}|" onsubmit="ModifyForm__submit(this); return false;"
-              enctype="multipart/form-data"
-              class="gap-5 flex flex-col justify-center items-center flex-grow">
+        <form method="POST" th:action="|/usr/member/me/${member.id}|" onsubmit="ModifyForm__submit(this); return false;" enctype="multipart/form-data" class="gap-5 flex flex-col justify-center items-center flex-grow">
             <div class="w-64 h-64 overflow-hidden">
                 <img id="profile" class="mask mask-circle shadow-2xl w-full h-full"
                      th:if="${member.photo == null}"
@@ -116,10 +115,10 @@
                 <img class="mask mask-circle shadow-2xl w-full h-full"
                      th:if="${member.photo != null}" th:src="${member.photo.filePath}" alt="profile"/>
             </div>
-            <input id="imageUrl" type="file"
+            <input id="imageUrl" name="file" type="file"
                    class="file-input file-input-bordered file-input-sm file-input-bordered w-full max-w-xs hidden-input"/>
             <div class="form-control">
-                <label class="input-group max-w-sm min-w-sm">
+                <label for="username" class="input-group max-w-sm min-w-sm">
                     <span>아이디</span>
                     <input id="username" name="username" type="text" placeholder="아이디를 입력해주세요." class="input input-bordered"
                            disabled
@@ -127,14 +126,14 @@
                 </label>
             </div>
             <div id="passwordText" class="form-control hidden-input">
-                <label class="input-group max-w-sm min-w-sm">
+                <label for="password" class="input-group max-w-sm min-w-sm">
                     <span>비밀번호</span>
                     <input id="password" name="password" type="password" placeholder="비밀번호를 입력해주세요."
                            class="input input-bordered"/>
                 </label>
             </div>
             <div id="passwordValidationText" class="form-control hidden-input">
-                <label class="input-group max-w-sm min-w-sm">
+                <label for="passwordValidation" class="input-group max-w-sm min-w-sm">
                     <span>비밀번호 확인</span>
                     <input id="passwordValidation" name="passwordValidation" type="password" placeholder="비밀번호를 재입력해주세요."
                            class="input input-bordered"/>
@@ -148,13 +147,18 @@
                            th:value="${member.email}"/>
                 </label>
             </div>
-
             <div id="modify-group" class="flex justify-end">
                 <button id="modifyActive" class="btn btn-outline btn-primary" onclick="modify_active();" type="button">회원정보수정</button>
-                <button id="modifySubmit" class="btn btn-primary hidden-input">변경완료</button>
+                <button id="modifySubmit" class="btn btn-primary hidden-input" style="margin-right: 10px">변경완료</button>
+                <a id="modifyCancel" href="/usr/member/me" class="btn btn-outline btn-primary hidden-input" style="margin-left: 10px">변경 취소</a>
             </div>
         </form>
     </div>
+        <div class="flex justify-center items-center">
+            <form method="POST" th:action="|/member/withdraw/${member.id}|" onsubmit="Withdraw__Submit(this); return false;" style="display: inline" class="self-start">
+                <button id="withdrawActive" class="link self-start hidden-input" style="margin-top: 50px; margin-left: 600px;">탈퇴하기</button>
+            </form>
+        </div>
     <div class="flex-col flex items-start justify-start pt-2 pl-60">
         <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">연습결과</h2>
     </div>
@@ -174,17 +178,11 @@
             </ul>
         </div>
     </div>
-    <div class="flex justify-center items-center">
-        <form method="POST" th:action="|/member/withdraw/${member.id}|" style="display: inline"
-              onsubmit="Withdraw__Submit(this); return false;" class="self-start">
-            <button class="link self-start" style="margin-top: 50px; margin-left: 600px;">탈퇴하기</button>
-        </form>
-    </div>
 </main>
 
 </body>
 
-<footer class="fixed left-0 bottom-0 w-full bg-gray-200 text-center">
+<footer class="mt-20 left-0 bottom-0 w-full bg-gray-200 text-center">
     <div class="py-4 text-neutral-500">
         © 2023 TicketKing
     </div>

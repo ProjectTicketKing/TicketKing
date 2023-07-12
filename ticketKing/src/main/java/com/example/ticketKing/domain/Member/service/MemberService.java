@@ -108,22 +108,21 @@ public class MemberService {
         /* 프로필 이미지 변경 */
         result = canModifyPhoto(target, input);
         if (result.isSuccess()) {
-            // 사진 업로드
-            RsData<Photo> photo = photoController.parseFileInfo(input.getFile());
-            if (photo.isSuccess()) {
-                if (target.getPhoto() != null) {
-                    Photo oldPhoto = target.getPhoto();
-                    target.setPhoto(null);
-                    memberRepository.save(target);
-                    photoRepository.delete(oldPhoto);
-                }
-                target.setPhoto(photo.getData());
-
-            } else { // 사진 업로드 실패할 경우 알림 출력
-                String photoResultCode = photo.getResultCode();
-                String photoMsg = photo.getMsg();
-                return RsData.of(photoResultCode, photoMsg);
-            }
+//            // 사진 업로드
+//            RsData<Photo> photo = photoController.parseFileInfo(input.getFile());
+//            if (photo.isSuccess()) {
+//                if (target.getPhoto() != null) {
+//                    Photo oldPhoto = target.getPhoto();
+//                    target.setPhoto(null);
+//                    memberRepository.save(target);
+//                    photoRepository.delete(oldPhoto);
+//                }
+//                target.setPhoto(photo.getData());
+//            } else { // 사진 업로드 실패할 경우 알림 출력
+//                String photoResultCode = photo.getResultCode();
+//                String photoMsg = photo.getMsg();
+//                return RsData.of(photoResultCode, photoMsg);
+//            }
         } else if (!result.getResultCode().equals("F-1")) {
             return result;
         }
