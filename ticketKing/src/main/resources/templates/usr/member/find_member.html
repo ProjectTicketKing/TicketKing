@@ -1,13 +1,52 @@
-<html th:lang="ko" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{usr/layout/layout.html}">
+<html th:lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <title>로그인</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <!-- toastr 불러오기 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
+
+  <!-- 폰트어썸 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+  <!-- 공통 JS 불러오기 -->
+  <script src="/resource/common/common.js"></script>
+  <script src="/js/validator.js"></script>
+  <!-- 공통 CSS 불러오기 -->
+  <link th:href="@{/resource/common/common.css}" rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/common/validator.js"></script>
+
+  <script>
+    const params = JSON.parse('[( ${@rq.paramsJsonStr} )]');
+
+    if (params.msg) {
+      toastNotice(params.msg[0]);
+    }
+    if (params.errorMsg) {
+      toastWarning(params.errorMsg[0]);
+    }
+    // history.back 에 의해서 돌아온 경우에 실행됨
+    // 평소에도 실행됨
+    $(window).bind("pageshow", function (event) {
+      const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
+      if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+        toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+        localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+      } else if (!document.referrer) {
+        const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___null";
+        if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+          toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+          localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+        }
+      }
+    });
+  </script>
 
   <meta name="_csrf_header" th:content="${_csrf.headerName}">
   <meta name="_csrf" th:content="${_csrf.token}">
@@ -40,7 +79,15 @@
 
 <body>
 
-<main layout:fragment="main" class="flex flex-col justify-center items-center flex-grow">
+<header style="display: flex; justify-content: center; align-items: center; margin-top: 60px; margin-bottom: 60px;">
+  <div style="margin: 0 auto;">
+    <a href="/">
+      <img src="https://media.discordapp.net/attachments/742869528618467401/1121944406426144808/ticketKingLogo.png?width=1332&height=242" alt="logo" border="0" style="max-width: 200px;">
+    </a>
+  </div>
+</header>
+
+<main class="flex flex-col justify-center items-center flex-grow">
 
   <script>
     $(document).ready(function () {
@@ -56,9 +103,9 @@
     });
   </script>
 
-  <h1 class="text-3xl font-bold self-center mb-8">아이디 찾기 / 비밀번호 찾기</h1>
+  <h1 class="text-2xl font-bold self-center mb-8 text-[#664AFF]">아이디 찾기 / 비밀번호 찾기</h1>
 
-  <div class="tabs min-w-[420px]">
+  <div class="tabs min-w-[445px]">
     <button class="tab tab-lg tab-lifted tab-active flex-1" data-tab="0">아이디</button>
     <button class="tab tab-lg tab-lifted flex-1" data-tab="1">비밀번호</button>
   </div>
@@ -95,9 +142,23 @@
       <button class="mt-3 btn w-[150px] btn-primary self-center">전송</button>
     </form>
   </div>
+  <div class="login-signup" style="display: flex; flex-direction: column; margin-top: 25px; padding-right: 140px;">
+    <span class="text m-2">이미 계정을 알고 계신가요?
+      <a href="/usr/member/login" class="text signup-link" style="color: #4070f4;">로그인</a>
+    </span>
+    <span class="text m-2">계정이 없으신가요?
+      <a href="/usr/member/join" class="text signup-link" style="color: #4070f4;">회원가입</a>
+    </span>
+  </div>
 
 </main>
 
 </body>
+
+<footer class="fixed left-0 bottom-0 w-full bg-gray-200 text-center">
+  <div class="py-4 text-neutral-500">
+    © 2023 TicketKing
+  </div>
+</footer>
 
 </html>

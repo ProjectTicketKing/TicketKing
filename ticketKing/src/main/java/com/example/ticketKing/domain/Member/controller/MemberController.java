@@ -58,7 +58,7 @@ public class MemberController {
             return rq.historyBack(rsMember);
         }
         model.addAttribute("member", rsMember.getData());
-        return rq.redirectWithMsg("usr/member/me", rsMember);
+        return rq.redirectWithMsg("/", rsMember);
     }
 
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.

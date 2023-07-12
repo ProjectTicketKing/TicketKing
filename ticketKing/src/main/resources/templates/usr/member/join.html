@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!-- toastr 불러오기 -->
@@ -11,6 +12,7 @@
 
     <!-- 폰트어썸 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
     <!-- 공통 JS 불러오기 -->
     <script src="/resource/common/common.js"></script>
@@ -50,9 +52,6 @@
 
 <body class="text-black min-h-screen flex flex-col">
 
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
-<script src="https://cdn.tailwindcss.com"></script>
-
 <header style="display: flex; justify-content: center; align-items: center; margin-top: 60px; margin-bottom: 60px;">
     <div style="margin: 0 auto;">
         <a href="/">
@@ -62,43 +61,6 @@
 </header>
 
 <main style="display: flex; justify-content: center; align-items: center;">
-    <script>
-        function JoinForm__submit(form) {
-            // username 이(가) 올바른지 체크
-
-            form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
-
-            if (form.username.value.length == 0) {
-                toastWarning('아이디를 입력해주세요.');
-                form.username.focus();
-                return;
-            }
-
-            if (form.username.value.length < 4 || form.username.value.length > 16) {
-                toastWarning('아이디를 4자 이상 16자 이하로 입력해주세요.');
-                form.username.focus();
-                return;
-            }
-
-            // password 이(가) 올바른지 체크
-
-            form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
-
-            if (form.password.value.length == 0) {
-                form.password.focus();
-                toastWarning('비밀번호를 입력해주세요.');
-                return;
-            }
-
-            if (form.password.value.length < 4 || form.password.value.length > 16) {
-                toastWarning('비밀번호를 4자 이상 16자 이하로 입력해주세요.');
-                form.password.focus();
-                return;
-            }
-
-            form.submit(); // 폼 발송
-        }
-    </script>
 
     <div class="max-w-2xl w-full px-4">
         <h1 class="mb-4">
@@ -109,10 +71,9 @@
         <form th:action method="POST" class="flex flex-col gap-6" onsubmit="JoinForm__submit(this); return false;">
             <div class="form-control">
                 <label for="username" class="label">
-                    <span class="label-text">ID</span>
+                    <span class="label-text">ID</span><button id="overlappedID" type="button" class="rounded-full border-2 border-[9B6DFF] text-sm text-center object-scale-down h-7 w-20">중복확인</button><i class="uil uil-check-circle h-10 w-10" id="id_check_sucess" style="color: #9B6DFF; display: none;"></i>
                 </label>
-                <input id="username" type="text" name="username" placeholder="아이디를 입력해주세요." class="input input-bordered" autofocus/>
-
+                <input id="username" type="text" name="username" placeholder="아이디를 입력해주세요." class="username_input input input-bordered" required autofocus/>
             </div>
 
             <!--            <div>-->
@@ -126,25 +87,25 @@
             <!--            </div>-->
 
             <div class="form-control">
-                <label class="label">
+                <label for="password" class="label">
                     <span class="label-text">Password</span>
                 </label>
-                <input type="password" name="password" placeholder="비밀번호를 입력해주세요." class="input input-bordered"/>
+                <input id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요." class="input input-bordered"/>
             </div>
 
             <div class="form-control">
-                <label class="label">
+                <label for="passwordValidation" class="label">
                     <span class="label-text">Password Validation</span>
                 </label>
-                <input type="password" name="password" placeholder="비밀번호를 확인해주세요." class="input input-bordered"/>
+                <input id="passwordValidation" type="password" name="passwordValidation" placeholder="비밀번호를 확인해주세요." class="input input-bordered"/>
             </div>
 
 
             <div class="form-control">
-                <label class="label">
+                <label for="email" class="label">
                     <span class="label-text">E-mail</span>
                 </label>
-                <input type="text" name="email" placeholder="이메일을 입력해주세요." class="input input-bordered" autofocus/>
+                <input id="email" type="text" name="email" placeholder="이메일을 입력해주세요." class="input input-bordered" autofocus/>
             </div>
 
             <div class="checkbox-text">
