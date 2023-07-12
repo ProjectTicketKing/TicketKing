@@ -22,6 +22,7 @@ function startGame() {
     var timeSelect = document.getElementById('timeSelect');
     var selectedTime = parseInt(timeSelect.value, 10);
     var selectedDate = document.getElementById('startDateInput');
+    startDateInput = selectedDate.value;
 
 //    var levelSelect = document.getElementById('levelSelect');
 
@@ -29,7 +30,7 @@ function startGame() {
     selectedLevel = levelSelect.value; // 사용자가 선택한 레벨 값
 
 
-    if (isNaN(selectedTime) || selectedDate === '' || selectedLevel === '') {
+    if (isNaN(selectedTime) || startDateInput === '' || selectedLevel === '') {
         timerDisplay.innerText = '00 : 00 : 00';
         alert('게임 시작을 위해 모든 항목을 선택해주세요.');
 
