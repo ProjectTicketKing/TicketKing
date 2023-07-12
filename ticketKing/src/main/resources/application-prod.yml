@@ -8,6 +8,9 @@ spring:
     url: jdbc:mysql://172.17.0.1:3306/ticketKing__prod?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: lldjlocal
     password: lldj123414
+  mail:
+    username:
+    password:
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
