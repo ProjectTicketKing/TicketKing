@@ -72,7 +72,7 @@ public class MemberController {
     public String join(@Valid @ModelAttribute MemberDto input, HttpServletRequest request) { // @Valid 가 없으면 @NotBlank 등이 작동하지 않음, 만약에 유효성 문제가 있다면 즉시 정지
         memberService.join(input);
         memberService.authenticateAccountAndSetSession(input, request);
-        return "redirect:/usr/member/login";
+        return "usr/member/login";
     }
 
     @PreAuthorize("isAuthenticated()")
