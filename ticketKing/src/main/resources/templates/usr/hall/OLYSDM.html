@@ -398,7 +398,7 @@
 
                             <div class="mt-3 flex justify-center relative absolute -left-[-270px] -top-[-10px]">
                                 <button type="submit" class="custom-button rounded-lg border-none py-2"
-                                        style="background-color: #ffffff; color: #664AFF; width: 100%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/date'"> &lt; 이전 단계</button>
+                                        style="background-color: #ffffff; color: #664AFF; width: 100%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/date'"> &lt; 이전 단계</button>
                             </div>
                         </div>
 
@@ -417,4 +417,5 @@
 
 <script th:inline="javascript">
     var hallValue = [[${hallValue}]];
+    var selectedLevel = [[${selectedLevel}]];
 </script>

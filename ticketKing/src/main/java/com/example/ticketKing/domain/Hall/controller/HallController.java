@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 @RequiredArgsConstructor
 public class HallController {
-    @GetMapping("/usr/concert/{hall}/stage")
-    public String showConcertSeatArea(Model model, @PathVariable("hall")String hallName) {
-        model.addAttribute("hallName",hallName);
-        return "usr/hall/"+hallName;
+    @GetMapping("/usr/concert/{hall}/{level}/stage")
+    public String showConcertSeatArea(Model model, @PathVariable("hall")String hall,@PathVariable String level) {
+        model.addAttribute("hallValue",hall);
+        model.addAttribute("selectedLevel",level);
+        return "usr/hall/"+hall;
     }
 
 }

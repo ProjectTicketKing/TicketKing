@@ -42,8 +42,10 @@
     <script th:inline="javascript">
         const hall = [[${hall}]];
         console.log(hall)
-        const type = [[${type}]];
+        const type =  [[${type}]];
         console.log(type)
+        const level = [[${level}]];
+        console.log(level)
     </script>
     <script th:src="@{/js/seat.js}" type="application/javascript"></script>
 
@@ -64,3 +66,9 @@
 
 </body>
 </html>
+
+<script th:inline="javascript">
+    var hallValue = [[${hallValue}]];
+    var selectedLevel = [[${selectedLevel}]];
+    // var type = [[${type}]];
+</script>
