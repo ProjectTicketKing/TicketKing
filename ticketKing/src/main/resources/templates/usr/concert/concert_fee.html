@@ -6,6 +6,67 @@
     <meta charset="UTF-8">
     <title>공연예매 페이지 5. 결제하기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* 모달 스타일 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 58px;
+            border-radius: 5px;
+            font-size: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .modal-content h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .modal-content img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+        }
+
+        .modal-content input {
+            font-size: 15px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            font-size: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -168,7 +229,29 @@
                                 <!--                                        style="background-color: #ffffff; color: #664AFF; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/payment'"> &lt; 이전 단계</button>-->
                                 <!--                                <div class="w-1/12"></div>-->
                                 <button type="submit" class="custom-button rounded-lg border-none py-2 w-full"
-                                        style="background-color: #664AFF; color: #ffffff; font-size: 80%">결제하기</button>
+                                        style="background-color: #664AFF; color: #ffffff; font-size: 80%" onclick="openModal()">결제하기</button>
+
+
+                                <div id="modal4" class="modal-overlay">
+
+                                    <div class="modal-content">
+                                        <p style="color: #664AFF;">축하합니다!<br>티켓팅에 성공하셨습니다</p>
+                                        <img src="https://i.ibb.co/VW3x9rv/success.png" alt="success"></a>
+                                        <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
+                                                style="background-color: #664AFF; color: #ffffff" onclick="goToHomePage()">다시하기</button>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function openModal() {
+                                        var modal = document.getElementById("modal4");
+                                        modal.style.display = "block";
+                                    }
+
+                                    function goToHomePage() {
+                                        window.location.href = "/";
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -177,6 +260,10 @@
             </div>
         </div>
     </div>
+
+
+
+
 </main>
 
 </body>
