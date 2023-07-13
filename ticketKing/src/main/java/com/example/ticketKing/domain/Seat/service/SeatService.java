@@ -150,7 +150,7 @@ public class SeatService {
 
          for (Seat seat : seats) {
              seat.setStatus("valid");
-//             seatRepository.save(seat);
+             seatRepository.save(seat);
          }
 
      }
