@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface SeatRepository extends JpaRepository<Seat,Long> {
 
+    List<Seat> findByHall(Hall hall);
+
     List<Seat> findBySeatType(String seatType);
 
     List<Seat> findByHallAndSeatType(Hall hall, String seatType);
