@@ -74,11 +74,11 @@ public class MemberController {
         try {
             memberService.join(input);
             memberService.authenticateAccountAndSetSession(input, request);
-            return "redirect:usr/member/login"; // 회원 가입 성공 시 로그인 페이지로 이동
+            return "usr/member/login"; // 회원 가입 성공 시 로그인 페이지로 이동
         } catch (DuplicateUsernameException e) {
             String errorMessage = "Username is already taken.";
             model.addAttribute("errorMessage", errorMessage);
-            return "redirect:usr/member/join"; // 중복 오류 발생 시 회원 가입 페이지로 리다이렉트
+            return "usr/member/join"; // 중복 오류 발생 시 회원 가입 페이지로 이동
         }
     }
 
