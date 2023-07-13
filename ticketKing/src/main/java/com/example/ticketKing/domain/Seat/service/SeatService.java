@@ -142,7 +142,18 @@ public class SeatService {
             seatRepository.save(randomSeat);
         }
     }
+     @Transactional
+     public void initializeSeat(String hallName){
+       Hall hall =  hallRepository.findByName(hallName);
+       List<Seat> seats = seatRepository.findByHall(hall);
 
+
+         for (Seat seat : seats) {
+             seat.setStatus("valid");
+//             seatRepository.save(seat);
+         }
+
+     }
 
 
     public String checkSeatStatus(String hall, String type, Integer row, Integer col){
@@ -159,6 +170,8 @@ public class SeatService {
         }
         return "none-exist";
     }
+
+
 
 
 
