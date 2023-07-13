@@ -33,8 +33,9 @@ function startGame() {
     if (isNaN(selectedTime) || startDateInput === '' || selectedLevel === '') {
         timerDisplay.innerText = '00 : 00 : 00';
 
-
-        return toastWarning('게임 시작을 위해 모든 항목을 선택해주세요.');
+        console.log('!!!');
+        toastWarning('게임 시작을 위해 모든 항목을 선택해주세요.');
+        return;
     }
 
     var seconds = selectedTime;
