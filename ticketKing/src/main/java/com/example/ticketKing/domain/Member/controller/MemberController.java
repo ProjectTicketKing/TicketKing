@@ -1,5 +1,6 @@
 package com.example.ticketKing.domain.Member.controller;
 
+import com.example.ticketKing.domain.Member.dto.JoinFormDto;
 import com.example.ticketKing.domain.Member.dto.MemberDto;
 import com.example.ticketKing.domain.Member.entity.Member;
 import com.example.ticketKing.domain.Member.finder.FindPasswordForm;
@@ -71,16 +72,14 @@ public class MemberController {
 
     @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
-    public String join(@Valid @ModelAttribute MemberDto input, HttpServletRequest request, Model model) { // @Valid 가 없으면 @NotBlank 등이 작동하지 않음, 만약에 유효성 문제가 있다면 즉시 정지
+    public String join(@Valid @ModelAttribute JoinFormDto input, HttpServletRequest request, Model model) { // @Valid 가 없으면 @NotBlank 등이 작동하지 않음, 만약에 유효성 문제가 있다면 즉시 정지
         try {
             memberService.join(input);
-            memberService.authenticateAccountAndSetSession(input, request);
+//            memberService.authenticateAccountAndSetSession(input, request);
 
-            return "usr/member/login"; // 회원 가입 성공 시 로그인 페이지로 이동
+            return "redirect:/usr/member/login"; // 회원 가입 성공 시 로그인 페이지로 이동
         } catch (DuplicateUsernameException e) {
-            String errorMessage = "Username is already taken.";
-            model.addAttribute("errorMessage", errorMessage);
-            return "usr/member/join"; // 중복 오류 발생 시 회원 가입 페이지로 이동
+            return rq.historyBack(e.getMessage());
         }
     }
 
@@ -111,5 +110,4 @@ public class MemberController {
     public String findPassword(@Valid @ModelAttribute FindPasswordForm form) {
         return memberService.findPassword(form.getEmail(), form.getUsername());
     }
-
 }

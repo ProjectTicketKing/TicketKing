@@ -1,6 +1,7 @@
 package com.example.ticketKing.domain.Member.service;
 
 import com.example.ticketKing.domain.Member.dto.EmailDto;
+import com.example.ticketKing.domain.Member.dto.JoinFormDto;
 import com.example.ticketKing.domain.Member.email.MailSenderRunner;
 import com.example.ticketKing.domain.Member.dto.MemberDto;
 import com.example.ticketKing.domain.Member.entity.Member;
@@ -52,7 +53,7 @@ public class MemberService {
 
     private final PhotoRepository photoRepository;
 
-    public Member join(MemberDto dto) {
+    public Member join(JoinFormDto dto) {
         Member member = Member.builder()
                 .username(dto.getUsername())
                 .password(dto.getPassword())
@@ -60,14 +61,14 @@ public class MemberService {
                 .build();
 
         if (memberRepository.existsByUsername(member.getUsername())) {
-            throw new DuplicateUsernameException("Username is already taken.");
+            throw new DuplicateUsernameException("이미 존재하는 아이디입니다.");
         } else if (memberRepository.existsByEmail(member.getEmail())) {
-            throw new DuplicateUsernameException("Email is already taken.");
+            throw new DuplicateUsernameException("이미 존재하는 이메일입니다.");
         }
         return memberRepository.save(member);
     }
 
-    public void authenticateAccountAndSetSession(MemberDto member, HttpServletRequest request) {
+    public void authenticateAccountAndSetSession(JoinFormDto member, HttpServletRequest request) {
         // 사용자 인증
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 member.getUsername(),

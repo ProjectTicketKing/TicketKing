@@ -167,10 +167,10 @@ function FindUsernameForm__submit(form) {
             xhr.setRequestHeader(header, token);
         },
         success: function (result) {
-            toastNotice(result);
+            toastNotice('이메일 전송이 완료되었습니다.');
         },
         error: function (request, status, error) {
-            toastNotice(error);
+            toastWarning('이메일 전송에 실패했습니다. \r 다시 확인해주세요.');
         }
     })
 }
@@ -207,10 +207,10 @@ function FindPasswordForm__submit(form) {
             xhr.setRequestHeader(header, token);
         },
         success: function (result) {
-            alert(result);
+            toastNotice('임시 비밀번호 전송이 완료되었습니다.');
         },
         error: function (request, status, error) {
-            alert(error);
+            toastWarning('임시 비밀번호 전송에 실패했습니다. 다시 확인해주세요.');
         }
     })
 }
