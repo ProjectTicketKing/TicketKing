@@ -54,9 +54,9 @@ function JoinForm__submit(form) {
     }
 
     if (!form.personalInfoAgreement.checked) {
-        alert('개인정보 수집 및 활용 약관에 동의해주세요.')
+        toastWarning('개인정보 수집 및 활용 약관에 동의해주세요.')
         form.personalInfoAgreement.focus();
-        return;
+        return false;
     }
 
     form.submit();
@@ -129,17 +129,17 @@ function Withdraw__Submit(form) {
                     xhr.setRequestHeader(header, token);
                 },
                 success: function (result) {
-                    alert('탈퇴 완료');
+                    toastNotice('탈퇴 완료');
                     window.location.href = '/main';
                 },
                 error: function (request, status, error) {
-                    alert('올바르지 않은 비밀번호입니다.');
+                    toastWarning('올바르지 않은 비밀번호입니다.');
                 }
             })
         } else if (passwordValueMinLength > input.trim().length || passwordValueMaxLength < input.trim().length)
-            alert('올바르지 않은 비밀번호입니다.');
+            toastWarning('올바르지 않은 비밀번호입니다.');
         else {
-            alert('취소되었습니다.');
+            toastNotice('취소되었습니다.');
         }
     }
 }
@@ -168,10 +168,10 @@ function FindUsernameForm__submit(form) {
             xhr.setRequestHeader(header, token);
         },
         success: function (result) {
-            alert(result);
+            toastNotice(result);
         },
         error: function (request, status, error) {
-            alert(error);
+            toastNotice(error);
         }
     })
 }

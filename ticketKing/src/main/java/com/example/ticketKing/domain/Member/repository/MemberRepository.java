@@ -13,6 +13,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findById(Long id);
     Optional<Member> findByEmail(String email);
 
+    boolean existsByUsername(String username);
+
     @Modifying
     @Transactional
     @Query("UPDATE Member a SET a.photo = null WHERE a.photo.id = :photoId")

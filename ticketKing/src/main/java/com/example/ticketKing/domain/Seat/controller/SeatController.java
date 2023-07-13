@@ -61,11 +61,26 @@ public class SeatController {
 
 
     // 스케줄링 중지 메서드
-    private void stopSeatStatusUpdateSchedule() {
+    public void stopSeatStatusUpdateSchedule() {
         if (executor != null && !executor.isShutdown()) {
             executor.shutdown();
         }
     }
+
+    @GetMapping("/")
+    public String showMain() {
+
+        stopScheduledExecutorService();
+        return "usr/main/home";
+    }
+
+    @GetMapping("/usr/concert/{hall}/{level}/cost")
+    public String showConcertCost(Model model, @PathVariable String hall, @PathVariable String level) {
+        model.addAttribute("hallValue", hall);
+        model.addAttribute("selectedLevel", level);
+        stopScheduledExecutorService();
+        return "usr/concert/concert_cost"; }
+
 
     @GetMapping("/usr/concert/{hall}/{level}/seats/{type}")
     public String getSeatList(Model model,
@@ -76,13 +91,13 @@ public class SeatController {
         model.addAttribute("type", type);
         model.addAttribute("selectedLevel",level);
 
-
+        startSeatStatusUpdateSchedule(hall, type, level);
 
         // 스케줄링이 시작되지 않았을 때만 스케줄링 시작
-        if (!scheduledHalls.contains(hall)) {
-            startSeatStatusUpdateSchedule(hall, type, level);
-            scheduledHalls.add(hall);
-        }
+//        if (!scheduledHalls.contains(hall)) {
+//            startSeatStatusUpdateSchedule(hall, type, level);
+//            scheduledHalls.add(hall);
+//        }
 
 
         return "usr/concert/remain_seat";
@@ -90,7 +105,7 @@ public class SeatController {
 
     // 애플리케이션 컨텍스트 종료 시 스케줄링 종료 메서드 호출
     @PreDestroy
-    private void stopScheduledExecutorService() {
+    public void stopScheduledExecutorService() {
         stopSeatStatusUpdateSchedule();
     }
 

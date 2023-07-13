@@ -23,6 +23,14 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <script th:inline="javascript">
+        var errorMessage = /*[[${errorMessage}]]*/ null;
+        if (errorMessage) {
+            // Show the toastWarning message
+            toastWarning(errorMessage);
+        }
+    </script>
+
     <script>
         const params = JSON.parse('[( ${@rq.paramsJsonStr} )]');
 
@@ -70,9 +78,6 @@
 
         <form th:action method="POST" class="flex flex-col gap-6" onsubmit="JoinForm__submit(this); return false;">
             <div class="form-control">
-                <label for="username" class="label">
-                    <span class="label-text">ID</span><button id="overlappedID" type="button" class="rounded-full border-2 border-[9B6DFF] text-sm text-center object-scale-down h-7 w-20">중복확인</button><i class="uil uil-check-circle h-10 w-10" id="id_check_sucess" style="color: #9B6DFF; display: none;"></i>
-                </label>
                 <input id="username" type="text" name="username" placeholder="아이디를 입력해주세요." class="username_input input input-bordered" required autofocus/>
             </div>
 
@@ -133,9 +138,16 @@
 </main>
 </body>
 
-<footer class="mt-20 left-0 bottom-0 w-full bg-gray-200 text-center">
-    <div class="py-4 text-neutral-500">
-        © 2023 TicketKing
+<footer class="bg-[#F2F4F4] flex-0 dark:bg-neutral-700 lg:text-left">
+    <div>
+        <ul class="flex flex-row items-center justify-around grid grid-flow-col justify-stretch">
+            <li></li>
+            <li class="ml-20 p-4 items-center text-center text-neutral-500 dark:text-neutral-200">© 2023 TicketKing</li>
+            <li class="flex flex-row items-end justify-end mr-10">
+                <a href="https://github.com/ProjectTicketKing/TicketKing" class="mr-3"><img src="https://i.ibb.co/mzmCJ7Q/free-icon-github-733609.png" alt="free-icon-github-733609" border="0" style="width: 20px; height: 20px; opacity: 50%"/></a>
+                <a href="https://www.notion.so/e1657ce659514cec8174e6c67515b3ab?v=19f54e6d6102423796ea7da85463ea0d"><img src="https://i.ibb.co/c8hgrTV/Notion-logo.png" alt="Notion-logo" border="0" style="width: 20px; height: 20px; opacity: 50%"/></a>
+            </li>
+        </ul>
     </div>
 </footer>
 
