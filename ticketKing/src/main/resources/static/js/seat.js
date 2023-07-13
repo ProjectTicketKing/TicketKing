@@ -1,4 +1,3 @@
-
 let test = [];
 let selectedSeats = new Array();
 let selectedSeatsMap = [];
@@ -55,14 +54,16 @@ function pdo(body) {
             const input = document.createElement('input');
             input.type = "button";
             input.name = "seats";
-            input.classList = "seat";
+            input.classList.add("seat", "bg-gray-300", "text-transparent", "font-bold", "rounded-md", "p-2");
+            // input.classList = "seat";
             mapping(input, i, j);
             div.append(input);
 
 
             <!--            백에서 처리 가능하면 백으로-->
             if (valid.includes(input.value)) {
-                input.classList.add("highlighted");
+                // input.classList.add("highlighted");
+                input.classList.add("bg-purple-500", "text-transparent");
                 input.addEventListener('click', function (e) {
                     console.log(e.target.value);
                     const [row, column] = reverseMapping(e.target.value);
@@ -201,9 +202,9 @@ function connect() {
                 getSeatStatus();
                 alert("실패");
 
-                    setTimeout(function () {
-                                    location.reload();
-                                }, 300);
+                setTimeout(function () {
+                    location.reload();
+                }, 300);
             } else {
                 alert("성공");
                 console.log("성공 seatData.body 확인");
@@ -239,4 +240,3 @@ function confirmSeat(){
     ConfirmClickEvent(seatRow, seatColumn);
     location.href = '/usr/concert/' + hall + '/' + selectedLevel + '/cost';
 }
-

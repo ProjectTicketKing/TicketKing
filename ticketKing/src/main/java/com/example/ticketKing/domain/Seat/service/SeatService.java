@@ -64,7 +64,7 @@ public class SeatService {
             return 25;
         }
         else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "S")) {
-            return 15;
+            return 20;
         }
         else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "G")) {
             return 25;
@@ -83,7 +83,7 @@ public class SeatService {
             return 26;
         }
         else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "VIP")) {
-            return 40;
+            return 35;
         }
         else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "S")) {
             return 25;
