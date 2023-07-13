@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateUsernameException.class)
     public String handleDuplicateUsernameException(@ModelAttribute DuplicateUsernameException ex, HttpServletRequest request) {
         String errorMessage = ex.getMessage();
-        return "redirect:/usr/member/join"; // 회원 가입 페이지로 리다이렉트
+        return "usr/member/join"; // 회원 가입 페이지로 리다이렉트
     }
 
     // ...
