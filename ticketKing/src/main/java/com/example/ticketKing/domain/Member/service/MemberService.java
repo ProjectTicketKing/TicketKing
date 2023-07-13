@@ -61,6 +61,8 @@ public class MemberService {
 
         if (memberRepository.existsByUsername(member.getUsername())) {
             throw new DuplicateUsernameException("Username is already taken.");
+        } else if (memberRepository.existsByEmail(member.getEmail())) {
+            throw new DuplicateUsernameException("Email is already taken.");
         }
         return memberRepository.save(member);
     }

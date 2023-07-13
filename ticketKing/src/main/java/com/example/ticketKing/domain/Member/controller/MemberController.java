@@ -10,6 +10,7 @@ import com.example.ticketKing.global.exception.DuplicateUsernameException;
 import com.example.ticketKing.global.rq.Rq;
 import com.example.ticketKing.global.rsData.RsData;
 import com.example.ticketKing.global.security.MemberAdapter;
+import com.example.ticketKing.global.security.SecurityMember;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +75,7 @@ public class MemberController {
         try {
             memberService.join(input);
             memberService.authenticateAccountAndSetSession(input, request);
+
             return "usr/member/login"; // 회원 가입 성공 시 로그인 페이지로 이동
         } catch (DuplicateUsernameException e) {
             String errorMessage = "Username is already taken.";
@@ -84,15 +86,12 @@ public class MemberController {
 
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/withdraw/{id}")
+    @PostMapping("/withdraw")
     @ResponseBody
-    public ResponseEntity<String> withdraw(@PathVariable Long id, @RequestParam("password") String password,
-                                           @AuthenticationPrincipal MemberAdapter memberAdapter, HttpServletRequest request) {
-        if (!memberAdapter.getId().equals(id)) {
-            return new ResponseEntity<>("Authentication failed", HttpStatus.UNAUTHORIZED);
-        }
+    public ResponseEntity<String> withdraw(@RequestParam("password") String password,
+                                           @AuthenticationPrincipal SecurityMember securityMember, HttpServletRequest request) {
 
-        return memberService.withdraw(memberAdapter.getId(), password, request);
+        return memberService.withdraw(securityMember.getId(), password, request);
     }
 
     @GetMapping("/findMember")
