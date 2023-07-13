@@ -154,8 +154,9 @@ public class SeatController {
         log.info("securityMember id : {} ", securityMember.getId());
 
 
-        practiceService.register(hall,type, request.getRow(), request.getColumn(), securityMember.getId());
 
+        practiceService.register(hall,type, request.getRow(), request.getColumn(), securityMember.getId());
+        seatService.seatStatusSave(hall,type, request.getRow(), request.getColumn());
 
 
     }

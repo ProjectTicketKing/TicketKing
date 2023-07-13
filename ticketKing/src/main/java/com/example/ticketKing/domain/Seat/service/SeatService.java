@@ -41,6 +41,13 @@ public class SeatService {
         return RsData.of("S-1", "좌석 등록이 완료되었습니다", seat);
     }
 
+    @Transactional
+    public void seatStatusSave(String hallName,String type,Integer row, Integer column){
+        Hall hall = hallRepository.findByName(hallName);
+        Seat seat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(hall,type,row,column);
+        seat.setStatus("valid");
+    }
+
     public List<Seat> getSeatsByHallAndType(String hallName, String type) {
         Hall hall = hallRepository.findByName(hallName);
         return seatRepository.findByHallAndSeatType(hall, type);
@@ -142,18 +149,18 @@ public class SeatService {
             seatRepository.save(randomSeat);
         }
     }
-     @Transactional
-     public void initializeSeat(String hallName){
-       Hall hall =  hallRepository.findByName(hallName);
-       List<Seat> seats = seatRepository.findByHall(hall);
+    @Transactional
+    public void initializeSeat(String hallName){
+        Hall hall =  hallRepository.findByName(hallName);
+        List<Seat> seats = seatRepository.findByHall(hall);
 
 
-         for (Seat seat : seats) {
-             seat.setStatus("valid");
-             seatRepository.save(seat);
-         }
+        for (Seat seat : seats) {
+            seat.setStatus("valid");
+            seatRepository.save(seat);
+        }
 
-     }
+    }
 
 
     public String checkSeatStatus(String hall, String type, Integer row, Integer col){
