@@ -32,9 +32,9 @@ function startGame() {
 
     if (isNaN(selectedTime) || startDateInput === '' || selectedLevel === '') {
         timerDisplay.innerText = '00 : 00 : 00';
-        alert('게임 시작을 위해 모든 항목을 선택해주세요.');
 
-        return;
+
+        return toastWarning('게임 시작을 위해 모든 항목을 선택해주세요.');
     }
 
     var seconds = selectedTime;
@@ -65,7 +65,7 @@ function startGame() {
                 openModal();
 
                 showMessage(); // 메시지를 보여주는 함수 호출
-
+                startButton.onclick = null; // 이벤트 핸들러 해제
 
             };
         }
@@ -144,15 +144,34 @@ function closeModal() {
 
 
 function checkCaptcha() {
-    var captchaInput = document.getElementById('captchaInput').value;
-    var expectedAnswers = ["263S2V", "263s2v"]; // 정답
+    document.getElementById("captchaInput").value = "";
+    captcha = document.getElementById("image");
+    let uniquechar = "";
 
-    if (expectedAnswers.includes(captchaInput)) {
+    const randomchar =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 1; i < 6; i++) {
+        uniquechar += randomchar.charAt(
+            Math.random() * randomchar.length)
+    }
+
+    captcha.innerHTML = uniquechar;
+}
+
+function captchaprintmsg(){
+    const captchaInput = document
+        .getElementById("captchaInput").value;
+    if (captchaInput.toUpperCase() === captcha.innerHTML.toUpperCase()) {
+        let s = document.getElementById("key")
+            .innerHTML = "Matched";
         // 검증 성공시 모달 닫기
         closeCaptchaModal();
     } else {
+        let s = document.getElementById("key")
+            .innerHTML = "not Matched";
         // 보안 문자가 올바르지 않다면 알림 처리
-        alert("보안 문자가 올바르지 않습니다.");
+        toastWarning("보안 문자가 올바르지 않습니다.");
     }
 }
 

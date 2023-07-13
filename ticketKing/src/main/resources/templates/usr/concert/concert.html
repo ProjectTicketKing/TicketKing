@@ -6,6 +6,13 @@
     <meta charset="UTF-8">
     <title>공연 정보</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script th:inline="javascript">
+        var hallValue = [[${hallValue}]];
+        var selectedLevel = [[${selectedLevel}]];
+    </script>
+    <script th:src="@{/js/timer.js}" type="application/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
 
 <body>
@@ -180,7 +187,7 @@
                 </div>
 
                 <div id="startContainer">
-                    <button id="startButton" onclick="startGame()" class="custom-button rounded-lg border-none w-full py-4 mt-7 flex justify-center" style="background-color: #664AFF; color: #ffffff; display: flex; justify-content: center; align-items: center;">연습 게임 시작하기</button>
+                    <button id="startButton" onclick="startGame(), checkCaptcha()" class="custom-button rounded-lg border-none w-full py-4 mt-7 flex justify-center" style="background-color: #664AFF; color: #ffffff; display: flex; justify-content: center; align-items: center;">연습 게임 시작하기</button>
                 </div>
             </div>
         </div>
@@ -251,11 +258,21 @@
 
         <div class="modal-content">
             <h2>문자를 입력해주세요</h2>
-            <p style="color: red;">부정예매방지를 위해 아래의 문자를 입력해주세요.<br>인증 후 좌석을 선택할 수 있습니다.</p>
-            <img th:src="@{/image/보안 문자.png}" alt="CAPTCHA Image">
-            <input type="text" id="captchaInput" placeholder="보안 문자 입력">
+            <p style="text: 15px; color: red;">부정예매방지를 위해 아래의 문자를 입력해주세요.<br>인증 후 좌석을 선택할 수 있습니다.</p>
+            <div id="image"
+                 class="inline"
+                 selectable="False"
+                 style="margin-top: 10px; box-shadow: 3px 3px 3px 3px gray; padding: 20px; text-decoration:line-through; font: italic bold 35px/2 cursive;">
+            </div>
+            <div class="inline" onclick="checkCaptcha()" style="margin-top: 20px; margin-bottom: 10px;">
+                <i class="fas fa-sync"></i>
+            </div>
+            <div id="user_input" class="">
+                <input type="text" id="captchaInput" placeholder="보안 문자를 입력하세요.">
+            </div>
             <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
-                    style="background-color: #664AFF; color: #ffffff" onclick="checkCaptcha()">확인</button>
+                    style="background-color: #664AFF; color: #ffffff" onclick="captchaprintmsg()">확인</button>
+            <p id="key" style="display: none;"></p>
         </div>
     </div>
 
@@ -324,12 +341,6 @@
 
 </main>
 
-    </body>
+</body>
 
 </html>
-
-<script th:inline="javascript">
-    var hallValue = [[${hallValue}]];
-    var selectedLevel = [[${selectedLevel}]];
-</script>
-<script th:src="@{/js/timer.js}" type="application/javascript"></script>

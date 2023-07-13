@@ -116,7 +116,7 @@
                      th:if="${member.photo != null}" th:src="${member.photo.filePath}" alt="profile"/>
             </div>
             <input id="imageUrl" name="file" type="file"
-                   class="file-input file-input-bordered file-input-sm file-input-bordered w-full max-w-xs hidden-input"/>
+                   class="file-input file-input-bordered file-input-bordered w-full max-w-xs hidden-input"/>
             <div class="form-control">
                 <label for="username" class="input-group max-w-sm min-w-sm">
                     <span>아이디</span>
@@ -154,11 +154,11 @@
             </div>
         </form>
     </div>
-        <div class="flex justify-center items-center">
-            <form method="POST" th:action="|/member/withdraw/${member.id}|" onsubmit="Withdraw__Submit(this); return false;" style="display: inline" class="self-start">
-                <button id="withdrawActive" class="link self-start hidden-input" style="margin-top: 50px; margin-left: 600px;">탈퇴하기</button>
-            </form>
-        </div>
+    <div class="flex justify-center items-center">
+        <form method="POST" th:action="|/member/withdraw/${member.id}|" onsubmit="Withdraw__Submit(this); return false;" style="display: inline" class="self-start">
+            <button id="withdrawActive" class="link self-start hidden-input" style="margin-top: 50px; margin-left: 600px;">탈퇴하기</button>
+        </form>
+    </div>
     <div class="flex-col flex items-start justify-start pt-2 pl-60">
         <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">연습결과</h2>
     </div>
@@ -182,9 +182,16 @@
 
 </body>
 
-<footer class="mt-20 left-0 bottom-0 w-full bg-gray-200 text-center">
-    <div class="py-4 text-neutral-500">
-        © 2023 TicketKing
+<footer class="bg-[#F2F4F4] flex-0 dark:bg-neutral-700 lg:text-left">
+    <div>
+        <ul class="flex flex-row items-center justify-around grid grid-flow-col justify-stretch">
+            <li></li>
+            <li class="ml-20 p-4 items-center text-center text-neutral-500 dark:text-neutral-200">© 2023 TicketKing</li>
+            <li class="flex flex-row items-end justify-end mr-10">
+                <a href="https://github.com/ProjectTicketKing/TicketKing" class="mr-3"><img src="https://i.ibb.co/mzmCJ7Q/free-icon-github-733609.png" alt="free-icon-github-733609" border="0" style="width: 20px; height: 20px; opacity: 50%"/></a>
+                <a href="https://www.notion.so/e1657ce659514cec8174e6c67515b3ab?v=19f54e6d6102423796ea7da85463ea0d"><img src="https://i.ibb.co/c8hgrTV/Notion-logo.png" alt="Notion-logo" border="0" style="width: 20px; height: 20px; opacity: 50%"/></a>
+            </li>
+        </ul>
     </div>
 </footer>
 
