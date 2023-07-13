@@ -9,6 +9,7 @@ import com.example.ticketKing.domain.Member.repository.MemberRepository;
 import com.example.ticketKing.domain.photo.entity.Photo;
 import com.example.ticketKing.domain.photo.controller.PhotoController;
 import com.example.ticketKing.domain.photo.repository.PhotoRepository;
+import com.example.ticketKing.global.exception.DuplicateUsernameException;
 import com.example.ticketKing.global.rsData.RsData;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -57,6 +58,10 @@ public class MemberService {
                 .password(dto.getPassword())
                 .email(dto.getEmail())
                 .build();
+
+        if (memberRepository.existsByUsername(member.getUsername())) {
+            throw new DuplicateUsernameException("Username is already taken.");
+        }
         return memberRepository.save(member);
     }
 

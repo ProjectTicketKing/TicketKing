@@ -1,9 +1,11 @@
 package com.example.ticketKing.global.error;
 
+import com.example.ticketKing.global.exception.DuplicateUsernameException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,6 +23,12 @@ public class ErrorController {
     public String forbidden(HttpServletResponse response) {
         response.setStatus(HttpStatus.FORBIDDEN.value());
         return "/usr/error/403";
+    }
+
+    @ExceptionHandler(DuplicateUsernameException.class)
+    public String handleDuplicateUsernameException(DuplicateUsernameException ex) {
+        // 중복된 사용자 이름 예외 처리 로직을 추가하세요.
+        return "/usr/error/duplicate-username";
     }
 
 }
