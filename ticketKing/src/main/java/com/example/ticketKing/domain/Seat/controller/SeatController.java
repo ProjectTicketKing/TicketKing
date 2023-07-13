@@ -85,13 +85,6 @@ public class SeatController {
         }
 
 
-        System.out.println("Confirm CHECk!!!!!!!!!!!!!");
-        System.out.println("Confirm CHECk!!!!!!!!!!!!!");
-        System.out.println("Confirm CHECk!!!!!!!!!!!!!");
-        System.out.println(finalRow);
-        System.out.println(finalCol);
-
-
         return "usr/concert/remain_seat";
     }
 
