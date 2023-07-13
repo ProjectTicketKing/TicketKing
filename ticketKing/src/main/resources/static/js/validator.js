@@ -119,10 +119,9 @@ function Withdraw__Submit(form) {
             let token = $("meta[name='_csrf']").attr('content');
 
             $.ajax({
-                url: form.action,
+                url: "/usr/member/withdraw",
                 type: "POST",
                 data: {
-                    _csrf: form._csrf.value,
                     password: input
                 },
                 beforeSend: function (xhr) {
@@ -130,7 +129,7 @@ function Withdraw__Submit(form) {
                 },
                 success: function (result) {
                     toastNotice('탈퇴 완료');
-                    window.location.href = '/main';
+                    window.location.href = '/';
                 },
                 error: function (request, status, error) {
                     toastWarning('올바르지 않은 비밀번호입니다.');
