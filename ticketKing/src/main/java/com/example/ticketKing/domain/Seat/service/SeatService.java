@@ -45,7 +45,8 @@ public class SeatService {
     public void seatStatusSave(String hallName,String type,Integer row, Integer column){
         Hall hall = hallRepository.findByName(hallName);
         Seat seat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(hall,type,row,column);
-        seat.setStatus("valid");
+        seat.setStatus("invalid");
+        seatRepository.save(seat);
     }
 
     public List<Seat> getSeatsByHallAndType(String hallName, String type) {
