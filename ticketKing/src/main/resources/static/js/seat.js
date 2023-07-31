@@ -126,7 +126,6 @@ function getSeatStatus() {
         .then(body => {
             pdo(body);
 
-            // drawSeat(body);
         });
 }
 

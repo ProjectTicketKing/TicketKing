@@ -111,20 +111,16 @@ public class SeatController {
 
     @MessageMapping("/seats/{hall}/{type}/seatInfo")
     @SendTo("/topic/seats/{hall}/{type}")
-    public SktRsData<List<Integer>> sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request
+    public SktRsData sendChatMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request
     ) {
         // 가져온 Seat의 status가 valid이면 => valid
         // 가져온 Seat의 status가 invalid이면 => invalid
         String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
         Integer row = request.getRow();
         Integer column = request.getColumn();
-
-
         List<Integer> rowCol = new ArrayList<>();
         rowCol.add(row);
         rowCol.add(column);
-
-
         SktRsData seatData = new SktRsData(status,rowCol);
 
         // RsData 만들어서 status, message, data 만들어서
@@ -140,23 +136,27 @@ public class SeatController {
 
 
     @MessageMapping("/seats/{hall}/{type}/confirmInfo")
-//    @SendTo("/topic/seats/{hall}/{type}")
-    public void sendConfirmMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request,
-                                   @AuthenticationPrincipal SecurityMember securityMember) {
+    @SendTo("/topic/seats/{hall}/{type}")
+    public SktRsData sendConfirmMessage(@DestinationVariable String hall, @DestinationVariable String type, SeatRequest request,
+                                        @AuthenticationPrincipal SecurityMember securityMember) {
 
+        // 가져온 Seat의 status가 valid이면 => valid
+        // 가져온 Seat의 status가 invalid이면 => invalid
+        String status = seatService.checkSeatStatus(hall, type, request.getRow(), request.getColumn());
+        Integer row = request.getRow();
+        Integer column = request.getColumn();
+        List<Integer> rowCol = new ArrayList<>();
+        rowCol.add(row);
+        rowCol.add(column);
+        SktRsData seatData = new SktRsData(status,rowCol);
 
-        log.info("hall : {}", hall);
-        log.info("type : {}", type);
-        log.info("row : {}", request.getRow());
-        log.info("column : {}", request.getColumn());
+        if(status.equals("valid")) {
+            practiceService.register(hall,type, request.getRow(), request.getColumn(), securityMember.getId());
+            seatService.seatStatusSave(hall,type, request.getRow(), request.getColumn());
+        }
 
-        log.info("securityMember : {}", securityMember);
-        log.info("securityMember id : {} ", securityMember.getId());
+        return seatData;
 
-
-
-        practiceService.register(hall,type, request.getRow(), request.getColumn(), securityMember.getId());
-        seatService.seatStatusSave(hall,type, request.getRow(), request.getColumn());
 
 
     }
