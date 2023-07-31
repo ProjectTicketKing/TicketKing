@@ -51,11 +51,6 @@ public class PracticeService {
 
         practiceRepository.save(practice);
 
-        System.out.println("register practice !!!!!!!!!!!!!!!");
-        System.out.println("register practice !!!!!!!!!!!!!!!");
-        System.out.println("register practice !!!!!!!!!!!!!!!");
-        System.out.println(practice);
-
         return RsData.of("S-1", "연습 등록이 완료되었습니다.", practice);
     }
 
