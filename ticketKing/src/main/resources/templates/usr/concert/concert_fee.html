@@ -17,6 +17,26 @@
             }
         });
     </script>
+    <script th:inline="javascript">
+        var hallValue = [[${hallValue}]];
+        var selectedLevel = [[${selectedLevel}]];
+    </script>
+
+    <!-- 좌석 정보 스크립트 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // localStorage에서 좌석 정보 가져오기
+            var seatRowValue = localStorage.getItem('selectedSeatRow');
+            var seatColumnValue = localStorage.getItem('selectedSeatColumn');
+
+            // 좌석 정보 출력
+            const seatRowValueElement = document.getElementById('seatRowValue');
+            seatRowValueElement.textContent = seatRowValue;
+
+            const seatColumnValueElement = document.getElementById('seatColumnValue');
+            seatColumnValueElement.textContent = seatColumnValue;
+        });
+    </script>
     <style>
         /* 모달 스타일 */
         .modal-overlay {
@@ -211,7 +231,8 @@
                                             </tr>
                                             <tr>
                                                 <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">선택 좌석</td>
-                                                <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;"></td>
+                                                <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">Row <span id="seatRowValue"></span> - Column <span id="seatColumnValue"></span></td>
+
                                             </tr>
                                             <tr>
                                                 <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">티켓 금액</td>
@@ -280,8 +301,3 @@
 </body>
 
 </html>
-
-<script th:inline="javascript">
-    var hallValue = [[${hallValue}]];
-    var selectedLevel = [[${selectedLevel}]];
-</script>

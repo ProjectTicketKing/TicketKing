@@ -177,6 +177,10 @@ function SeatClickEvent(row, column) {
     };
 
     stompClient.send(`/app/seats/${hall}/${type}/seatInfo`, {}, JSON.stringify(seatData));
+
+    // // TODO : 좌석 선택 후 localStorage에 저장
+    localStorage.setItem('selectedSeatRow', row);
+    localStorage.setItem('selectedSeatColumn', column);
 }
 
 
@@ -247,13 +251,12 @@ function connect() {
 }
 
 
+
 document.addEventListener("DOMContentLoaded", function() {
-    // ChatMessageUl = document.querySelector('.chat__message-ul');
     seatWrapper = document.querySelector(".seat-wrapper");
     connect();
     getSeatStatus();
 });
-
 
 function confirmSeat(){
     //TODO : 좌석을 선택하지 않고, 페이지 이동하려는 경우 안내창
@@ -273,8 +276,6 @@ function confirmSeat(){
         }
     }, 1000);
 
-    // ConfirmClickEvent(seatRow, seatColumn);
-    // location.href = '/usr/concert/' + hall + '/' + selectedLevel + '/cost';
 
 }
 
