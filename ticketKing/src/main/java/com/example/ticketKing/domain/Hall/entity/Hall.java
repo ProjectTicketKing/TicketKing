@@ -20,11 +20,14 @@ import static jakarta.persistence.FetchType.LAZY;
 @SuperBuilder
 public class Hall extends BaseEntity {
 
-    private String name;
-    private Integer seatCount;
+    private String name; // KSPO, OLYPS
+    private String area; // A,S ,VIP
+
+//    private Integer seatCount;
 
     @OneToMany(mappedBy= "hall", fetch = LAZY)
     private List<Concert> concerts;
+
 
 
 }

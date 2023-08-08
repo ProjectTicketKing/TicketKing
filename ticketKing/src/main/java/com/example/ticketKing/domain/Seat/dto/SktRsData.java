@@ -1,6 +1,5 @@
 package com.example.ticketKing.domain.Seat.dto;
 
-import com.example.ticketKing.global.rsData.RsData;
 import lombok.*;
 
 @Getter

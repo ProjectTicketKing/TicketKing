@@ -6,7 +6,6 @@ import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.repository.SeatRepository;
 import com.example.ticketKing.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.resource.beans.container.spi.BeanLifecycleStrategy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +18,17 @@ public class SeatService {
     private final SeatRepository seatRepository;
     private final HallRepository hallRepository;
 
+    private static final String INVALID_STATUS = "invalid";
+    private static final String VALID_STATUS = "valid";
+
     public List<Seat> getAllSeats() {
         return seatRepository.findAll();
     }
 
 
     @Transactional
-    public RsData<Seat> register(String seatType, Integer seatRow, Integer seatNumber, String status, Hall hall) {
-
+    public RsData<Seat> register(String seatType, Integer seatRow, Integer seatNumber, String status, Hall hall)
+    {
         Seat seat = Seat
                 .builder()
                 .seatType(seatType)
@@ -37,7 +39,6 @@ public class SeatService {
                 .build();
 
         seatRepository.save(seat);
-
         return RsData.of("S-1", "좌석 등록이 완료되었습니다", seat);
     }
 
@@ -45,11 +46,12 @@ public class SeatService {
     public void seatStatusSave(String hallName,String type,Integer row, Integer column){
         Hall hall = hallRepository.findByName(hallName);
         Seat seat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(hall,type,row,column);
-        seat.setStatus("invalid");
+        seat.setStatus(INVALID_STATUS);
         seatRepository.save(seat);
     }
 
-    public List<Seat> getSeatsByHallAndType(String hallName, String type) {
+    public List<Seat> getSeatsByHallAndType(String hallName, String type)
+    {
         Hall hall = hallRepository.findByName(hallName);
         return seatRepository.findByHallAndSeatType(hall, type);
     }
@@ -60,7 +62,8 @@ public class SeatService {
         return seatRepository.findBySeatType(type);
     }
 
-    public int getRow(String hall, String type) {
+    public int getRow(String hall, String type)
+    {
         if (Objects.equals(hall, "KSPO") && Objects.equals(type, "VIP")) {
             return 24;
         } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "R")) {
@@ -82,7 +85,8 @@ public class SeatService {
     }
 
 
-    public int getColumn(String hall, String type) {
+    public int getColumn(String hall, String type)
+    {
         if (Objects.equals(hall, "KSPO") && Objects.equals(type, "VIP")) {
             return 20;
         } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "R")) {
@@ -103,14 +107,16 @@ public class SeatService {
         return 10;
     }
 
-    public int[][] getValidSeats(String hallName, String type) {
+
+    public int[][] getValidSeats(String hallName, String type)
+    {
         Hall hall = hallRepository.findByName(hallName);
         List<Seat> seats = seatRepository.findByHallAndSeatType(hall, type);
 
 
         List<Seat> validSeats = new ArrayList<>();
         for (Seat seat : seats) {
-            if (seat.getStatus().equals("valid")) {
+            if (seat.getStatus().equals(VALID_STATUS)) {
                 validSeats.add(seat);
             }
         }
@@ -127,9 +133,8 @@ public class SeatService {
 
 
 
-
-
-    public String getSeatStatus(String hallName, String type, int row, int column) {
+    public String getSeatStatus(String hallName, String type, int row, int column)
+    {
 
         Hall hall = hallRepository.findByName(hallName);
         Seat targetSeat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(hall,type,row,column);
@@ -139,50 +144,45 @@ public class SeatService {
 
 
     @Transactional
-    public void updateRandomSeatStatusToInvalid(String hallName, String type) {
+    public void updateRandomSeatStatusToInvalid(String hallName, String type)
+    {
         Hall hall = hallRepository.findByName(hallName);
-        List<Seat> seats = seatRepository.findByHallAndSeatTypeAndStatus(hall, type, "valid");
+        List<Seat> seats = seatRepository.findByHallAndSeatTypeAndStatus(hall, type, VALID_STATUS);
 
         if (!seats.isEmpty()) {
             // 랜덤으로 Seat 선택
             Seat randomSeat = seats.get(new Random().nextInt(seats.size()));
-            randomSeat.setStatus("invalid");
+            randomSeat.setStatus(INVALID_STATUS);
             seatRepository.save(randomSeat);
         }
     }
-    @Transactional
-    public void initializeSeat(String hallName){
-        Hall hall =  hallRepository.findByName(hallName);
-        List<Seat> seats = seatRepository.findByHall(hall);
 
 
-        for (Seat seat : seats) {
-            seat.setStatus("valid");
-            seatRepository.save(seat);
-        }
-
-    }
-
-
-    public String checkSeatStatus(String hall, String type, Integer row, Integer col){
+    public String checkSeatStatus(String hall, String type, Integer row, Integer col)
+    {
         Hall targetedHall = hallRepository.findByName(hall);
-
         Seat seat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(targetedHall, type, row, col);
 
         if (seat != null) {
-            if (seat.getStatus().equals("valid")) {
-                return "valid";
-            } else if (seat.getStatus().equals("invalid")) {
-                return "invalid";
+            if (seat.getStatus().equals(VALID_STATUS)) {
+                return VALID_STATUS;
+            } else if (seat.getStatus().equals(INVALID_STATUS)) {
+                return INVALID_STATUS;
             }
         }
+
         return "none-exist";
     }
 
 
 
-
-
-
+    @Transactional
+    public void initializeAllSeats() {
+        List<Seat> seats = getAllSeats();
+        for (Seat seat : seats) {
+            seat.setStatus(VALID_STATUS);
+            seatRepository.save(seat);
+        }
+    }
 
 }

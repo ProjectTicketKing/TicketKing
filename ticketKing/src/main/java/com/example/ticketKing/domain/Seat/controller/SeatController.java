@@ -5,6 +5,7 @@ import com.example.ticketKing.domain.Practice.service.PracticeService;
 import com.example.ticketKing.domain.Seat.dto.SktRsData;
 import com.example.ticketKing.domain.Seat.service.SeatService;
 import com.example.ticketKing.global.rq.Rq;
+import com.example.ticketKing.global.schedule.SeatStatusScheduler;
 import com.example.ticketKing.global.security.SecurityMember;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
@@ -30,49 +31,20 @@ public class SeatController {
     private final SeatService seatService;
     private final PracticeService practiceService;
     private final Rq rq;
-
-    private ScheduledExecutorService executor;
-    private Set<String> scheduledHalls = new HashSet<>();
-
-    Integer finalRow = 0;
-    Integer finalCol = 0;
+    private final SeatStatusScheduler seatStatusScheduler;
 
 
-    // 스케줄링 시작 메서드
     private void startSeatStatusUpdateSchedule(String hall, String type, String level) {
-        executor = Executors.newSingleThreadScheduledExecutor();
-
-
-//
-        long initialDelay = 0;
-        long period = 0;
-        System.out.println("level!!!!!!!!");
-        System.out.println(level);
-        if (level.equals("basic")) {
-            initialDelay = 5000;
-            period = 5000; // 5 seconds
-        } else if (level.equals("advanced")) {
-            initialDelay = 1000;
-            period = 1000; // 3 seconds
-        }
-        executor.scheduleAtFixedRate(() -> seatService.updateRandomSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
+        seatStatusScheduler.startSeatStatusUpdateSchedule(seatService, hall, type, level);
     }
 
-
-
-    // 스케줄링 중지 메서드
     public void stopSeatStatusUpdateSchedule() {
-        if (executor != null && !executor.isShutdown()) {
-            executor.shutdown();
+        if (seatStatusScheduler != null) {
+            seatStatusScheduler.stopSeatStatusUpdateSchedule();
         }
     }
 
-    @GetMapping("/")
-    public String showMain() {
 
-        stopScheduledExecutorService();
-        return "usr/main/home";
-    }
 
     @GetMapping("/usr/concert/{hall}/{level}/cost")
     public String showConcertCost(Model model, @PathVariable String hall, @PathVariable String level) {
@@ -92,12 +64,6 @@ public class SeatController {
         model.addAttribute("selectedLevel",level);
 
         startSeatStatusUpdateSchedule(hall, type, level);
-
-        // 스케줄링이 시작되지 않았을 때만 스케줄링 시작
-//        if (!scheduledHalls.contains(hall)) {
-//            startSeatStatusUpdateSchedule(hall, type, level);
-//            scheduledHalls.add(hall);
-//        }
 
 
         return "usr/concert/remain_seat";
@@ -123,16 +89,9 @@ public class SeatController {
         rowCol.add(column);
         SktRsData seatData = new SktRsData(status,rowCol);
 
-        // RsData 만들어서 status, message, data 만들어서
-        // Signal Type
-        // subscribe단에서 type을 줘서 프론트에서 if문을 써서 처리할 수 있도록
-        // data generic타입으로
-        // 프론트 단에서 리스트처리
-
         return seatData;
 
     }
-
 
 
     @MessageMapping("/seats/{hall}/{type}/confirmInfo")
