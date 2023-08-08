@@ -23,8 +23,6 @@ public class ConcertController {
     }
 
 
-
-
     @GetMapping("/usr/concert/{hall}/{level}/date")
     public String showConcertDate(Model model, @PathVariable String hall, @PathVariable String level) {
         model.addAttribute("hallValue", hall);

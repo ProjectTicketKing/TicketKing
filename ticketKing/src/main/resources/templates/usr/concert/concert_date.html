@@ -48,32 +48,41 @@
                     <!-- 관람일 선택 -->
                     <div class="flex justify-center">
                         <div class="p-4">
-                            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">관람일 선택</p>
-                            <style>
-                                .custom-input {
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    appearance: none;
-                                    padding: 0.32rem 1rem;
-                                    background-color: #ffffff;
-                                    color: #9B6DFF;
-                                    border-color: #9B6DFF;
-                                    background-image: none;
-                                }
-                            </style>
-                            <div class="flex-col">
-                                <label for="startDateInput" class="sr-only">관람일 선택</label>
-                                <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />
-                            </div>
+                            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">선택한 관람일 : <span id="selectedDate"></span></p>
+
                             <script>
-                                var startDateInput = document.getElementById('startDateInput');
-                                startDateInput.addEventListener('change', function() {
-                                    if (startDateInput.value === '') {
-                                        startDateInput.type = 'text';
-                                        startDateInput.value = '관람일';
-                                    }
-                                });
+                                var selectedStartDate = localStorage.getItem('selectedStartDate');
+                                if (selectedStartDate) {
+                                    var selectedDateElement = document.getElementById('selectedDate');
+                                    selectedDateElement.textContent = selectedStartDate;
+                                }
                             </script>
+<!--                            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">관람일 선택</p>-->
+<!--                            <style>-->
+<!--                                .custom-input {-->
+<!--                                    -webkit-appearance: none;-->
+<!--                                    -moz-appearance: none;-->
+<!--                                    appearance: none;-->
+<!--                                    padding: 0.32rem 1rem;-->
+<!--                                    background-color: #ffffff;-->
+<!--                                    color: #9B6DFF;-->
+<!--                                    border-color: #9B6DFF;-->
+<!--                                    background-image: none;-->
+<!--                                }-->
+<!--                            </style>-->
+<!--                            <div class="flex-col">-->
+<!--                                <label for="startDateInput" class="sr-only">관람일 선택</label>-->
+<!--                                <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />-->
+<!--                            </div>-->
+<!--                            <script>-->
+<!--                                var startDateInput = document.getElementById('startDateInput');-->
+<!--                                startDateInput.addEventListener('change', function() {-->
+<!--                                    if (startDateInput.value === '') {-->
+<!--                                        startDateInput.type = 'text';-->
+<!--                                        startDateInput.value = '관람일';-->
+<!--                                    }-->
+<!--                                });-->
+<!--                            </script>-->
                         </div>
                     </div>
 

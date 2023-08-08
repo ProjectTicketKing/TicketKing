@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function startGame() {
+    console.log("Start button clicked!"); // 확인용 로그
     var timerDisplay = document.getElementById('timer');
     var startButton = document.getElementById('startButton');
     var timeSelect = document.getElementById('timeSelect');
