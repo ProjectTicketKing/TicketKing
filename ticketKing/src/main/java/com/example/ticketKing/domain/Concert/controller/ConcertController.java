@@ -18,7 +18,6 @@ public class ConcertController {
     @GetMapping("/usr/concert/{hall}")
     public String showConcert(Model model,@PathVariable String hall) {
         model.addAttribute("hallValue", hall);
-        seatService.initializeSeat(hall);
 
         return "usr/concert/concert";
     }

@@ -21,7 +21,6 @@ public class HallService
         Hall hall = Hall
                 .builder()
                 .name(name)
-                .seatCount(seatCount)
                 .build();
 
         hallRepository.save(hall);

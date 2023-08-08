@@ -13,5 +13,4 @@ public class SeatRequest {
     private int row;
     private int column;
 
-    // getters and setters
 }
