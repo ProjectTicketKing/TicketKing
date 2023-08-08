@@ -14,6 +14,17 @@
 <!--        seatColumnValueElement.textContent = seatColumn.toString();-->
 
 <!--    </script>-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectedStartDate = localStorage.getItem('selectedStartDate');
+            if (selectedStartDate) {
+                var selectedDateElements = document.getElementsByClassName('selected-date');
+                for (var i = 0; i < selectedDateElements.length; i++) {
+                    selectedDateElements[i].textContent = selectedStartDate;
+                }
+            }
+        });
+    </script>
 
 
 </head>
@@ -182,7 +193,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">관람일시</td>
-                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">23-07-15</td>
+                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;"><span class="selected-date"></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">선택 좌석</td>
