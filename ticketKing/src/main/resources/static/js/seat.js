@@ -124,9 +124,24 @@ function getSeatStatus() {
         }})
         .then(response => response.json())
         .then(body => {
+            //TODO: Valid seats 정보 업데이트
+            valid = [];
+            secondValid = [];
+
             pdo(body);
 
+            // TODO:선택 가능한 좌석이 없는 경우
+            if (valid.length === 0) {
+                document.getElementById("seatConfirmButton").disabled = true;
+                openModalFail();
+            } else {
+                document.getElementById("seatConfirmButton").disabled = false;
+                closeModal();
+            }
+
         });
+
+
 }
 
 // seat의 status를 출력해주는
@@ -199,11 +214,15 @@ function connect() {
 
             if (parsedData.status === "invalid") {
                 getSeatStatus();
+                seatStatus = "invalid";
                 alert("실패");
 
-                setTimeout(function () {
-                    location.reload();
-                }, 300);
+                // alert("실패");
+                //
+                // setTimeout(function () {
+                //     location.reload();
+                // }, 300);
+
             } else {
                 alert("성공");
                 console.log("성공 seatData.body 확인");
@@ -212,6 +231,9 @@ function connect() {
 
                 seatRow = parsedData.data[0];
                 seatColumn = parsedData.data[1];
+
+                //TODO: 성공여부 시점 수정
+                seatStatus = "valid"; // 좌석 상태를 '유효'로 설정
 
                 const seatRowValueElement = document.getElementById('seatRowValue');
                 seatRowValueElement.textContent = seatRow.toString();
@@ -233,9 +255,26 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-
 function confirmSeat(){
+    //TODO : 좌석을 선택하지 않고, 페이지 이동하려는 경우 안내창
+    if (selectedSeats.length === 0) {
+        alert("좌석을 먼저 선택해주세요.");
+        return;
+    }
+
     ConfirmClickEvent(seatRow, seatColumn);
-    location.href = '/usr/concert/' + hall + '/' + selectedLevel + '/cost';
+
+    // TODO:서버로부터 응답을 기다린 후에 페이지 이동 처리
+    setTimeout(() => {
+        if (seatStatus === "valid") {
+            location.href = '/usr/concert/' + hall + '/' + selectedLevel + '/cost';
+        } else {
+            openModalFail();
+        }
+    }, 1000);
+
+    // ConfirmClickEvent(seatRow, seatColumn);
+    // location.href = '/usr/concert/' + hall + '/' + selectedLevel + '/cost';
+
 }
+

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
@@ -23,20 +24,22 @@ public class SecurityConfig {
                                 .loginPage("/usr/member/login")
                                 .defaultSuccessUrl("/")
                 )
-//                .oauth2Login(
-//                        oauth2Login -> oauth2Login
-//                                .loginPage("/usr/member/login")
-//                                .tokenEndpoint(t -> t
-//                                        .accessTokenResponseClient(oAuth2AccessTokenResponseClient)
-//                                )
-//                )
                 .logout(
                         logout -> logout
                                 .logoutUrl("/usr/member/logout")
-                );
+                )
+                .authorizeRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/usr/concert/**") // 특정 URL 패턴 설정
+                                .authenticated() // 인증된 사용자만 접근 허용
+                )
+                .authorizeRequests()
+                .anyRequest() // 나머지 모든 요청에 대해서
+                .permitAll(); // 모든 사용자에게 접근 허용
 
         return http.build();
     }
+
 
     @Bean
     PasswordEncoder passwordEncoder() {

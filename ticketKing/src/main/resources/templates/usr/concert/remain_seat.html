@@ -8,6 +8,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script th:inline="javascript">
+        const token = /*[[${_csrf.token}]]*/ '';
+        var hallValue = [[${hallValue}]];
+
+        var selectedLevel = [[${selectedLevel}]];
+
+        const hall = [[${hall}]];
+        console.log(hall)
+        const type =  [[${type}]];
+        console.log(type)
+        const level = [[${level}]];
+        console.log(level)
+    </script>
+
+    <script th:src="@{/js/seat.js}" type="application/javascript"></script>
+
     <style>
         .seat {
             width: 20px;
@@ -37,25 +54,69 @@
             color: transparent;
         }
     </style>
-    <script th:inline="javascript">
-        const token = /*[[${_csrf.token}]]*/ '';
-    </script>
 
-    <script th:inline="javascript">
-        const hall = [[${hall}]];
-        console.log(hall)
-        const type =  [[${type}]];
-        console.log(type)
-        const level = [[${level}]];
-        console.log(level)
-    </script>
-    <script th:src="@{/js/seat.js}" type="application/javascript"></script>
+    <style>
+        /* 모달 스타일 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
 
-    <script th:inline="javascript">
-        var hallValue = [[${hallValue}]];
-        var selectedLevel = [[${selectedLevel}]];
-        // var type = [[${type}]];
-    </script>
+        .modal-content {
+            background-color: #fff;
+            padding: 58px;
+            border-radius: 5px;
+            font-size: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .modal-content h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .modal-content img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+        }
+
+        .modal-content input {
+            font-size: 15px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            font-size: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -118,10 +179,10 @@
 
             <!-- 버튼 -->
             <div class="mt-7 flex justify-center relative absolute -left-[-850px] -top-[400px]">
-                <!--        <button id="seatConfirmButton" class="modal-close" onclick="confirmSeat()">좌석 선택 완료하기</button>-->
                 <button id="seatConfirmButton" class="custom-button rounded-lg border-none w-full py-4"
                         style="background-color: #664AFF; color: #ffffff" onclick="confirmSeat()">좌석 선택 완료</button>
             </div>
+            <!--        <button id="seatConfirmButton" class="modal-close" onclick="confirmSeat()">좌석 선택 완료하기</button>-->
 
             <div class="mt-3 flex justify-center relative absolute -left-[-850px] -top-[400px]">
                 <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
@@ -130,10 +191,47 @@
 
             <div class="mt-3 flex justify-between relative absolute -left-[-850px] -top-[400px]">
                 <button type="submit" class="custom-button rounded-lg border-none py-2"
-                        style="background-color: #ffffff; color: #664AFF; width: 100%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/date'"> &lt; 이전 단계</button>
+                        style="background-color: #ffffff; color: #664AFF; width: 100%; font-size: 80%"
+                        onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/date'"> &lt; 이전 단계</button>
 
             </div>
+
+
         </div>
+
+        <!-- 실패시 모달창 -->
+        <div id="modalFail" class="modal-overlay">
+            <div class="modal-content">
+                <p style="color: #FF6B6B;">티켓팅에 실패하셨습니다</p>
+                <img src="https://i.ibb.co/VW3x9rv/failure.png" alt="failure">
+                <button type="button" class="custom-button rounded-lg border-none w-full py-4"
+                        style="background-color: #FF6B6B; color: #ffffff" onclick="closeModalAndRedirect()">다시하기</button>
+            </div>
+        </div>
+
+
+        <script>
+            function openModalFail() {
+                var modalFail = document.getElementById("modalFail");
+                modalFail.style.display = "block";
+                document.getElementById("seatConfirmButton").disabled = true;
+            }
+
+
+            function closeModal() {
+                var modalFail = document.getElementById("modalFail");
+                modalFail.style.display = "none";
+            }
+
+            function closeModalAndRedirect() {
+                var modalFail = document.getElementById("modalFail");
+                modalFail.style.display = "none";
+                window.location.href = '/';
+                // window.location.href = '/usr/concert/' + hallValue + '/' + selectedLevel + '/date';
+
+            }
+        </script>
+
 
     </div>
 

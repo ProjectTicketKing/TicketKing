@@ -59,7 +59,7 @@ public class SeatController {
                               @PathVariable("hall") String hall,
                               @PathVariable("type") String type,
                               @PathVariable("level") String level) {
-        model.addAttribute("hall", hall);
+        model.addAttribute("hallValue", hall);
         model.addAttribute("type", type);
         model.addAttribute("selectedLevel",level);
 
