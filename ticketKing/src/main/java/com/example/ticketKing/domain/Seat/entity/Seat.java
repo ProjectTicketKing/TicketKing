@@ -40,4 +40,3 @@ public class Seat extends BaseEntity {
         this.status = status;
     }
 }
-

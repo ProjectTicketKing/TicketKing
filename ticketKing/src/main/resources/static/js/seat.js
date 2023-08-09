@@ -110,7 +110,6 @@ function reverseMapping(inputValue) {
 }
 
 
-
 //소켓적용
 function getSeatStatus() {
     console.log("getSeatStatus")
@@ -196,6 +195,7 @@ function ConfirmClickEvent(row, column) {
     };
 
     stompClient.send(`/app/seats/${hall}/${type}/confirmInfo`, {}, JSON.stringify(seatData));
+
 
 }
 

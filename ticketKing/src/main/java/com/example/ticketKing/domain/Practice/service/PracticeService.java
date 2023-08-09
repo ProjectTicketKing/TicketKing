@@ -36,17 +36,17 @@ public class PracticeService {
         Seat seat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(hall, type, row, col);
         Member member = null;
         Optional<Member> memData = memberRepository.findById(userId);
-        
+
         if (memData.isPresent()) {
             member = memData.get();
         } else {
         }
-     
+
         Practice practice = Practice
-                        .builder()
-                        .seat(seat)
-                         .member(member)
-                         .build();
+                .builder()
+                .seat(seat)
+                .member(member)
+                .build();
 
 
         practiceRepository.save(practice);

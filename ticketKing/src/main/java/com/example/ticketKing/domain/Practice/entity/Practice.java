@@ -19,7 +19,6 @@ import static jakarta.persistence.FetchType.LAZY;
 @Builder
 public class Practice extends BaseEntity {
 
-
     @ManyToOne(fetch = LAZY)
     private Seat seat;
 
@@ -27,6 +26,5 @@ public class Practice extends BaseEntity {
     private Member member;
 
 
-
-
 }
+
