@@ -48,32 +48,45 @@
                     <!-- 관람일 선택 -->
                     <div class="flex justify-center">
                         <div class="p-4">
-                            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">관람일 선택</p>
-                            <style>
-                                .custom-input {
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    appearance: none;
-                                    padding: 0.32rem 1rem;
-                                    background-color: #ffffff;
-                                    color: #9B6DFF;
-                                    border-color: #9B6DFF;
-                                    background-image: none;
-                                }
-                            </style>
-                            <div class="flex-col">
-                                <label for="startDateInput" class="sr-only">관람일 선택</label>
-                                <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />
-                            </div>
+                            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">선택한 관람일 : <span class="selected-date"></span></p>
                             <script>
-                                var startDateInput = document.getElementById('startDateInput');
-                                startDateInput.addEventListener('change', function() {
-                                    if (startDateInput.value === '') {
-                                        startDateInput.type = 'text';
-                                        startDateInput.value = '관람일';
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    var selectedStartDate = localStorage.getItem('selectedStartDate');
+                                    if (selectedStartDate) {
+                                        var selectedDateElements = document.getElementsByClassName('selected-date');
+                                        for (var i = 0; i < selectedDateElements.length; i++) {
+                                            selectedDateElements[i].textContent = selectedStartDate;
+                                        }
                                     }
                                 });
                             </script>
+
+<!--                            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">관람일 선택</p>-->
+<!--                            <style>-->
+<!--                                .custom-input {-->
+<!--                                    -webkit-appearance: none;-->
+<!--                                    -moz-appearance: none;-->
+<!--                                    appearance: none;-->
+<!--                                    padding: 0.32rem 1rem;-->
+<!--                                    background-color: #ffffff;-->
+<!--                                    color: #9B6DFF;-->
+<!--                                    border-color: #9B6DFF;-->
+<!--                                    background-image: none;-->
+<!--                                }-->
+<!--                            </style>-->
+<!--                            <div class="flex-col">-->
+<!--                                <label for="startDateInput" class="sr-only">관람일 선택</label>-->
+<!--                                <input type="date" name="startDate" class="text-gray-300 select select mb-0.5 custom-input" id="startDateInput" style="width: 200px;" />-->
+<!--                            </div>-->
+<!--                            <script>-->
+<!--                                var startDateInput = document.getElementById('startDateInput');-->
+<!--                                startDateInput.addEventListener('change', function() {-->
+<!--                                    if (startDateInput.value === '') {-->
+<!--                                        startDateInput.type = 'text';-->
+<!--                                        startDateInput.value = '관람일';-->
+<!--                                    }-->
+<!--                                });-->
+<!--                            </script>-->
                         </div>
                     </div>
 
@@ -168,8 +181,9 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">관람일시</td>
-                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">23-07-15</td>
+                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;"><span class="selected-date"></span></td>
                                                 </tr>
+
                                                 <tr>
                                                     <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">선택 좌석</td>
                                                     <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;"></td>

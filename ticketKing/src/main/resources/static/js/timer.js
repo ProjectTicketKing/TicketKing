@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function startGame() {
+
     var timerDisplay = document.getElementById('timer');
     var startButton = document.getElementById('startButton');
     var timeSelect = document.getElementById('timeSelect');

@@ -149,6 +149,8 @@
                                     if (startDateInput.value === '') {
                                         startDateInput.type = 'text';
                                         startDateInput.value = '관람일';
+                                    } else {
+                                        localStorage.setItem('selectedStartDate', startDateInput.value);
                                     }
                                 });
                             </script>
@@ -189,7 +191,8 @@
                 </div>
 
                 <div id="startContainer">
-                    <button id="startButton" onclick="checkCaptcha();" class="custom-button rounded-lg border-none w-full py-4 mt-7 flex justify-center" style="background-color: #664AFF; color: #ffffff; display: flex; justify-content: center; align-items: center;">연습 게임 시작하기</button>
+                    <button id="startButton" onclick="checkCaptcha();" class="custom-button rounded-lg border-none w-full py-4 mt-7 flex justify-center"
+                            style="background-color: #664AFF; color: #ffffff; display: flex; justify-content: center; align-items: center;">연습 게임 시작하기</button>
                 </div>
             </div>
         </div>
