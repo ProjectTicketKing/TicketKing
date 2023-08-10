@@ -62,57 +62,29 @@ public class SeatService {
         return seatRepository.findBySeatType(type);
     }
 
-    public int getRow(String hall, String type)
-    {
-        if (Objects.equals(hall, "KSPO") && Objects.equals(type, "VIP")) {
-            return 24;
-        } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "R")) {
-            return 22;
-        } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "A")) {
-            return 20;
-        }
-        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "VIP")) {
-            return 25;
-        }
-        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "S")) {
-            return 20;
-        }
-        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "G")) {
-            return 25;
-        }
 
-        return 10;
+    public int getRow(String hall, String type) {
+        Map<String, Map<String, Integer>> hallTypeToRows = new HashMap<>();
+
+        hallTypeToRows.put("KSPO", Map.of("VIP", 24, "R", 22, "A", 20));
+        hallTypeToRows.put("OLYSDM", Map.of("VIP", 25, "S", 20, "G", 25));
+
+        return hallTypeToRows.getOrDefault(hall, Map.of()).getOrDefault(type, 10);
+    }
+
+    public int getColumn(String hall, String type) {
+        Map<String, Map<String, Integer>> hallTypeToColumns = new HashMap<>();
+
+        hallTypeToColumns.put("KSPO", Map.of("VIP", 20, "R", 20, "A", 26));
+        hallTypeToColumns.put("OLYSDM", Map.of("VIP", 35, "S", 25, "G", 35));
+
+        return hallTypeToColumns.getOrDefault(hall, Map.of()).getOrDefault(type, 10);
     }
 
 
-    public int getColumn(String hall, String type)
-    {
-        if (Objects.equals(hall, "KSPO") && Objects.equals(type, "VIP")) {
-            return 20;
-        } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "R")) {
-            return 20;
-        } else if (Objects.equals(hall, "KSPO") && Objects.equals(type, "A")) {
-            return 26;
-        }
-        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "VIP")) {
-            return 35;
-        }
-        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "S")) {
-            return 25;
-        }
-        else if (Objects.equals(hall, "OLYSDM") && Objects.equals(type, "G")) {
-            return 35;
-        }
-
-        return 10;
-    }
-
-
-    public int[][] getValidSeats(String hallName, String type)
-    {
+    public int[][] getValidSeats(String hallName, String type) {
         Hall hall = hallRepository.findByName(hallName);
         List<Seat> seats = seatRepository.findByHallAndSeatType(hall, type);
-
 
         List<Seat> validSeats = new ArrayList<>();
         for (Seat seat : seats) {
@@ -121,12 +93,10 @@ public class SeatService {
             }
         }
 
-        Seat[] validSeatsArray = validSeats.toArray(new Seat[0]);
-
-        int[][] seatRowCol = new int[validSeatsArray.length][2];
-        for (int i = 0; i < validSeatsArray.length; i++) {
-            seatRowCol[i][0] = validSeatsArray[i].getSeatRow();
-            seatRowCol[i][1] = validSeatsArray[i].getSeatNumber();
+        int[][] seatRowCol = new int[validSeats.size()][2];
+        for (int i = 0; i < validSeats.size(); i++) {
+            seatRowCol[i][0] = validSeats.get(i).getSeatRow();
+            seatRowCol[i][1] = validSeats.get(i).getSeatNumber();
         }
         return seatRowCol;
     }
