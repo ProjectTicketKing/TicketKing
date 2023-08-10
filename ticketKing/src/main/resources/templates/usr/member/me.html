@@ -178,21 +178,31 @@
             <button id="withdrawActive" class="link self-start hidden-input" style="margin-top: 50px; margin-left: 600px;">탈퇴하기</button>
         </form>
     </div>
+
     <div class="flex-col flex items-start justify-start pt-2 pl-60">
         <h2 class="text-sm font-bold my-2 block border-b-2 border-[#9B6DFF] pb-1.5">연습결과</h2>
     </div>
-    <div class="flex-col flex items-center justify-center">
-        <div class="border-2 border-[#7A7A7A] rounded-xl font-bold text-xs text-black mt-5">
-            <ul class="bg-[#c0a8f6] border-b-2 border-[#7A7A7A] rounded-lg flex justify-center items-center" style="width: 50vw; height: 7vh">
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">선택한 좌석</li>
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">티켓팅 성공여부</li>
-            </ul>
-            <ul class="flex justify-center items-center" style="width: 50vw; height: 10vh">
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;">Row <span id="seatRowValue"></span> - Column <span id="seatColumnValue"></span></li>
-                <li class="flex justify-center items-center border-r-2 border-[#7A7A7A]" style="width: inherit; height: inherit;"></li>
-            </ul>
-        </div>
+
+    <div class="flex-col flex items-center justify-center pt-2 pl-60 pr-60">
+        <table class="border-collapse border w-full">
+            <thead>
+            <tr class="bg-gray-200">
+                <th class="border p-2">성공 시간</th>
+                <th class="border p-2">선택한 좌석</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="practice : ${practices}">
+                <td class="border p-2">
+                    <span th:text="${#temporals.format(practice.seatSelectionTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                </td>
+                <td class="border p-2" th:text="${practice.selectedSeatInfo}"></td>
+            </tr>
+
+            </tbody>
+        </table>
     </div>
+
 </main>
 
 </body>

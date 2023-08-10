@@ -48,6 +48,8 @@ public class SeatController {
 
     @GetMapping("/usr/concert/{hall}/{level}/cost")
     public String showConcertCost(Model model, @PathVariable String hall, @PathVariable String level) {
+
+
         model.addAttribute("hallValue", hall);
         model.addAttribute("selectedLevel", level);
         stopScheduledExecutorService();
@@ -115,7 +117,6 @@ public class SeatController {
         }
 
         return seatData;
-
 
 
     }

@@ -25,6 +25,10 @@ public class Practice extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Member member;
 
+    private LocalDateTime seatSelectionTime;
+
+    private String selectedSeatInfo;
+
 
 }
 

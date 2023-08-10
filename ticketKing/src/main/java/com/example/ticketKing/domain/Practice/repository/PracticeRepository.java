@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PracticeRepository extends JpaRepository<Practice,Long> {
 
+    List<Practice> findByMemberId(Long memberId);
 }
