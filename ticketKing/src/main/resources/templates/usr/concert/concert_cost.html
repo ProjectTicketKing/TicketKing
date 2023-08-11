@@ -2,7 +2,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
 
-
 <head>
     <meta charset="UTF-8">
     <title>공연 정보</title>
@@ -25,30 +24,11 @@
         var selectedLevel = [[${selectedLevel}]];
     </script>
 
-    <!-- 좌석 정보 스크립트 -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // localStorage에서 좌석 정보 가져오기
-            var seatRowValue = localStorage.getItem('selectedSeatRow');
-            var seatColumnValue = localStorage.getItem('selectedSeatColumn');
-
-            // 좌석 정보 출력
-            const seatRowValueElement = document.getElementById('seatRowValue');
-            seatRowValueElement.textContent = seatRowValue;
-
-            const seatColumnValueElement = document.getElementById('seatColumnValue');
-            seatColumnValueElement.textContent = seatColumnValue;
-        });
-    </script>
-
-
-
 </head>
 
 <body>
 
 <main layout:fragment="main" class="flex flex-col items-center mt-10 w-full min-h-screen">
-
 
     <!-- 예매창 네비바 -->
     <nav class=" font-bold text-xs text-white mt-2">
@@ -213,10 +193,10 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">선택 좌석</td>
-                                                    <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">Row <span id="seatRowValue"></span> - Column <span id="seatColumnValue"></span></td>
-
+                                                    <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">
+                                                        <span th:if="${latestPractice != null}" th:text="${latestPractice.selectedSeatInfo}"></span>
+                                                    </td>
                                                 </tr>
-
                                                 <tr>
                                                     <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">티켓 금액</td>
                                                     <td class="whitespace-nowrap px-4 py-1" style="font-size: 12px;">121,000원</td>
@@ -253,8 +233,6 @@
             </div>
         </div>
     </div>
-
-
 
 </main>
 

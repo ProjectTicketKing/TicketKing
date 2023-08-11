@@ -1,6 +1,10 @@
 package com.example.ticketKing.domain.Seat.controller;
 
 
+import com.example.ticketKing.domain.Member.entity.Member;
+import com.example.ticketKing.domain.Member.service.MemberService;
+import com.example.ticketKing.domain.Practice.entity.Practice;
+import com.example.ticketKing.domain.Practice.repository.PracticeRepository;
 import com.example.ticketKing.domain.Practice.service.PracticeService;
 import com.example.ticketKing.domain.Seat.dto.SktRsData;
 import com.example.ticketKing.domain.Seat.service.SeatService;
@@ -32,6 +36,8 @@ public class SeatController {
     private final PracticeService practiceService;
     private final Rq rq;
     private final SeatStatusScheduler seatStatusScheduler;
+    private final MemberService memberService;
+    private final PracticeRepository practiceRepository;
 
 
     private void startSeatStatusUpdateSchedule(String hall, String type, String level) {
@@ -47,9 +53,17 @@ public class SeatController {
 
 
     @GetMapping("/usr/concert/{hall}/{level}/cost")
-    public String showConcertCost(Model model, @PathVariable String hall, @PathVariable String level) {
+    public String showConcertCost(Model model, @PathVariable String hall, @PathVariable String level, 
+                                  @AuthenticationPrincipal SecurityMember securityMember) {
+        Long memberId = securityMember.getId();
+        Member member = memberService.getMemberFromUsername(securityMember.getUsername());
+        // 가장 최신의 선택 기록을 가져옵니다.
+        Optional<Practice> latestPractice = practiceRepository.findTopByMemberIdOrderBySeatSelectionTimeDesc(memberId);
+
+
         model.addAttribute("hallValue", hall);
         model.addAttribute("selectedLevel", level);
+        model.addAttribute("latestPractice", latestPractice.orElse(null));
         stopScheduledExecutorService();
         return "usr/concert/concert_cost"; }
 
@@ -115,7 +129,6 @@ public class SeatController {
         }
 
         return seatData;
-
 
 
     }

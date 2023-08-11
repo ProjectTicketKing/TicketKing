@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,13 +48,12 @@ public class PracticeService {
                 .builder()
                 .seat(seat)
                 .member(member)
+                .seatSelectionTime(LocalDateTime.now())
+                .selectedSeatInfo(String.format("%s-%d-%d", type, row, col))
                 .build();
-
 
         practiceRepository.save(practice);
 
         return RsData.of("S-1", "연습 등록이 완료되었습니다.", practice);
     }
-
-
 }
