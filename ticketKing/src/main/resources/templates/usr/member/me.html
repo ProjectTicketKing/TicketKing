@@ -52,22 +52,6 @@
         var selectedLevel = [[${selectedLevel}]];
     </script>
 
-    <!-- 좌석 정보 스크립트 -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // localStorage에서 좌석 정보 가져오기
-            var seatRowValue = localStorage.getItem('selectedSeatRow');
-            var seatColumnValue = localStorage.getItem('selectedSeatColumn');
-
-            // 좌석 정보 출력
-            const seatRowValueElement = document.getElementById('seatRowValue');
-            seatRowValueElement.textContent = seatRowValue;
-
-            const seatColumnValueElement = document.getElementById('seatColumnValue');
-            seatColumnValueElement.textContent = seatColumnValue;
-        });
-    </script>
-
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <meta name="_csrf" th:content="${_csrf.token}">
 
@@ -99,7 +83,6 @@
 
         <a th:if="${@rq.logout}" th:href="@{/usr/member/login}" class="btn btn-sm bg mx-2 border-none" style="background-color: #F2F4F4; color: #9B6DFF">로그인</a>
 
-        <!--            <a href="/usr/member/me" th:if="${@rq.login}" class="btn btn-sm rounded-lg font-bold mx-2 border-none bg-opacity-0" style="background-color: #121212; color: #9B6DFF">MY PAGE</a>-->
 
         <form th:if="${@rq.login}" th:action="|/usr/member/logout|" method="post" class="m-0">
             <button th:if="${@rq.login}" type="submit" class="btn btn-sm btn-ghost" style="background-color: #F2F4F4; color: #9B6DFF;">로그아웃</button>
@@ -189,6 +172,7 @@
             <tr class="bg-gray-200">
                 <th class="border p-2">성공 시간</th>
                 <th class="border p-2">선택한 좌석</th>
+<!--                <th class="border p-2">서버 클릭 속도</th>-->
             </tr>
             </thead>
             <tbody>
@@ -198,7 +182,6 @@
                 </td>
                 <td class="border p-2" th:text="${practice.selectedSeatInfo}"></td>
             </tr>
-
             </tbody>
         </table>
     </div>

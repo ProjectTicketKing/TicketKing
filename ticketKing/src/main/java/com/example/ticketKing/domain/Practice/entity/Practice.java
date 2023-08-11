@@ -29,6 +29,5 @@ public class Practice extends BaseEntity {
 
     private String selectedSeatInfo;
 
-
 }
 
