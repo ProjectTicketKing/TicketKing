@@ -1,7 +1,8 @@
 # TicketKing
 
-티켓팅 연습 사이트, **티켓킹(TicketKing)**
-![제목을-입력해주세요_-001](https://github.com/ProjectTicketKing/TicketKing/assets/82140052/4d3df676-3ef6-4a1e-bde4-31a37ec05dfd)
+티켓팅 연습 사이트, **TicketKing**
+
+<img src="https://i.ibb.co/hRcMTcb/The-Heartbreakers.jpg" width="1000" height="400" >
 
 ## 서비스 소개
 티켓팅은 경쟁이 매우 치열한 프로세스입니다.
