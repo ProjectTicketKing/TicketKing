@@ -1,25 +1,26 @@
 package com.example.ticketKing.domain.Member.controller;
 
 import com.example.ticketKing.domain.Member.dto.JoinFormDto;
-import com.example.ticketKing.domain.Member.dto.MemberDto;
 import com.example.ticketKing.domain.Member.entity.Member;
 import com.example.ticketKing.domain.Member.finder.FindPasswordForm;
 import com.example.ticketKing.domain.Member.finder.FindUsernameForm;
 import com.example.ticketKing.domain.Member.finder.ModifyForm;
 import com.example.ticketKing.domain.Member.service.MemberService;
+import com.example.ticketKing.domain.TimerHistory.dto.ApiResponse;
+import com.example.ticketKing.domain.TimerHistory.dto.TimeDifferenceRequest;
 import com.example.ticketKing.domain.Practice.entity.Practice;
 import com.example.ticketKing.domain.Practice.repository.PracticeRepository;
+import com.example.ticketKing.domain.TimerHistory.repostitory.TimerHistoryRepository;
 import com.example.ticketKing.domain.Practice.service.PracticeService;
+import com.example.ticketKing.domain.TimerHistory.entity.TimerHistory;
 import com.example.ticketKing.global.exception.DuplicateUsernameException;
 import com.example.ticketKing.global.rq.Rq;
 import com.example.ticketKing.global.rsData.RsData;
-import com.example.ticketKing.global.security.MemberAdapter;
 import com.example.ticketKing.global.security.SecurityMember;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +29,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -39,6 +39,9 @@ public class MemberController {
     private final Rq rq;
     private final PracticeService practiceService;
     private final PracticeRepository practiceRepository;
+
+    @Autowired
+    private TimerHistoryRepository timerHistoryRepository;
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login") // 로그인 폼, 로그인 폼 처리는 스프링 시큐리티가 구현, 폼 처리시에 CustomUserDetailsService 가 사용됨
@@ -57,12 +60,28 @@ public class MemberController {
         Long memberId = securityMember.getId();
         Member member = memberService.getMemberFromUsername(securityMember.getUsername());
         List<Practice> practices = practiceRepository.findByMemberId(memberId);
+        List<TimerHistory> timerHistoryList = timerHistoryRepository.findByMemberId(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("practices", practices);
+        model.addAttribute("timerHistoryList", timerHistoryList);
 
         return "usr/member/me";
     }
+
+    @PostMapping("/save-time-difference")
+    @ResponseBody
+    public ApiResponse saveTimeDifference(@RequestBody TimeDifferenceRequest request,
+                                          @AuthenticationPrincipal SecurityMember securityMember) {
+        Long memberId = securityMember.getId();
+        TimerHistory timerHistory = new TimerHistory(); //시간 차이 정보를 담은 새로운 TimerHistory 객체를 생성
+        timerHistory.setTimeDifference(request.getTimeDifference()); // 요청에서 받아온 시간 차이를 설정
+        timerHistory.setMemberId(memberId);
+        timerHistoryRepository.save(timerHistory);
+
+        return new ApiResponse("Time difference saved successfully."); //클라이언트에게 성공적으로 시간 차이가 저장되었음을 알림
+    }
+
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/me/{id}")

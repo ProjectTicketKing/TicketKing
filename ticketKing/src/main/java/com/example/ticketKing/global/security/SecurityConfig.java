@@ -37,6 +37,9 @@ public class SecurityConfig {
                 .anyRequest() // 나머지 모든 요청에 대해서
                 .permitAll(); // 모든 사용자에게 접근 허용
 
+         //CSRF 비활성화 설정
+        http.csrf().disable();
+
         return http.build();
     }
 

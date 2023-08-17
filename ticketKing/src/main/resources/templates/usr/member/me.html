@@ -48,12 +48,11 @@
     </script>
 
     <script th:inline="javascript">
+        const token = /*[[${_csrf.token}]]*/ '';
         var hallValue = [[${hallValue}]];
         var selectedLevel = [[${selectedLevel}]];
     </script>
 
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <meta name="_csrf" th:content="${_csrf.token}">
 
     <style>
         .input-group span {
@@ -167,12 +166,13 @@
     </div>
 
     <div class="flex-col flex items-center justify-center pt-2 pl-60 pr-60">
+
         <table class="border-collapse border w-full">
             <thead>
             <tr class="bg-gray-200">
                 <th class="border p-2">성공 시간</th>
                 <th class="border p-2">선택한 좌석</th>
-<!--                <th class="border p-2">서버 클릭 속도</th>-->
+                <th class="border p-2">시간 차이</th>
             </tr>
             </thead>
             <tbody>
@@ -181,6 +181,9 @@
                     <span th:text="${#temporals.format(practice.seatSelectionTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
                 </td>
                 <td class="border p-2" th:text="${practice.selectedSeatInfo}"></td>
+            </tr>
+            <tr th:each="timerHistory : ${timerHistoryList}">
+                <td class="border p-2" th:text="${timerHistory.timeDifference}"></td>
             </tr>
             </tbody>
         </table>

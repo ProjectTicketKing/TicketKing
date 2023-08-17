@@ -1,3 +1,5 @@
+const token = /*[[${_csrf.token}]]*/ '';
+
 var timerInterval;
 var isfinished = false;
 var queueCount = 0; // 대기열 고객 수
@@ -5,6 +7,7 @@ var startTime; // Variable to store the start time
 var timeDifference;
 var levelSelect;
 var selectedLevel;
+
 //var hallValue = "[[${hallValue}]]";// Access the hallValue from Thymeleaf
 //var hallValue = "KSPO";
 // Event listener for DOMContentLoaded to record the start time when the button is loaded
@@ -64,6 +67,9 @@ function startGame() {
                 timeDifference = endTime - startTime;
                 console.log("Time taken to click Start button:", timeDifference + " ms");
 
+
+                sendTimeDifference(timeDifference);
+
                 openModal();
 
                 showMessage(); // 메시지를 보여주는 함수 호출
@@ -73,6 +79,27 @@ function startGame() {
         }
     }, 1000);
 }
+function sendTimeDifference(timeDiff) {
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+
+    const data = JSON.stringify({ timeDifference: timeDiff });
+
+    fetch('/usr/member/save-time-difference', {
+        method: 'POST',
+        headers: headers,
+        body: data
+    })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result.message);
+        })
+
+}
+
 
 function formatTime(seconds) {
     var hours = Math.floor(seconds / 3600);

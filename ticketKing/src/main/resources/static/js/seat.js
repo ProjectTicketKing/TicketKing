@@ -82,7 +82,6 @@ function pdo(body) {
     }
 }
 
-
 function mapping(input, i, j) {
     const alphabet = String.fromCharCode(65 + i); // Convert numeric value to corresponding ASCII character
     input.value = alphabet + j.toString();
@@ -93,8 +92,6 @@ function secondMapping(i,j) {
     seatNum = alphabet + j.toString();
 
 }
-
-
 
 function reverseMapping(inputValue) {
     if (inputValue) { // inputValue가 존재하는 경우에만 함수 실행
@@ -198,8 +195,6 @@ function ConfirmClickEvent(row, column) {
 
 }
 
-
-
 function connect() {
     var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
@@ -248,8 +243,6 @@ function connect() {
         });
     });
 }
-
-
 
 document.addEventListener("DOMContentLoaded", function() {
     seatWrapper = document.querySelector(".seat-wrapper");
