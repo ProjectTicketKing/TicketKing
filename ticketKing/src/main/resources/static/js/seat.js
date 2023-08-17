@@ -110,7 +110,6 @@ function reverseMapping(inputValue) {
 }
 
 
-//소켓적용
 function getSeatStatus() {
     console.log("getSeatStatus")
 
