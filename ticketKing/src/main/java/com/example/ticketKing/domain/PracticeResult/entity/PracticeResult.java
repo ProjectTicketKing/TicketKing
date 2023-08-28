@@ -1,7 +1,8 @@
-package com.example.ticketKing.domain.Practice.entity;
+package com.example.ticketKing.domain.PracticeResult.entity;
 
 import com.example.ticketKing.domain.Member.entity.Member;
-import com.example.ticketKing.domain.Seat.entity.Seat;
+import com.example.ticketKing.domain.RealParticipant.entity.RealParticipant;
+import com.example.ticketKing.domain.VirtualParticipant.entity.VirtualParticipant;
 import com.example.ticketKing.global.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -17,17 +18,18 @@ import static jakarta.persistence.FetchType.LAZY;
 @Entity
 @SuperBuilder
 @Builder
-public class Practice extends BaseEntity {
-
-    @ManyToOne(fetch = LAZY)
-    private Seat seat;
+public class PracticeResult extends BaseEntity {
 
     @ManyToOne(fetch = LAZY)
     private Member member;
-
     private LocalDateTime seatSelectionTime;
+    private Boolean success;
 
-    private String selectedSeatInfo;
+    @ManyToOne(fetch = LAZY)
+    private RealParticipant realParticipant;
+
+    @ManyToOne(fetch = LAZY)
+    private VirtualParticipant virtualParticipant;
 
 }
 

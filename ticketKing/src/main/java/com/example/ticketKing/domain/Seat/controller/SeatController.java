@@ -3,9 +3,9 @@ package com.example.ticketKing.domain.Seat.controller;
 
 import com.example.ticketKing.domain.Member.entity.Member;
 import com.example.ticketKing.domain.Member.service.MemberService;
-import com.example.ticketKing.domain.Practice.entity.Practice;
-import com.example.ticketKing.domain.Practice.repository.PracticeRepository;
-import com.example.ticketKing.domain.Practice.service.PracticeService;
+import com.example.ticketKing.domain.PracticeResult.entity.PracticeResult;
+import com.example.ticketKing.domain.PracticeResult.repository.PracticeResultRepository;
+import com.example.ticketKing.domain.PracticeResult.service.PracticeResultService;
 import com.example.ticketKing.domain.Seat.dto.SktRsData;
 import com.example.ticketKing.domain.Seat.service.SeatService;
 import com.example.ticketKing.global.rq.Rq;
@@ -23,9 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 @Controller
@@ -33,11 +30,11 @@ import java.util.concurrent.TimeUnit;
 public class SeatController {
 
     private final SeatService seatService;
-    private final PracticeService practiceService;
+    private final PracticeResultService practiceService;
     private final Rq rq;
     private final SeatStatusScheduler seatStatusScheduler;
     private final MemberService memberService;
-    private final PracticeRepository practiceRepository;
+    private final PracticeResultRepository practiceRepository;
 
 
     private void startSeatStatusUpdateSchedule(String hall, String type, String level) {
@@ -58,7 +55,7 @@ public class SeatController {
         Long memberId = securityMember.getId();
         Member member = memberService.getMemberFromUsername(securityMember.getUsername());
         // 가장 최신의 선택 기록을 가져옵니다.
-        Optional<Practice> latestPractice = practiceRepository.findTopByMemberIdOrderBySeatSelectionTimeDesc(memberId);
+        Optional<PracticeResult> latestPractice = practiceRepository.findTopByMemberIdOrderBySeatSelectionTimeDesc(memberId);
 
 
         model.addAttribute("hallValue", hall);
