@@ -1,25 +1,21 @@
 package com.example.ticketKing.domain.Member.controller;
 
 import com.example.ticketKing.domain.Member.dto.JoinFormDto;
-import com.example.ticketKing.domain.Member.dto.MemberDto;
 import com.example.ticketKing.domain.Member.entity.Member;
 import com.example.ticketKing.domain.Member.finder.FindPasswordForm;
 import com.example.ticketKing.domain.Member.finder.FindUsernameForm;
 import com.example.ticketKing.domain.Member.finder.ModifyForm;
 import com.example.ticketKing.domain.Member.service.MemberService;
-import com.example.ticketKing.domain.Practice.entity.Practice;
-import com.example.ticketKing.domain.Practice.repository.PracticeRepository;
-import com.example.ticketKing.domain.Practice.service.PracticeService;
+import com.example.ticketKing.domain.PracticeResult.entity.PracticeResult;
+import com.example.ticketKing.domain.PracticeResult.repository.PracticeResultRepository;
+import com.example.ticketKing.domain.PracticeResult.service.PracticeResultService;
 import com.example.ticketKing.global.exception.DuplicateUsernameException;
 import com.example.ticketKing.global.rq.Rq;
 import com.example.ticketKing.global.rsData.RsData;
-import com.example.ticketKing.global.security.MemberAdapter;
 import com.example.ticketKing.global.security.SecurityMember;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +24,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -37,8 +32,8 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
-    private final PracticeService practiceService;
-    private final PracticeRepository practiceRepository;
+    private final PracticeResultService practiceService;
+    private final PracticeResultRepository practiceRepository;
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login") // 로그인 폼, 로그인 폼 처리는 스프링 시큐리티가 구현, 폼 처리시에 CustomUserDetailsService 가 사용됨
@@ -56,7 +51,7 @@ public class MemberController {
     public String showMePage(Model model, @AuthenticationPrincipal SecurityMember securityMember) {
         Long memberId = securityMember.getId();
         Member member = memberService.getMemberFromUsername(securityMember.getUsername());
-        List<Practice> practices = practiceRepository.findByMemberId(memberId);
+        List<PracticeResult> practices = practiceRepository.findByMemberId(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("practices", practices);

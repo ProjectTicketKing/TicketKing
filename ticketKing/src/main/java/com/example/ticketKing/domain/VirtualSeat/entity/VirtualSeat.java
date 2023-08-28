@@ -1,16 +1,15 @@
-package com.example.ticketKing.domain.Seat.entity;
-
+package com.example.ticketKing.domain.VirtualSeat.entity;
 
 import com.example.ticketKing.domain.Hall.entity.Hall;
-import com.example.ticketKing.domain.RealGame.entity.RealGame;
+import com.example.ticketKing.domain.VirtualGame.entity.VirtualGame;
 import com.example.ticketKing.global.baseEntity.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import static jakarta.persistence.FetchType.LAZY;
 
 @Getter
@@ -19,7 +18,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @SuperBuilder
 @Builder
 @Setter
-public class Seat extends BaseEntity {
+public class VirtualSeat extends BaseEntity {
     private String seatType;
     private Integer seatRow;
     private Integer seatNumber;
@@ -29,9 +28,9 @@ public class Seat extends BaseEntity {
     private Hall hall;
 
     @ManyToOne(fetch = LAZY)
-    private RealGame realGame;
+    private VirtualGame virtualGame;
 
-    public Seat(String seatType, int seatRow, int seatNumber, String status) {
+    public VirtualSeat(String seatType, int seatRow, int seatNumber, String status) {
         this.seatType = seatType;
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;

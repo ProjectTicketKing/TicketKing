@@ -1,41 +1,35 @@
-package com.example.ticketKing.domain.Practice.service;
+package com.example.ticketKing.domain.PracticeResult.service;
 
 import com.example.ticketKing.domain.Hall.entity.Hall;
 import com.example.ticketKing.domain.Hall.repository.HallRepository;
 import com.example.ticketKing.domain.Member.entity.Member;
 import com.example.ticketKing.domain.Member.repository.MemberRepository;
-import com.example.ticketKing.domain.Practice.entity.Practice;
-import com.example.ticketKing.domain.Practice.repository.PracticeRepository;
+import com.example.ticketKing.domain.PracticeResult.entity.PracticeResult;
+import com.example.ticketKing.domain.PracticeResult.repository.PracticeResultRepository;
 import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.repository.SeatRepository;
-import com.example.ticketKing.global.rq.Rq;
 import com.example.ticketKing.global.rsData.RsData;
-import com.fasterxml.classmate.MemberResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class PracticeService {
+public class PracticeResultService {
 
-    private final PracticeRepository  practiceRepository;
+    private final PracticeResultRepository practiceRepository;
     private final SeatRepository seatRepository;
     private final MemberRepository memberRepository;
     private final HallRepository hallRepository;
 
 
     @Transactional
-    public RsData<Practice> register(String hallName, String type,Integer row, Integer col,Long userId){
+    public RsData<PracticeResult> register(String hallName, String type, Integer row, Integer col, Long userId){
 
-//        Member member = rq.getMember();
-        Hall hall = hallRepository.findByName(hallName);
-        Seat seat = seatRepository.findByHallAndSeatTypeAndSeatRowAndSeatNumber(hall, type, row, col);
         Member member = null;
         Optional<Member> memData = memberRepository.findById(userId);
 
@@ -44,12 +38,10 @@ public class PracticeService {
         } else {
         }
 
-        Practice practice = Practice
+        PracticeResult practice = PracticeResult
                 .builder()
-                .seat(seat)
                 .member(member)
                 .seatSelectionTime(LocalDateTime.now())
-                .selectedSeatInfo(String.format("%s-%d-%d", type, row, col))
                 .build();
 
         practiceRepository.save(practice);

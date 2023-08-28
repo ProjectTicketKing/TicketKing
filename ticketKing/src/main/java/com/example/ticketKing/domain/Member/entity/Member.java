@@ -1,8 +1,8 @@
 package com.example.ticketKing.domain.Member.entity;
 
 
-import com.example.ticketKing.domain.Practice.entity.Practice;
-import com.example.ticketKing.domain.photo.entity.Photo;
+import com.example.ticketKing.domain.PracticeResult.entity.PracticeResult;
+import com.example.ticketKing.domain.RealParticipant.entity.RealParticipant;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -12,12 +12,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import static jakarta.persistence.FetchType.LAZY;
-
 
 
 @Getter
@@ -42,11 +40,12 @@ public class Member {
     private String password;
     @Column(unique = true)
     private String email;
-    @OneToOne(orphanRemoval = true)
-    private Photo photo;
 
     @OneToMany(mappedBy = "member", fetch = LAZY)
-    private List<Practice> practices;
+    private List<PracticeResult> practices;
+
+    @OneToMany(mappedBy = "member", fetch = LAZY)
+    private List<RealParticipant> realParticipants;
 
     @Builder.Default
     private int authority = 1;
