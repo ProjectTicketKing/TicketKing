@@ -18,7 +18,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -116,6 +118,16 @@ public class MemberController {
     @ResponseBody
     public String findPassword(@Valid @ModelAttribute FindPasswordForm form) {
         return memberService.findPassword(form.getEmail(), form.getUsername());
+    }
+
+    @GetMapping("/api/getUserName")
+    public String getUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            return authentication.getName(); // 사용자 이름 반환 (사용자 ID)
+        } else {
+            return null; // 인증되지 않은 경우
+        }
     }
 
 
