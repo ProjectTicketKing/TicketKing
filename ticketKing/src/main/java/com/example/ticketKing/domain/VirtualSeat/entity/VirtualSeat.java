@@ -1,7 +1,7 @@
 package com.example.ticketKing.domain.VirtualSeat.entity;
 
 import com.example.ticketKing.domain.Hall.entity.Hall;
-import com.example.ticketKing.domain.VirtualGame.entity.VirtualGame;
+import com.example.ticketKing.domain.Game.VirtualGame.entity.VirtualGame;
 import com.example.ticketKing.global.baseEntity.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

@@ -2,7 +2,7 @@ package com.example.ticketKing.domain.Seat.entity;
 
 
 import com.example.ticketKing.domain.Hall.entity.Hall;
-import com.example.ticketKing.domain.RealGame.entity.RealGame;
+import com.example.ticketKing.domain.Game.RealGame.entity.RealGame;
 import com.example.ticketKing.global.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;

@@ -1,6 +1,6 @@
-package com.example.ticketKing.domain.VirtualGame.service;
+package com.example.ticketKing.domain.Game.VirtualGame.service;
 
-import com.example.ticketKing.domain.VirtualGame.entity.VirtualGame;
+import com.example.ticketKing.domain.Game.VirtualGame.entity.VirtualGame;
 import com.example.ticketKing.domain.VirtualParticipant.entity.VirtualParticipant;
 import com.example.ticketKing.domain.VirtualParticipant.repository.VirtualParticipantRepository;
 import com.example.ticketKing.domain.VirtualSeat.entity.VirtualSeat;
