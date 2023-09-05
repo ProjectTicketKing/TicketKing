@@ -41,6 +41,11 @@ public class SeatController {
         seatStatusScheduler.startSeatStatusUpdateSchedule(seatService, hall, type, level);
     }
 
+    private void startVirtualSeatStatusUpdateSchedule(String hall, String type, String level) {
+        seatStatusScheduler.startVirtualSeatStatusUpdateSchedule(seatService,hall,type,level);
+    }
+
+
     public void stopSeatStatusUpdateSchedule() {
         if (seatStatusScheduler != null) {
             seatStatusScheduler.stopSeatStatusUpdateSchedule();
@@ -79,6 +84,29 @@ public class SeatController {
 
         return "usr/concert/remain_seat";
     }
+
+
+    @GetMapping("/usr/{env}/concert/{hall}/{level}/seats/{type}")
+    public String getVirtualSeatList(Model model,
+                              @PathVariable("hall") String hall,
+                              @PathVariable("type") String type,
+                              @PathVariable("level") String level,
+                                     @PathVariable("env") String env) {
+        model.addAttribute("hallValue", hall);
+        model.addAttribute("type", type);
+        model.addAttribute("selectedLevel",level);
+
+        if(env.equals("virtual"))
+        {
+            startVirtualSeatStatusUpdateSchedule(hall,type,level);
+        } else if (env.equals("real")) {
+            startSeatStatusUpdateSchedule(hall, type, level);
+        }
+
+        return "usr/concert/remain_seat";
+    }
+
+
 
     // 애플리케이션 컨텍스트 종료 시 스케줄링 종료 메서드 호출
     @PreDestroy

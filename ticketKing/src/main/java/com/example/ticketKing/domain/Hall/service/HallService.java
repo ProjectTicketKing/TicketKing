@@ -16,7 +16,7 @@ public class HallService
     private final HallRepository hallRepository;
 
     @Transactional
-    public RsData<Hall> register(String name, Integer seatCount){
+    public RsData<Hall> register(String name){
 
         Hall hall = Hall
                 .builder()

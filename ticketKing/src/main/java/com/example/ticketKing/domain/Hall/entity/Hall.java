@@ -20,8 +20,4 @@ public class Hall extends BaseEntity {
     private String name; // KSPO, OLYPS
     private String area; // A,S ,VIP
 
-
-
-
-
 }

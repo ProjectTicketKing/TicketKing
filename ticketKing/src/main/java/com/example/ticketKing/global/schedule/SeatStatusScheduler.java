@@ -30,4 +30,19 @@ public class SeatStatusScheduler {
             executor.shutdown();
         }
     }
+
+    public void startVirtualSeatStatusUpdateSchedule(SeatService seatService, String hall, String type, String level) {
+        executor = Executors.newSingleThreadScheduledExecutor();
+
+        long initialDelay = 0;
+        long period = 0;
+        if (level.equals("basic")) {
+            initialDelay = 5000;
+            period = 5000; // 5 seconds
+        } else if (level.equals("advanced")) {
+            initialDelay = 1000;
+            period = 1000; // 3 seconds
+        }
+        executor.scheduleAtFixedRate(() -> seatService.updateRandomVirtualSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
+    }
 }
