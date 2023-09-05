@@ -87,24 +87,24 @@ public class NotProd {
                 virtualGameService.create(game, virtualSeats, participant);
 
 
-//                Member memberAdmin1 = Member.builder()
-//                        .username("admin").password("admin").email("admin@admin.com")
-//                        .authority(0)
-//                        .build();
-//
-//                List<Member> members = List.of(
-//                        Member.builder()
-//                                .username("user1").password("1234").email("user1@test.com")
-//                                .build(),
-//                        Member.builder()
-//                                .username("user2").password("1234").email("user2@test.com")
-//                                .build(),
-//                        Member.builder()
-//                                .username("user3").password("1234").email("user3@test.com")
-//                                .build()
-//                );
-//                memberService.create(memberAdmin1);
-//                members.forEach(memberService::create);
+                Member memberAdmin1 = Member.builder()
+                        .username("admin").password("admin").email("admin@admin.com")
+                        .authority(0)
+                        .build();
+
+                List<Member> members = List.of(
+                        Member.builder()
+                                .username("user1").password("1234").email("user1@test.com")
+                                .build(),
+                        Member.builder()
+                                .username("user2").password("1234").email("user2@test.com")
+                                .build(),
+                        Member.builder()
+                                .username("user3").password("1234").email("user3@test.com")
+                                .build()
+                );
+                memberService.create(memberAdmin1);
+                members.forEach(memberService::create);
 
 //                Hall KSPO = hallService.register("KSPO",1000).getData();
 //                Hall OLYSDM = hallService.register("OLYSDM",1000).getData();
