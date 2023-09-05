@@ -1,7 +1,7 @@
 package com.example.ticketKing.domain.VirtualParticipant.entity;
 
 import com.example.ticketKing.domain.PracticeResult.entity.PracticeResult;
-import com.example.ticketKing.domain.VirtualGame.entity.VirtualGame;
+import com.example.ticketKing.domain.Game.VirtualGame.entity.VirtualGame;
 import com.example.ticketKing.global.baseEntity.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

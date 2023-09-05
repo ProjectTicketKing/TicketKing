@@ -1,4 +1,4 @@
-package com.example.ticketKing.domain.RealGame.entity;
+package com.example.ticketKing.domain.Game.RealGame.entity;
 
 import com.example.ticketKing.domain.RealParticipant.entity.RealParticipant;
 import com.example.ticketKing.domain.Seat.entity.Seat;
