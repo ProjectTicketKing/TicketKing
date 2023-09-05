@@ -1,0 +1,499 @@
+<html th:lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>공연예매 페이지 1. 관람일/회차 선택</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+<main layout:fragment="main" class="flex flex-col items-center mt-10 w-full min-h-screen">
+
+
+
+    <!-- 예매창 네비바 -->
+    <nav class=" font-bold text-xs text-white mt-2">
+        <ul class="flex justify-center items-center" style="width: 1070px; height: 60px">
+            <li class="flex justify-center items-center px-5 py-2 border-r bg-[#c0a8f6] mt-0 px-0" style="width: inherit; height: inherit;">01.관람일/회차선택</li>
+            <li class="flex justify-center items-center px-5 py-2 border-r bg-[#9a6cfd] mx-0 px-0" style="width: inherit; height: inherit;">02.좌석선택</li>
+            <li class="flex justify-center items-center px-5 py-2 border-r bg-[#c0a8f6] mx-0 px-0" style="width: inherit; height: inherit;">03.가격/할인선택</li>
+            <li class="flex justify-center items-center px-5 py-2 border-r bg-[#c0a8f6] mx-0 px-0" style="width: inherit; height: inherit;">04.배송선택/주문자확인</li>
+            <li class="flex justify-center items-center px-5 py-2 bg-[#c0a8f6] mx-0 px-0" style="width: inherit; height: inherit;">05.결제하기</li>
+        </ul>
+    </nav>
+
+    <div class="flex flex-col bg-[#F2F4F4] rounded-bl-lg rounded-br-lg w-[1070px] h-[550px]">
+        <div>
+            <div class="flex flex justify-center">
+                <div class="relative absolute -right-[220px] -top-[-90px] flex gap-4 ">
+                    <!--Floor-->
+                    <div>
+                        <a href="#" onclick="window.location.href='/usr/' + env + '/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/VIP'">
+                            <img src="https://i.ibb.co/6sP9wWq/areaF1.png">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/VIP'">
+                            <img th:src="@{https://i.ibb.co/jfchKpY/areaF3.png}" alt="areaF3" class="area-img mt-5">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/VIP'">
+                            <img th:src="@{https://i.ibb.co/Dk0SKcy/areaF2.png}" alt="areaF2" class="area-img mt-5">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/VIP'">
+                            <img th:src="@{https://i.ibb.co/7thpNgR/areaF4.png}" alt="areaF4" class="area-img mt-5">
+                        </a>
+                    </div>
+
+                    <!--1F 좌측 12 - 15 구역-->
+                    <div class="relative absolute flex flex-col -left-[400px]">
+                        <style>
+                            .tilted13-image {
+                                transform: rotate(346deg);
+                                margin-right: 7px;
+                                margin-left: 27px;
+                            }
+
+                            .tilted12-image {
+                                transform: rotate(331deg);
+                                margin-right: -11px;
+                                margin-left: 44px;
+                            }
+                        </style>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="mr-1 ml-5 area-img transform -rotate-5">
+                            <img th:src="@{https://i.ibb.co/YTz9xJx/area15.png}" alt="area Image">
+                        </a>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="mr-3 ml-5 area-img transform -rotate-5">
+                            <img th:src="@{https://i.ibb.co/crn93xy/area14.png}" alt="area Image">
+                        </a>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted13-image">
+                            <img th:src="@{https://i.ibb.co/Xy616rc/13area.png}" alt="area Image">
+                        </a>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted12-image">
+                            <img th:src="@{https://i.ibb.co/X3NbZq6/12area.png}" alt="area Image">
+                        </a>
+
+                    </div>
+
+                    <!--1F 우측 1 - 4 구역-->
+                    <div class="relative absolute flex flex-col ml-4 -right-[-120px]">
+                        <style>
+                            .tilted3-image {
+                                transform: rotate(16deg);
+                                margin-right: 25px;
+                                margin-left: 7px;
+                            }
+
+                            .tilted4-image {
+                                transform: rotate(30deg);
+                                margin-right: 42px;
+                                margin-left: -10px;
+                            }
+                        </style>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="ml-1 mr-5 area-img transform -rotate-5">
+                            <img th:src="@{https://i.ibb.co/6D9nQrB/area1.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="ml-3 mr-5 area-img transform -rotate-5">
+                            <img th:src="@{https://i.ibb.co/Lr7zgPv/area2.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted3-image">
+                            <img th:src="@{https://i.ibb.co/YDx542F/area3.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted4-image">
+                            <img th:src="@{https://i.ibb.co/YQY4XNh/area4.png}" alt="area Image">
+                        </a>
+
+                    </div>
+
+                    <!--1F 중앙 5 - 11 구역-->
+                    <div class="absolute flex mt-8 justify-center -left-[-5px] -bottom-[-80px]">
+                        <style>
+                            .tilted11-image {
+                                transform: rotate(41deg);
+                                margin-top: -42px;
+                                margin-bottom: 46px;
+                                margin-left: -23px;
+                            }
+
+                            .tilted10-image {
+                                transform: rotate(26deg);
+                                margin-top: -21px;
+                                margin-bottom: -5px;
+                                margin-left: -16px;
+
+                            }
+
+                            .tilted9-image {
+                                transform: rotate(15deg);
+                                margin-top: -5px;
+                                margin-bottom: 0px;
+                                margin-left: 1px;
+
+                            }
+
+                            .tilted7-image {
+                                transform: rotate(-15deg);
+                                margin-top: -6px;
+                                margin-bottom: 2px;
+                                margin-right: -45px;
+
+                            }
+
+                            .tilted6-image {
+                                transform: rotate(332deg);
+                                margin-top: -23px;
+                                margin-right: 57px;
+                                margin-left: 50px;
+
+                            }
+
+                            .tilted5-image {
+                                transform: rotate(321deg);
+                                margin-top: -51px;
+                                margin-right: -210px;
+                                margin-left: -53px;
+
+                            }
+                        </style>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted11-image">
+                            <img th:src="@{https://i.ibb.co/vYWtGxT/area11.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted10-image">
+                            <img th:src="@{https://i.ibb.co/DK3hM5t/area10.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted9-image">
+                            <img th:src="@{https://i.ibb.co/zxG36pD/area9.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img">
+                            <img th:src="@{https://i.ibb.co/bvqBvkd/area8.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted7-image">
+                            <img th:src="@{https://i.ibb.co/ykWFX78/area7.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted6-image">
+                            <img th:src="@{https://i.ibb.co/thcVmwM/area6.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/R'" class="area-img tilted5-image">
+                            <img th:src="@{https://i.ibb.co/q7DFFFy/area5.png}" alt="area Image">
+                        </a>
+
+                    </div>
+
+                    <!--2F 좌측 39 - 43 구역-->
+                    <div class="relative absolute flex flex-col mr-4 -left-[730px] -top-[40px]">
+                        <style>
+                            .tilted43-image {
+                                transform: rotate(113deg);
+                                margin-left: 16px;
+                                margin-right: 0px;
+                                margin-top: 0px;
+                            }
+                            .tilted42-image {
+                                transform: rotate(97deg);
+                                margin-left: -15px;
+                                margin-top: -2px;
+                                margin-right: -4px;
+
+                            }
+                            .tilted41-image {
+                                transform: rotate(86deg);
+                                margin-left: -6px;
+                                margin-top: -21px;
+                                margin-right: 0px;
+
+                            }
+                            .tilted40-image {
+                                transform: rotate(77deg);
+                                margin-left: 10px;
+                                margin-top: -22px;
+                                margin-right: 3px;
+
+
+                            }
+
+                            .tilted39-image {
+                                transform: rotate(68deg);
+                                margin-left: 25px;
+                                margin-top: -16px;
+                                margin-right: -15px;
+
+                            }
+
+                        </style>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="area-img tilted43-image">
+                            <img th:src="@{https://i.ibb.co/R7Jys9S/area43.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="area-img tilted42-image">
+                            <img th:src="@{https://i.ibb.co/LpCzxXG/area42.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="area-img tilted41-image">
+                            <img th:src="@{https://i.ibb.co/27ty3Lj/area41.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="area-img tilted40-image">
+                            <img th:src="@{https://i.ibb.co/RP6101v/area40.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="area-img tilted39-image">
+                            <img th:src="@{https://i.ibb.co/zfZmdnp/area39.png}" alt="area Image">
+                        </a>
+
+                    </div>
+
+                    <!--2F 중앙 29 - 38 구역-->
+                    <div class="absolute flex mt-8 justify-center -left-[-5px] -bottom-[85px]">
+                        <style>
+                            .tilted38-image {
+                                transform: rotate(44deg);
+                                margin-top: -234px;
+                                margin-right: 1px;
+                                margin-left: -173px;
+                            }
+
+                            .tilted37-image {
+                                transform: rotate(34deg);
+                                margin-top: -188px;
+                                margin-right: 26px;
+                                margin-left: 7px;
+                            }
+
+                            .tilted36-image {
+                                transform: rotate(25deg);
+                                margin-top: -157px;
+                                margin-right: 68px;
+                                margin-left: -22px;
+                            }
+
+                            .tilted35-image {
+                                transform: rotate(17deg);
+                                margin-top: -136px;
+                                margin-right: -121px;
+                                margin-left: -66px;
+                            }
+
+                            .tilted34-image {
+                                transform: rotate(5deg);
+                                margin-top: -125px;
+                                margin-right: 108px;
+                                margin-left: 123px;
+                            }
+
+                            .tilted33-image {
+                                transform: rotate(352deg);
+                                margin-top: -126px;
+                                margin-right: 9px;
+                                margin-left: -107px;
+                            }
+                            .tilted32-image {
+                                transform: rotate(344deg);
+                                margin-top: -137px;
+                                margin-bottom: 17px;
+                                margin-left: -8px;
+                            }
+                            .tilted31-image {
+                                transform: rotate(333deg);
+                                margin-top: -160px;
+                                margin-right: 25px;
+                                margin-left: 6px;
+                            }
+                            .tilted30-image {
+                                transform: rotate(326deg);
+                                margin-top: -192px;
+                                margin-right: 26px;
+                                margin-left: -20px;
+                            }
+                            .tilted29-image {
+                                transform: rotate(317deg);
+                                margin-top: -238px;
+                                margin-right: -227px;
+                                margin-left: -17px;
+                            }
+                        </style>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted38-image">
+                            <img th:src="@{https://i.ibb.co/pW8903p/area38.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted37-image">
+                            <img th:src="@{https://i.ibb.co/Ns4Ps5D/area37.png}" alt="area Image">
+                        </a>
+
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted36-image">
+                            <img th:src="@{https://i.ibb.co/6yy4TJK/area36.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted35-image">
+                            <img th:src="@{https://i.ibb.co/xGtLpYt/area35.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted34-image">
+                            <img th:src="@{https://i.ibb.co/LpYPMs8/area34.png.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted33-image">
+                            <img th:src="@{https://i.ibb.co/XVqPq9N/area33.png}" alt="area Image">
+                        </a>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted32-image">
+                            <img th:src="@{https://i.ibb.co/J56J8MF/area32.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted31-image">
+                            <img th:src="@{https://i.ibb.co/DYJ3Lrc/area31.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted30-image">
+                            <img th:src="@{https://i.ibb.co/VqM1phr/area30.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted29-image">
+                            <img th:src="@{https://i.ibb.co/rQpCs44/area29.png}" alt="area Image">
+                        </a>
+
+                    </div>
+
+                    <!--2F 우측 24 - 28 구역-->
+                    <div class="relative absolute flex flex-col ml-4 -left-[240px] -top-[40px]">
+                        <style>
+                            .tilted20-image {
+                                transform: rotate(252deg);
+                                margin-right: 54px;
+                                margin-left: -10px;
+                            }
+                            .tilted25-image {
+                                transform: rotate(266deg);
+                                margin-right: 44px;
+                                margin-left: 1px;
+                                margin-top: -20px;
+                            }
+                            .tilted26-image {
+                                transform: rotate(272deg);
+                                margin-right: 43px;
+                                margin-left: 2px;
+                                margin-top: -13px;
+
+                            }
+
+                            .tilted27-image {
+                                transform: rotate(281deg);
+                                margin-right: 48px;
+                                margin-left: -4px;
+                                margin-top: -15px;
+                            }
+
+                            .tilted28-image {
+                                transform: rotate(288deg);
+                                margin-right: 62px;
+                                margin-left: -19px;
+                                margin-top: -16px;
+                            }
+                        </style>
+
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted20-image">
+                            <img th:src="@{https://i.ibb.co/y5jJp9v/area24.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted25-image">
+                            <img th:src="@{https://i.ibb.co/cYfPcn2/area25.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted26-image">
+                            <img th:src="@{https://i.ibb.co/chjM5VZ/area26.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted27-image">
+                            <img th:src="@{https://i.ibb.co/BCFPms3/area27.png}" alt="area Image">
+                        </a>
+                        <a href="#" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/seats' + '/A'" class="tilted28-image">
+                            <img th:src="@{https://i.ibb.co/G3PJQWq/area28.png}" alt="area Image">
+                        </a>
+
+                    </div>
+
+                    <!--좌석 등급 / 잔여석-->
+                    <div class="max-w-[900px]">
+                        <div class="block rounded-lg bg-white text-center border-red-500 relative absolute -left-[220px] -top-[10px]">
+                            <div class="border-b-2 border-neutral-100 px-4 py-2 text-m dark:border-neutral-600 dark:text-neutral-50">좌석 등급 / 잔여석</div>
+
+                            <div class="p-4">
+                                <div class="flex flex-col justify-center mx-auto">
+                                    <div class="sm:-mx-6 lg:-mx-8">
+                                        <div class="inline-block min-w-full py-1 sm:px-4 lg:px-6 text-center">
+                                            <div class="overflow-hidden">
+                                                <table class="w-full text-center text-xxs sm:text-sm font-light">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                            <div class="w-3 h-3 mr-1" style="background-color: #B1B2FF;"></div>
+                                                            VIP석
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-4 py-2">250,000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                            <div class="w-3 h-3 mr-1" style="background-color: #D2DAFF;"></div>
+                                                            R석
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-4 py-2">220,000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                            <div class="w-3 h-3 mr-1" style="background-color: #AAC4FF;"></div>
+                                                            R석
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-4 py-2">198,000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                            <div class="w-3 h-3 mr-1" style="background-color: #AFBDCA;"></div>
+                                                            A석
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-4 py-2">165,000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="whitespace-nowrap px-4 py-2 flex items-center">
+                                                            <div class="w-3 h-3 mr-1" style="background-color: #7795B2;"></div>
+                                                            A석
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-4 py-2">132,000</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="mt-7 flex justify-center relative absolute -left-[220px] -top-[10px]">
+                            <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
+                                    style="background-color: #664AFF; color: #ffffff" onclick="location.reload()">좌석 다시 선택</button>
+                        </div>
+
+                        <div class="mt-3 flex justify-between relative absolute -left-[220px] -top-[10px]">
+                            <button type="submit" class="custom-button rounded-lg border-none py-2"
+                                    style="background-color: #ffffff; color: #664AFF; width: 100%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/date'"> &lt; 이전 단계</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</main>
+</body>
+
+
+</html>
+
+<script th:inline="javascript">
+    var hallValue = [[${hallValue}]];
+    var selectedLevel = [[${selectedLevel}]];
+    var type = [[${type}]];
+    var env = [[${env}]];
+</script>

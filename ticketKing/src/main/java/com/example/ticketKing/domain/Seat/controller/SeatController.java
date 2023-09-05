@@ -99,10 +99,11 @@ public class SeatController {
         if(env.equals("virtual"))
         {
             startVirtualSeatStatusUpdateSchedule(hall,type,level);
-        } else if (env.equals("real")) {
+        }
+        else if (env.equals("real"))
+        {
             startSeatStatusUpdateSchedule(hall, type, level);
         }
-
         return "usr/concert/remain_seat";
     }
 

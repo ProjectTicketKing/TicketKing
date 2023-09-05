@@ -269,7 +269,7 @@ function confirmSeat(){
     // TODO:서버로부터 응답을 기다린 후에 페이지 이동 처리
     setTimeout(() => {
         if (seatStatus === "valid") {
-            location.href = '/usr/concert/' + hall + '/' + selectedLevel + '/cost';
+            location.href = '/usr/' + env + '/concert/' + hall + '/' + selectedLevel + '/cost';
         } else {
             openModalFail();
         }

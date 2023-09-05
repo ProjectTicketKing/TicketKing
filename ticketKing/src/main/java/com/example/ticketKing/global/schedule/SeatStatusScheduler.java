@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class SeatStatusScheduler {
     private ScheduledExecutorService executor;
 
+    // env1 (실제 환경)에서의 스케쥴링
     public void startSeatStatusUpdateSchedule(SeatService seatService, String hall, String type, String level) {
         executor = Executors.newSingleThreadScheduledExecutor();
 
@@ -25,12 +26,14 @@ public class SeatStatusScheduler {
         executor.scheduleAtFixedRate(() -> seatService.updateRandomSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
     }
 
+    // env1 (실제 환경)에서의 스케쥴링 중단
     public void stopSeatStatusUpdateSchedule() {
         if (executor != null && !executor.isShutdown()) {
             executor.shutdown();
         }
     }
 
+    // env2 (가상 환경)에서의 스케쥴링
     public void startVirtualSeatStatusUpdateSchedule(SeatService seatService, String hall, String type, String level) {
         executor = Executors.newSingleThreadScheduledExecutor();
 

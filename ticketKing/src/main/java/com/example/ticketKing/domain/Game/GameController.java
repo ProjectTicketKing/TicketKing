@@ -9,21 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequiredArgsConstructor
 public class GameController {
 
-    @GetMapping("/usr/{env}/concert/{hall}")
-    public String showRealGamePage(
-            @PathVariable("hall") String hall,
-            @PathVariable("env") String env,
-            Model model) {
 
-        model.addAttribute("env", env);
-        model.addAttribute("hallValue", hall);
-
-        if(env.equals("realGame")){
-            return "usr/concert/concertVer2";
-        } else if (env.equals("virtualGame")) {
-            return "usr/concert/concert";
-        }
-        return "usr/concert/concert";
-    }
 
 }
