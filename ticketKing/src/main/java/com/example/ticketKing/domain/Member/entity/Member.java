@@ -3,6 +3,7 @@ package com.example.ticketKing.domain.Member.entity;
 
 import com.example.ticketKing.domain.PracticeResult.entity.PracticeResult;
 import com.example.ticketKing.domain.RealParticipant.entity.RealParticipant;
+import com.example.ticketKing.domain.photo.entity.Photo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -40,6 +41,8 @@ public class Member {
     private String password;
     @Column(unique = true)
     private String email;
+    @OneToOne(orphanRemoval = true)
+    private Photo photo;
 
     @OneToMany(mappedBy = "member", fetch = LAZY)
     private List<PracticeResult> practices;

@@ -4,6 +4,8 @@ import com.example.ticketKing.domain.Hall.entity.Hall;
 import com.example.ticketKing.domain.Hall.repository.HallRepository;
 import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.repository.SeatRepository;
+import com.example.ticketKing.domain.VirtualSeat.entity.VirtualSeat;
+import com.example.ticketKing.domain.VirtualSeat.repository.VirtualSeatRepository;
 import com.example.ticketKing.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class SeatService {
     private final SeatRepository seatRepository;
     private final HallRepository hallRepository;
 
+    private final VirtualSeatRepository virtualSeatRepository;
     private static final String INVALID_STATUS = "invalid";
     private static final String VALID_STATUS = "valid";
 
@@ -126,6 +129,24 @@ public class SeatService {
             seatRepository.save(randomSeat);
         }
     }
+
+
+
+    @Transactional
+    public void updateRandomVirtualSeatStatusToInvalid(String hallName, String type)
+    {
+        Hall hall =  hallRepository.findByName(hallName);
+        List<VirtualSeat> seats = virtualSeatRepository.findByHallAndSeatTypeAndStatus(hall, type, VALID_STATUS);
+
+        if (!seats.isEmpty()) {
+            // 랜덤으로 Seat 선택
+            VirtualSeat randomSeat = seats.get(new Random().nextInt(seats.size()));
+            randomSeat.setStatus(INVALID_STATUS);
+
+        }
+    }
+
+
 
 
     public String checkSeatStatus(String hall, String type, Integer row, Integer col)

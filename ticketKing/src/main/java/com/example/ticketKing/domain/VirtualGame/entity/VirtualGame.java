@@ -8,6 +8,7 @@ import jakarta.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Entity
 @SuperBuilder
 @Builder
+@Setter
 public class VirtualGame extends BaseEntity {
 
     @OneToOne
