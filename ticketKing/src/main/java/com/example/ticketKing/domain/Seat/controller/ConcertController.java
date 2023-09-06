@@ -19,70 +19,103 @@ public class ConcertController {
     private final SeatService seatService;
     private final MemberService memberService;
 
-    @PreAuthorize("isAuthenticated()") // 로그인 해야만 접속가능
-    @GetMapping("/usr/concert/{hall}")
-    public String showConcert(Model model, @PathVariable String hall) {
+
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/{env}/concert/{hall}")
+    public String showRealGamePage(
+            @PathVariable("hall") String hall,
+            @PathVariable("env") String env,
+            Model model) {
+
+        model.addAttribute("env", env);
         model.addAttribute("hallValue", hall);
 
-        return "usr/concert/concert";
+        if(env.equals("realGame")){
+            return "usr/concert/concert_ver2";
+        } else if (env.equals("virtualGame")) {
+            return "usr/concert/concert_ver1";
+        }
+        return "usr/concert/concert_ver1";
     }
 
 
-    @GetMapping("/usr/concert/{hall}/{level}/date")
-    public String showConcertDate(Model model, @PathVariable String hall, @PathVariable String level) {
+    // 실제 경쟁 환경 (env1)
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/{env}/concert/{hall}/date")
+    public String showConcertDate(Model model, @PathVariable String hall,@PathVariable String env) {
+        model.addAttribute("hallValue", hall);
+        model.addAttribute("env",env);
+        return "usr/concert/concert_date_ver1";
+
+    }
+
+    // 가상 경제 환경 (env2)
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/{env}/concert/{hall}/{level}/date")
+    public String showConcertDateSecondEnv(Model model, @PathVariable String hall, @PathVariable String level,@PathVariable String env) {
         model.addAttribute("hallValue", hall);
         model.addAttribute("selectedLevel", level);
-        return "usr/concert/concert_date";
+        model.addAttribute("env",env);
+        return "usr/concert/concert_date_ver2";
     }
 
 
-    @GetMapping("/usr/concert/{hall}/{level}/delivery")
-    public String showConcertDelivery(Model model, @PathVariable String hall,@PathVariable String level,
-                                      @AuthenticationPrincipal SecurityMember securityMember) {
+    // 실제 경쟁 환경 (env1)
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/{env}/concert/{hall}/stage")
+    public String showConcertSeatArea(Model model, @PathVariable("hall")String hall,@PathVariable String env) {
+        model.addAttribute("hallValue",hall);
+        model.addAttribute("env",env);
+        return "usr/hallEnv1/"+hall;
+    }
 
-        Long memberId = securityMember.getId();
-        Member member = memberService.getMemberFromUsername(securityMember.getUsername());
-        // 가장 최신의 선택 기록을 가져옵니다.
-//        Optional<Practice> latestPractice = practiceRepository.findTopByMemberIdOrderBySeatSelectionTimeDesc(memberId);
+    //  가상 경제 환경 (env2)
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/{env}/concert/{hall}/{level}/stage")
+    public String showConcertSeatAreaSecondEnv(Model model, @PathVariable("hall")String hall,@PathVariable String level,@PathVariable String env) {
+        model.addAttribute("hallValue",hall);
+        model.addAttribute("selectedLevel",level);
+        model.addAttribute("env",env);
+        return "usr/hallEnv2/"+hall;
+    }
+
+
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/concert/{hall}/delivery")
+    public String showConcertDelivery(Model model, @PathVariable String hall,
+                                       @AuthenticationPrincipal SecurityMember securityMember) {
 
         model.addAttribute("hallValue", hall);
-        model.addAttribute("selectedLevel", level);
-//        model.addAttribute("latestPractice", latestPractice.orElse(null));
 
         return "usr/concert/concert_delivery";
 
     }
 
-
-    @GetMapping("/usr/concert/{hall}/{level}/payment")
-    public String showConcertPayment(Model model, @PathVariable String hall,@PathVariable String level,
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/concert/{hall}/payment")
+    public String showConcertPayment(Model model, @PathVariable String hall,
                                      @AuthenticationPrincipal SecurityMember securityMember) {
-        Long memberId = securityMember.getId();
-        Member member = memberService.getMemberFromUsername(securityMember.getUsername());
-        // 가장 최신의 선택 기록을 가져옵니다.
-//        Optional<Practice> latestPractice = practiceRepository.findTopByMemberIdOrderBySeatSelectionTimeDesc(memberId);
 
         model.addAttribute("hallValue", hall);
-        model.addAttribute("selectedLevel", level);
-//        model.addAttribute("latestPractice", latestPractice.orElse(null));
 
         return "usr/concert/concert_payment";
     }
-    @GetMapping("/usr/concert/{hall}/{level}/fee")
-    public String showConcertFee(Model model, @PathVariable String hall ,@PathVariable String level,
+
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/concert/{hall}/fee")
+    public String showConcertFee(Model model, @PathVariable String hall,
                                  @AuthenticationPrincipal SecurityMember securityMember) {
 
-        Long memberId = securityMember.getId();
-        Member member = memberService.getMemberFromUsername(securityMember.getUsername());
-        // 가장 최신의 선택 기록을 가져옵니다.
-//        Optional<Practice> latestPractice = practiceRepository.findTopByMemberIdOrderBySeatSelectionTimeDesc(memberId);
 
         model.addAttribute("hallValue", hall);
-        model.addAttribute("selectedLevel", level);
-//        model.addAttribute("latestPractice", latestPractice.orElse(null));
 
         return "usr/concert/concert_fee";
     }
+
+
 
 
 

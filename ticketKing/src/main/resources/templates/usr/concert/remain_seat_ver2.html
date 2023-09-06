@@ -1,0 +1,242 @@
+<html th:lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script th:inline="javascript">
+        const token = /*[[${_csrf.token}]]*/ '';
+        var hallValue = [[${hallValue}]];
+
+        var selectedLevel = [[${selectedLevel}]];
+        const env = [[${env}]];
+        const hall = [[${hall}]];
+        console.log(hall)
+        const type =  [[${type}]];
+        console.log(type)
+        const level = [[${level}]];
+        console.log(level)
+
+    </script>
+
+    <script th:src="@{/js/seat.js}" type="application/javascript"></script>
+
+    <style>
+        .seat {
+            width: 20px;
+            height: 20px;
+            transition: background-color 0.4s ease;
+            color: transparent; /* 텍스트를 투명하게 설정 */
+        }
+
+        .seat-wrapper {
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 화면 높이에 맞게 조정 */
+            flex-direction: column;
+        }
+
+        .seat.clicked {
+            background-color: white;
+            color: black;
+            color: transparent;
+            background-image: linear-gradient(to bottom right, purple, #664AFF);
+        }
+
+        .highlighted {
+            background-color: purple;
+            color: white;
+            color: transparent;
+        }
+    </style>
+
+    <style>
+        /* 모달 스타일 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 58px;
+            border-radius: 5px;
+            font-size: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .modal-content h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .modal-content img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+        }
+
+        .modal-content input {
+            font-size: 15px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            font-size: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<main layout:fragment="main" class="flex flex-col items-center mt-10 w-full min-h-screen">
+    <!-- 예매창 네비바 -->
+    <nav class=" font-bold text-xs text-white mt-2">
+        <ul class="flex justify-center items-center" style="width: 1070px; height: 60px">
+            <li class="flex justify-center items-center px-5 py-2 border-r bg-[#c0a8f6] mt-0 px-0" style="width: inherit; height: inherit;">01.관람일/회차선택</li>
+            <li class="flex justify-center items-center px-5 py-2 border-r bg-[#9a6cfd] mx-0 px-0" style="width: inherit; height: inherit;">02.좌석선택</li>
+            <li class="flex justify-center items-center px-5 py-2 border-r bg-[#c0a8f6] mx-0 px-0" style="width: inherit; height: inherit;">03.가격/할인선택</li>
+            <li class="flex justify-center items-center px-5 py-2 border-r bg-[#c0a8f6] mx-0 px-0" style="width: inherit; height: inherit;">04.배송선택/주문자확인</li>
+            <li class="flex justify-center items-center px-5 py-2 bg-[#c0a8f6] mx-0 px-0" style="width: inherit; height: inherit;">05.결제하기</li>
+        </ul>
+    </nav>
+    <div class="flex flex-col bg-[#F2F4F4] rounded-bl-lg rounded-br-lg w-[1070px] h-[550px]">
+
+        <div class="seat-wrapper ml-20 mt-10"></div>
+
+        <!--행과 열-->
+        <div class="max-w-[190px] relative">
+
+            <div class="block rounded-lg bg-white text-center border-red-500 relative absolute -left-[-850px] -top-[400px]">
+                <div class="border-b-2 border-neutral-100 px-4 py-2 text-m dark:border-neutral-600 dark:text-neutral-50">내가 선택한 좌석</div>
+
+                <div class="p-4">
+                    <div class="flex flex-col justify-center mx-auto">
+                        <div class="sm:-mx-6 lg:-mx-8">
+                            <div class="inline-block min-w-full py-1 sm:px-4 lg:px-6 text-center">
+                                <div class="overflow-hidden">
+                                    <table class="w-full text-center text-xxs sm:text-sm font-light">
+                                        <tbody>
+                                        <tr>
+                                        <tr>
+                                            <td class="whitespace-nowrap px-4 py-2">
+                                                선택한 열 :
+                                            </td>
+                                            <td class="whitespace-nowrap px-8 py-2">
+                                                <div id="seatRowValue"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="whitespace-nowrap px-4 py-2">
+                                                선택한 행 :
+                                            </td>
+                                            <td class="whitespace-nowrap px-8 py-2">
+                                                <div id="seatColumnValue"></div>
+                                            </td>
+                                        </tr>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 버튼 -->
+            <div class="mt-7 flex justify-center relative absolute -left-[-850px] -top-[400px]">
+                <button id="seatConfirmButton" class="custom-button rounded-lg border-none w-full py-4"
+                        style="background-color: #664AFF; color: #ffffff" onclick="confirmSeat()">좌석 선택 완료</button>
+            </div>
+            <!--        <button id="seatConfirmButton" class="modal-close" onclick="confirmSeat()">좌석 선택 완료하기</button>-->
+
+            <div class="mt-3 flex justify-center relative absolute -left-[-850px] -top-[400px]">
+                <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
+                        style="background-color: #664AFF; color: #ffffff" onclick="location.reload()">좌석 다시 선택</button>
+            </div>
+
+            <div class="mt-3 flex justify-between relative absolute -left-[-850px] -top-[400px]">
+                <button type="submit" class="custom-button rounded-lg border-none py-2"
+                        style="background-color: #ffffff; color: #664AFF; width: 100%; font-size: 80%"
+                        onclick="window.location.href='/usr/'+env+'/concert/' + hallValue + '/' + selectedLevel + '/date'"> &lt; 이전 단계</button>
+
+            </div>
+
+
+        </div>
+
+        <!-- 실패시 모달창 -->
+        <div id="modalFail" class="modal-overlay">
+            <div class="modal-content">
+                <p style="color: #FF6B6B;">티켓팅에 실패하셨습니다</p>
+                <img src="https://i.ibb.co/VW3x9rv/failure.png" alt="failure">
+                <button type="button" class="custom-button rounded-lg border-none w-full py-4"
+                        style="background-color: #FF6B6B; color: #ffffff" onclick="closeModalAndRedirect()">다시하기</button>
+            </div>
+        </div>
+
+
+        <script>
+            function openModalFail() {
+                var modalFail = document.getElementById("modalFail");
+                modalFail.style.display = "block";
+                document.getElementById("seatConfirmButton").disabled = true;
+            }
+
+
+            function closeModal() {
+                var modalFail = document.getElementById("modalFail");
+                modalFail.style.display = "none";
+            }
+
+            function closeModalAndRedirect() {
+                var modalFail = document.getElementById("modalFail");
+                modalFail.style.display = "none";
+                window.location.href = '/';
+                // window.location.href = '/usr/concert/' + hallValue + '/' + selectedLevel + '/date';
+
+            }
+        </script>
+
+
+    </div>
+
+
+</main>
+</body>
+</html>

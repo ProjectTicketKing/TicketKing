@@ -12,15 +12,13 @@
     <script th:inline="javascript">
         const token = /*[[${_csrf.token}]]*/ '';
         var hallValue = [[${hallValue}]];
-
-        var selectedLevel = [[${selectedLevel}]];
+         var env = [[${env}]];
 
         const hall = [[${hall}]];
         console.log(hall)
         const type =  [[${type}]];
         console.log(type)
-        const level = [[${level}]];
-        console.log(level)
+
     </script>
 
     <script th:src="@{/js/seat.js}" type="application/javascript"></script>
@@ -192,7 +190,7 @@
             <div class="mt-3 flex justify-between relative absolute -left-[-850px] -top-[400px]">
                 <button type="submit" class="custom-button rounded-lg border-none py-2"
                         style="background-color: #ffffff; color: #664AFF; width: 100%; font-size: 80%"
-                        onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/date'"> &lt; 이전 단계</button>
+                        onclick="window.location.href='/usr/' + env + '/concert/' + hallValue +  '/date'"> &lt; 이전 단계</button>
 
             </div>
 
@@ -227,7 +225,7 @@
                 var modalFail = document.getElementById("modalFail");
                 modalFail.style.display = "none";
                 window.location.href = '/';
-                // window.location.href = '/usr/concert/' + hallValue + '/' + selectedLevel + '/date';
+                // window.location.href = '/usr/'+ env + '/concert/' + hallValue  + '/date';
 
             }
         </script>

@@ -4,6 +4,7 @@ import com.example.ticketKing.domain.Hall.entity.Hall;
 import com.example.ticketKing.domain.Hall.service.HallService;
 import com.example.ticketKing.domain.Member.entity.Member;
 import com.example.ticketKing.domain.Member.service.MemberService;
+import com.example.ticketKing.domain.Seat.entity.Seat;
 import com.example.ticketKing.domain.Seat.service.SeatService;
 import com.example.ticketKing.domain.Game.VirtualGame.entity.VirtualGame;
 import com.example.ticketKing.domain.Game.VirtualGame.service.VirtualGameService;
@@ -107,42 +108,18 @@ public class NotProd {
 
 //                Hall KSPO = hallService.register("KSPO",1000).getData();
 //                Hall OLYSDM = hallService.register("OLYSDM",1000).getData();
-//
-//                Seat seat1 = seatService.register("VIP",1,1,"valid", KSPO).getData();
-//                Seat seat2 = seatService.register("VIP",2,2,"valid", KSPO).getData();
-//                Seat seat3 = seatService.register("VIP",3,3,"valid", KSPO).getData();
-//                Seat seat4 = seatService.register("VIP",1,4,"valid", OLYSDM).getData();
-//                Seat seat5 = seatService.register("VIP",1,5,"valid", OLYSDM).getData();
-//                Seat seat6 = seatService.register("VIP",2,1,"valid",KSPO).getData();
-//                Seat seat7 = seatService.register("VIP",5,5,"valid",KSPO).getData();
-//                Seat seat8 = seatService.register("VIP",2,3,"valid",KSPO).getData();
-//                Seat seat9 = seatService.register("VIP",2,4,"valid", OLYSDM).getData();
-//                Seat seat10 = seatService.register("VIP",2,5,"valid", OLYSDM).getData();
-//
-//                Seat seat11 = seatService.register("VIP",5,6,"valid", OLYSDM).getData();
-//                Seat seat12 = seatService.register("VIP",5,7,"valid", OLYSDM).getData();
-//                Seat seat13 = seatService.register("VIP",6,1,"valid", OLYSDM).getData();
-//                Seat seat14 = seatService.register("VIP",6,2,"valid", OLYSDM).getData();
-//                Seat seat15 = seatService.register("VIP",6,3,"valid", OLYSDM).getData();
-//                Seat seat16 = seatService.register("VIP",6,4,"valid", OLYSDM).getData();
-//
-//                Seat seat11 = seatService.register("VIP",3,1,"valid").getData();
-//                Seat seat12 = seatService.register("VIP",3,2,"valid").getData();
-//                Seat seat13 = seatService.register("VIP",3,3,"valid").getData();
-//                Seat seat14 = seatService.register("VIP",3,4,"valid").getData();
-//                Seat seat15 = seatService.register("VIP",3,5,"valid").getData();
-//
-//                Seat seat16 = seatService.register("VIP",4,1,"valid").getData();
-//                Seat seat17 = seatService.register("VIP",4,2,"valid").getData();
-//                Seat seat18 = seatService.register("VIP",4,3,"valid").getData();
-//                Seat seat19 = seatService.register("VIP",4,4,"valid").getData();
-//                Seat seat20 = seatService.register("VIP",4,5,"valid").getData();
-//
-//                Seat seat21 = seatService.register("VIP",5,1,"valid").getData();
-//                Seat seat22 = seatService.register("VIP",5,2,"valid").getData();
-//                Seat seat23 = seatService.register("VIP",5,3,"valid").getData();
-//                Seat seat25 = seatService.register("VIP",5,4,"valid").getData();
-//                Seat seat26 = seatService.register("VIP",5,5,"valid").getData();
+
+                Seat realSeat1 = seatService.register("VIP",1,1,"valid", KSPO).getData();
+                Seat realSeat2 = seatService.register("VIP",2,2,"valid", KSPO).getData();
+                Seat realSeat3 = seatService.register("VIP",3,3,"valid", KSPO).getData();
+                Seat realSeat4 = seatService.register("VIP",1,4,"valid", OLYSDM).getData();
+                Seat realSeat5 = seatService.register("VIP",1,5,"valid", OLYSDM).getData();
+                Seat realSeat6 = seatService.register("VIP",2,1,"valid",KSPO).getData();
+                Seat realSeat7 = seatService.register("VIP",5,5,"valid",KSPO).getData();
+                Seat realSeat8 = seatService.register("VIP",2,3,"valid",KSPO).getData();
+                Seat realSeat9 = seatService.register("VIP",2,4,"valid", OLYSDM).getData();
+                Seat srealSeat10 = seatService.register("VIP",2,5,"valid", OLYSDM).getData();
+
 
             }
         };

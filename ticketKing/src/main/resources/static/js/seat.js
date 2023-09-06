@@ -113,8 +113,7 @@ function reverseMapping(inputValue) {
 function getSeatStatus() {
     console.log("getSeatStatus")
 
-
-    fetch(`/api/usr/concert/${hall}/seats/${type}`, {
+    fetch(`/api/usr/${env}/concert/${hall}/seats/${type}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -174,7 +173,7 @@ function SeatClickEvent(row, column) {
 
     };
 
-    stompClient.send(`/app/seats/${hall}/${type}/seatInfo`, {}, JSON.stringify(seatData));
+    stompClient.send(`/app/seats/${env}/${hall}/${type}/seatInfo`, {}, JSON.stringify(seatData));
 
     // // TODO : 좌석 선택 후 localStorage에 저장
     localStorage.setItem('selectedSeatRow', row);
@@ -193,7 +192,7 @@ function ConfirmClickEvent(row, column) {
 
     };
 
-    stompClient.send(`/app/seats/${hall}/${type}/confirmInfo`, {}, JSON.stringify(seatData));
+    stompClient.send(`/app/seats/${env}/${hall}/${type}/confirmInfo`, {}, JSON.stringify(seatData));
 
 
 }
@@ -211,7 +210,7 @@ function connect() {
     stompClient.connect(headers, function (frame) {
         console.log('Connected: ' + frame);
 
-        stompClient.subscribe(`/topic/seats/${hall}/${type}`, function (seatData) {
+        stompClient.subscribe(`/topic/seats/${env}/${hall}/${type}`, function (seatData) {
             const parsedData = JSON.parse(seatData.body);
 
 
@@ -220,11 +219,6 @@ function connect() {
                 seatStatus = "invalid";
                 alert("실패");
 
-                // alert("실패");
-                //
-                // setTimeout(function () {
-                //     location.reload();
-                // }, 300);
 
             } else {
                 alert("성공");
@@ -269,7 +263,8 @@ function confirmSeat(){
     // TODO:서버로부터 응답을 기다린 후에 페이지 이동 처리
     setTimeout(() => {
         if (seatStatus === "valid") {
-            location.href = '/usr/concert/' + hall + '/' + selectedLevel + '/cost';
+
+            location.href = '/usr/'+env+'/concert/' + hall + '/cost';
         } else {
             openModalFail();
         }
@@ -277,4 +272,3 @@ function confirmSeat(){
 
 
 }
-

@@ -21,7 +21,7 @@
 
     <script th:inline="javascript">
         var hallValue = [[${hallValue}]];
-        var selectedLevel = [[${selectedLevel}]];
+        var env= [[${env}]];
     </script>
 
 </head>
@@ -194,7 +194,7 @@
                                                 <tr>
                                                     <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">선택 좌석</td>
                                                     <td class="whitespace-nowrap px-4 py-1 font-medium" style="font-size: 12px;">
-                                                        <span th:if="${latestPractice != null}" th:text="${latestPractice.selectedSeatInfo}"></span>
+<!--                                                        <span th:if="${latestPractice != null}" th:text="${latestPractice.selectedSeatInfo}"></span>-->
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -217,16 +217,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="mt-3 flex justify-between">
 
-                                <div class="mt-3 flex justify-between">
-                                    <button type="submit" class="custom-button rounded-lg border-none py-2"
-                                            style="background-color: #ffffff; color: #664AFF; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/stage'"> &lt; 이전 단계</button>
-                                    <div class="w-1/12"></div>
-                                    <button type="submit" class="custom-button rounded-lg border-none py-2"
-                                            style="background-color: #664AFF; color: #ffffff; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/' + selectedLevel + '/delivery'">다음 단계 &gt;</button>
-                                </div>
-                            </div>
+                                        <div class="w-1/12"></div>
+                                        <button type="submit" class="custom-button rounded-lg border-none py-2"
+                                                style="background-color: #664AFF; color: #ffffff; width: 50%; font-size: 80%" onclick="window.location.href='/usr/concert/' + hallValue + '/delivery'">다음 단계 &gt;</button>
+                                    </div>
                         </div>
                     </div>
                 </div>
