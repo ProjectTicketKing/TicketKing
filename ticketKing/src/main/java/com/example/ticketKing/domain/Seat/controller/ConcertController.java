@@ -82,41 +82,40 @@ public class ConcertController {
 
 
 
-
-    @GetMapping("/usr/{env}/concert/{hall}/{level}/delivery")
-    public String showConcertDelivery(Model model, @PathVariable String hall,@PathVariable String level,
-                                      @PathVariable String env, @AuthenticationPrincipal SecurityMember securityMember) {
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/concert/{hall}/delivery")
+    public String showConcertDelivery(Model model, @PathVariable String hall,
+                                       @AuthenticationPrincipal SecurityMember securityMember) {
 
         model.addAttribute("hallValue", hall);
-        model.addAttribute("selectedLevel", level);
-
 
         return "usr/concert/concert_delivery";
 
     }
 
-
-    @GetMapping("/usr/{env}/concert/{hall}/{level}/payment")
-    public String showConcertPayment(Model model, @PathVariable String hall,@PathVariable String level,
-                                     @PathVariable String env,
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/concert/{hall}/payment")
+    public String showConcertPayment(Model model, @PathVariable String hall,
                                      @AuthenticationPrincipal SecurityMember securityMember) {
 
         model.addAttribute("hallValue", hall);
-        model.addAttribute("selectedLevel", level);
 
         return "usr/concert/concert_payment";
     }
-    @GetMapping("/usr/{env}/concert/{hall}/{level}/fee")
-    public String showConcertFee(Model model, @PathVariable String hall ,@PathVariable String level,
+
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/usr/concert/{hall}/fee")
+    public String showConcertFee(Model model, @PathVariable String hall,
                                  @AuthenticationPrincipal SecurityMember securityMember) {
 
 
         model.addAttribute("hallValue", hall);
-        model.addAttribute("selectedLevel", level);
-
 
         return "usr/concert/concert_fee";
     }
+
+
 
 
 

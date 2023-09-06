@@ -8,34 +8,32 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class SeatStatusScheduler {
-    private ScheduledExecutorService executor;
+    private ScheduledExecutorService realExecutor;
+    private ScheduledExecutorService virtualExecutor;
 
     // env1 (실제 환경)에서의 스케쥴링
-    public void startSeatStatusUpdateSchedule(SeatService seatService, String hall, String type, String level) {
-        executor = Executors.newSingleThreadScheduledExecutor();
+    public void startSeatStatusUpdateSchedule(SeatService seatService, String hall, String type) {
+        realExecutor = Executors.newSingleThreadScheduledExecutor();
 
         long initialDelay = 0;
         long period = 0;
-        if (level.equals("basic")) {
-            initialDelay = 5000;
-            period = 5000; // 5 seconds
-        } else if (level.equals("advanced")) {
-            initialDelay = 1000;
-            period = 1000; // 3 seconds
-        }
-        executor.scheduleAtFixedRate(() -> seatService.updateRandomSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
+
+        initialDelay = 5000;
+        period = 5000; // 5 seconds
+
+        realExecutor.scheduleAtFixedRate(() -> seatService.updateRandomSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
     }
 
     // env1 (실제 환경)에서의 스케쥴링 중단
     public void stopSeatStatusUpdateSchedule() {
-        if (executor != null && !executor.isShutdown()) {
-            executor.shutdown();
+        if (realExecutor != null && !realExecutor.isShutdown()) {
+            realExecutor.shutdown();
         }
     }
 
     // env2 (가상 환경)에서의 스케쥴링
     public void startVirtualSeatStatusUpdateSchedule(SeatService seatService, String hall, String type, String level) {
-        executor = Executors.newSingleThreadScheduledExecutor();
+        virtualExecutor = Executors.newSingleThreadScheduledExecutor();
 
         long initialDelay = 0;
         long period = 0;
@@ -46,6 +44,14 @@ public class SeatStatusScheduler {
             initialDelay = 1000;
             period = 1000; // 3 seconds
         }
-        executor.scheduleAtFixedRate(() -> seatService.updateRandomVirtualSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
+        virtualExecutor.scheduleAtFixedRate(() -> seatService.updateRandomVirtualSeatStatusToInvalid(hall, type), initialDelay, period, TimeUnit.MILLISECONDS);
     }
+
+    // env (가상 환경)에서의 스케쥴링 중단
+    public void stopVirtualSeatStatusUpdateSchedule() {
+        if (virtualExecutor != null && !virtualExecutor.isShutdown()) {
+            virtualExecutor.shutdown();
+        }
+    }
+
 }
