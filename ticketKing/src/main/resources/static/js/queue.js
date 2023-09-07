@@ -9,7 +9,11 @@ document.addEventListener("DOMContentLoaded", function() {
     startButton.addEventListener('click', startGame); // startGame 함수를 click 이벤트 핸들러로 할당
 });
 
-function startGame() {
+Leave a comment
+선택된 파일 없음
+Attach files by dragging & dropping, selecting or pasting them.
+
+    function startGame() {
     var timerDisplay = document.getElementById('timer');
     var startButton = document.getElementById('startButton');
     var startDateInput = document.getElementById('startDateInput'); // 추가: 날짜 입력 요소
