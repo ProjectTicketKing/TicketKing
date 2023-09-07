@@ -25,8 +25,7 @@ public class QueueController {
         getQueueCount(queue);
     }
 
-
-    //TODO - 특정 시간 이후로 3초마다 5명씩 queue배열에서 제거해주고
+    //특정 시간 이후로 3초마다 5명씩 queue배열에서 제거해주고
     @Scheduled(fixedDelay = 3000)
     public void removeUsersFromQueue() {
         int removalCount = Math.min(5, queue.size()); // 최대 5명 삭제
@@ -41,14 +40,9 @@ public class QueueController {
         return queue.size();
     }
 
-
     public int getQueueCount(List<String> queue){
         return queue.size();
     }
-
-    // 보안문자 창에 들어왔을 때
-    // 사용자가 대기열에서 나간 시점
-    // 사용자 이름을 받아서 대기열에서 해당 사용자를 제거하고 인원 수를 업데이트
 
 
 }
