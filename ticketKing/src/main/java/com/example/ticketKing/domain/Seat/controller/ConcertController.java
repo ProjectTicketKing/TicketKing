@@ -32,11 +32,11 @@ public class ConcertController {
         model.addAttribute("hallValue", hall);
 
         if(env.equals("realGame")){
-            return "usr/concert/concert_ver2";
-        } else if (env.equals("virtualGame")) {
             return "usr/concert/concert_ver1";
+        } else if (env.equals("virtualGame")) {
+            return "usr/concert/concert_ver2";
         }
-        return "usr/concert/concert_ver1";
+        return "usr/concert/concert_ver2";
     }
 
 

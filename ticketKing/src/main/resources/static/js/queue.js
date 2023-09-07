@@ -9,11 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     startButton.addEventListener('click', startGame); // startGame 함수를 click 이벤트 핸들러로 할당
 });
 
-Leave a comment
-선택된 파일 없음
-Attach files by dragging & dropping, selecting or pasting them.
-
-    function startGame() {
+function startGame() {
     var timerDisplay = document.getElementById('timer');
     var startButton = document.getElementById('startButton');
     var startDateInput = document.getElementById('startDateInput'); // 추가: 날짜 입력 요소
@@ -28,7 +24,7 @@ Attach files by dragging & dropping, selecting or pasting them.
         timerDisplay.innerText = '00 : 00 : 00';
         console.log('!!!');
         // toastWarning('게임 시작을 위해 모든 항목을 선택해주세요.');
-        reserve();
+
         openQueueModal(); // 대기열 모달창 열기
         // openCaptchaModal();
         return;
@@ -57,6 +53,8 @@ Attach files by dragging & dropping, selecting or pasting them.
             startButton.removeAttribute('disabled');
 
             // WebSocket 연결 설정
+            // addUserToQueue();
+
             connect();
 
         } else {
@@ -81,42 +79,29 @@ function padZero(value) {
     return value < 10 ? '0' + value : value;
 }
 
-function connect() {
-    var socket = new SockJS('/ws');
-    stompClient = Stomp.over(socket);
 
-    const headers = {
-        'X-CSRF-TOKEN': token,
+
+
+
+// app관련 코드 : 클릭으로 userName (프론트에서 백으로 전달)
+// /app/addUserToQueue 엔드포인트로 사용자 이름을 서버로 전송
+function addUserToQueue() {
+    var userName = getUserName()
+
+    const queueData = {
+        userName: userName
     };
-
-    stompClient.connect(headers, function (frame, userName) {
-        // 연결 성공 시, 사용자를 대기열에 추가
-        stompClient.send("/app/addUserToQueue", {}, userName);
-
-
-        stompClient.subscribe("/topic/queueCount", function (message) {
-            var queueCount = JSON.parse(message.body);
-            // 대기 인원 업데이트
-            document.getElementById('queueCount').innerText = queueCount;
-        });
-
-        // WebSocket 연결이 설정된 후에 대기열 모달 열기
-        openQueueModal();
-    });
-}
-
-function reserve() {
-    var userName = getUserName();
-
     if (!userName) {
         // 사용자 ID가 없을 경우 처리 (예: 로그인되지 않은 경우)
         return;
     }
 
-    stompClient.send("/app/reserve", {}, userName); // userName을 서버로 전송
+    // 연결 성공 시, 사용자를 대기열에 추가
+    stompClient.send("/app/addUserToQueue", {}, JSON.stringify(queueData));
+
 }
 
-// 사용자 ID를 얻는 로직을 구현해야 합니다.
+// 사용자 ID를 얻는 로직을 구현
 function getUserName() {
     // Spring Security를 통해 현재 사용자의 아이디(username)를 얻는 방법
     var userName = null;
@@ -140,25 +125,78 @@ function getUserName() {
 
 
 
+function connect() {
+    var socket = new SockJS('/ws');
+    stompClient = Stomp.over(socket);
+
+    const headers = {
+        'X-CSRF-TOKEN': token,
+    };
+
+    stompClient.connect(headers, function (frame, userName) {
+
+        stompClient.subscribe("/topic/initialQueueCount", function (initialDate){
+            const initQueueSize = JSON.parse(initialDate.body);
+
+            // 초기 대기 인원 업데이트
+            document.getElementById('initQueueSize').innerText = initQueueSize;
+
+        })
+
+        // 수신 메시지는 queue 매개 변수로 전달
+        stompClient.subscribe("/topic/queueSize", function (queueData) {
+            const queueSize = JSON.parse(queueData.body);
+
+            // 현재 대기 인원 업데이트
+            document.getElementById('queueSize').innerText = queueSize;
+
+            checkQueueDifferenceAndCallCaptcha();
+
+
+        });
+
+        // WebSocket 연결이 설정된 후에 대기열 모달 열기
+        // close();
+        openQueueModal();
+    });
+}
+
+
+function checkQueueDifferenceAndCallCaptcha() {
+    const initQueueSize = parseInt(document.getElementById('initQueueSize').innerText, 10);
+    const queueSize = parseInt(document.getElementById('queueSize').innerText, 10);
+
+    const difference = initQueueSize - queueSize;
+
+    if (difference === 0) {
+        checkCaptcha();
+    }
+}
+
 // 대기열 모달 열기
 function openQueueModal() {
     // WebSocket을 통해 서버에 연결
-    stompClient.connect({}, function (frame) {
+    stompClient.connect({}, function (frame, userName) {
         // 연결 성공 시, 사용자를 대기열에 추가
-        stompClient.send("/app/addUserToQueue", {}, "RealParticipant");
+        stompClient.send("/app/addUserToQueue", {}, userName);
 
         document.getElementById('modal').style.display = 'block';
     });
 }
 
+
 // 대기열 모달 닫기 및 보안 문자 모달 열기
 function closeModal() {
-    // WebSocket 연결을 해제
-    stompClient.send("/app/removeUserFromQueue", {}, "RealParticipant");
-    stompClient.disconnect();
+    stompClient.connect({}, function (frame, userName) {
+        // WebSocket 연결을 해제
+        stompClient.send("/app/removeUserFromQueue", {}, userName);
+        stompClient.disconnect();
 
-    document.getElementById('modal').style.display = 'none';
-    openCaptchaModal();
+        document.getElementById('modal').style.display = 'none';
+        openCaptchaModal();
+
+    });
+
 }
 
 
@@ -204,6 +242,6 @@ function openCaptchaModal() {
 function closeCaptchaModal() {
     document.getElementById('modal2').style.display = 'none';
 
-    location.href = '/usr/' + environment + '/' + userId + '/concert/' + hallValue +'/date'; // 예매 페이지로 이동하는 로직 추가
+    location.href = '/usr/' + env + '/concert/' + hallValue +'/date'; // 예매 페이지로 이동하는 로직 추가
 
 }

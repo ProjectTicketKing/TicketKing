@@ -1,3 +1,4 @@
+
 <html th:lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{usr/layout/layout.html}" xmlns="http://www.w3.org/1999/html">
@@ -6,23 +7,20 @@
   <meta charset="UTF-8">
   <title>공연 정보</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <script th:src="@{/js/queue.js}" type="application/javascript"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 
   <script th:inline="javascript">
     const token = /*[[${_csrf.token}]]*/ '';
     var hallValue = [[${hallValue}]];
     var selectedLevel = [[${selectedLevel}]];
     var env = [[${env}]];
-    var userId = [[${userId}]];
-
   </script>
+  <script th:src="@{/js/timer.js}" type="application/javascript"></script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 
 </head>
 
@@ -169,12 +167,40 @@
           </div>
         </div>
 
+        <div class="flex flex-col mt-7">
+          <style>
+            select[name="startTime"], select[name="levelSelect"] {
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+              padding: 0.2rem 2rem 0.2rem 1rem;
+              background-color: #ffffff;
+              color: #9B6DFF;
+              border-color: #9B6DFF;
+            }
+          </style>
+
+          <select id="timeSelect" name="startTime" class="select select w-full">
+            <option class="" selected disabled>게임 시작 시간 선택하기</option>
+            <option value="5">5초 후</option>
+            <option value="30">30초 후</option>
+            <option value="60">1분 후</option>
+            <option value="180">3분 후</option>
+            <option value="300">5분 후</option>
+          </select>
+
+          <select id="levelSelect" name="levelSelect" class="select select w-full mt-7">
+            <option value="" selected disabled>게임 난이도 설정하기</option>
+            <option value="basic">초급</option>
+            <option value="advanced">고급</option>
+          </select>
+
+        </div>
 
         <div id="startContainer">
           <button id="startButton" onclick="checkCaptcha();" class="custom-button rounded-lg border-none w-full py-4 mt-7 flex justify-center"
                   style="background-color: #664AFF; color: #ffffff; display: flex; justify-content: center; align-items: center;">연습 게임 시작하기</button>
         </div>
-
       </div>
     </div>
   </div>
@@ -185,7 +211,8 @@
       <hr class="divider">
       <p1>대기 인원 <span id="queueCount" style="color: red;">0</span></p1>
       <button type="submit" class="custom-button rounded-lg border-none w-full py-4"
-              style="background-color: #664AFF; color: #ffffff" onclick="window.location.href='/usr/'+env+'/concert/' + hallValue">게임 종료</button>
+              style="background-color: #664AFF; color: #ffffff" onclick="window.location.href='/usr/' + env + '/concert/' + hallValue">게임 종료</button>
+
     </div>
   </div>
 
