@@ -41,8 +41,7 @@
 - Tailwind, DaisyUI
 
 ## 테이블 (다이어그램)
-![Ticketing (7)](https://github.com/ProjectTicketKing/TicketKing/assets/82140052/1f1f0e40-ea6f-469c-b24d-a5bc6ad55530)
-
+![image](https://github.com/ProjectTicketKing/TicketKing/assets/89733207/3283ec6a-fe99-43e6-830f-ab6b214a276e)
 
 ## 사이트
 https://www.ticketking.co.kr/
