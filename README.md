@@ -43,6 +43,9 @@
 ## 테이블 (다이어그램)
 ![image](https://github.com/ProjectTicketKing/TicketKing/assets/89733207/3283ec6a-fe99-43e6-830f-ab6b214a276e)
 
+## API명세 
+![image](https://github.com/ProjectTicketKing/TicketKing/assets/89733207/a5822a14-1f6f-4dab-b013-fe7e0ca76176)
+
 ## 사이트
 https://www.ticketking.co.kr/
 
